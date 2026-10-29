@@ -45,10 +45,18 @@ type Readings struct {
 	// this one.
 	Yield ops.Yield `json:"yield"`
 
-	// VCHitRate is the value-cache hit rate; VCMeasured is false when the
-	// evaluator has no value cache (eval.stub), and the rate is then 0.
-	VCHitRate  float64 `json:"vc_hit_rate"`
-	VCMeasured bool    `json:"vc_measured"`
+	// VCHitRate is the value-cache hit rate over this generation's genome
+	// evaluations: pure instructions served from the cache over all pure
+	// instructions (served plus executed). The cache is per instruction
+	// (giri's hook), so a hit saves that instruction, not its operands'
+	// computation. VCMeasured is false when the evaluator has no value
+	// cache (eval.stub), and the rate is then 0.
+	VCHitRate      float64 `json:"vc_hit_rate"`
+	VCMeasured     bool    `json:"vc_measured"`
+	VCHits         uint64  `json:"vc_hits"`
+	VCPureExecuted uint64  `json:"vc_pure_executed"`
+	VCEntries      int     `json:"vc_entries"` // committed cache entries after this generation
+	VCFull         bool    `json:"vc_full"`    // the cache reached its bound and dropped entries
 
 	Substitutions int    `json:"substitutions"` // substitution children evaluated
 	FPCollisions  int    `json:"fp_collisions"` // of those, failing a vector their donor passed
@@ -143,6 +151,9 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		}
 		for _, ind := range all {
 			rd.Evaluations++
+			rd.VCMeasured = rd.VCMeasured || ind.vcMeasured
+			rd.VCHits += ind.vcHits
+			rd.VCPureExecuted += ind.vcPure
 			if ind.Discard != "" {
 				rd.Discards[ind.Discard]++
 			}
@@ -166,6 +177,17 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		}
 		if err := r.indexGeneration(g, all); err != nil {
 			return nil, err
+		}
+		if pure := rd.VCHits + rd.VCPureExecuted; pure > 0 {
+			rd.VCHitRate = float64(rd.VCHits) / float64(pure)
+		}
+		// Commit the generation's cache entries: the next generation's
+		// lookups see them (eval.ValueCache).
+		if c, ok := r.ev.(interface{ EndGeneration() }); ok {
+			c.EndGeneration()
+		}
+		if c, ok := r.ev.(interface{ Cache() *eval.ValueCache }); ok && c.Cache() != nil {
+			rd.VCEntries, rd.VCFull = c.Cache().Len(), c.Cache().Full()
 		}
 		for _, is := range islands {
 			if err := os.RemoveAll(filepath.Join(r.work, fmt.Sprintf("island%02d", is.n), fmt.Sprintf("gen%04d", g))); err != nil {
@@ -306,6 +328,7 @@ func (r *runner) score(ind *Individual, res eval.Result) {
 		}
 	}
 	ind.Cost = r.cost(res)
+	ind.vcHits, ind.vcPure, ind.vcMeasured = res.CacheHits, res.PureExecuted, res.CacheMeasured
 	ind.FPs = nil
 	for _, tr := range res.Traces {
 		if fp, ok := index.FromTrace(tr); ok {

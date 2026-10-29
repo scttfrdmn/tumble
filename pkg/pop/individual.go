@@ -61,7 +61,10 @@ type Individual struct {
 	Correct int    // number of true entries in C
 	Cost    uint64 // abstract cost
 	Novelty int
-	FPs     []index.Fingerprint
+
+	vcHits, vcPure uint64 // value-cache readings of the evaluation
+	vcMeasured     bool
+	FPs            []index.Fingerprint
 
 	// parentBest is the best parent's rank key, for attributing
 	// improvements to operators; donorC is a substitution donor's
