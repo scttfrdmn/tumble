@@ -280,3 +280,23 @@ func TestElitesSpreadAcrossCost(t *testing.T) {
 		t.Errorf("elites after every cost is benchmarked: %v", costs(got))
 	}
 }
+
+func TestIndexBudget(t *testing.T) {
+	prob := problem(t)
+	p := smallParams()
+	p.IndexBudget = 5
+	prev := 0
+	_, err := Run(fakeEval{want: prob.Want}, prob, p, t.TempDir(), func(rd *Readings, a *Archive) error {
+		if grew := rd.Fragments - prev; grew > p.IndexBudget {
+			t.Errorf("gen %d: %d new fragments, budget %d", rd.Gen, grew, p.IndexBudget)
+		}
+		prev = rd.Fragments
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if prev == 0 {
+		t.Error("nothing indexed under a budget")
+	}
+}

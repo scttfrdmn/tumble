@@ -415,6 +415,11 @@ func collides(ind *Individual) bool {
 // that were not in the index before this generation. Everything runs in
 // island and genome order, so the index is a function of the seed.
 //
+// At most IndexBudget new fragments (0 for no bound) are evaluated per
+// generation, the first in that order; the rest are not marked failed, and
+// are queued again by a later generation whose genomes still carry them.
+// Fragments are evaluated concurrently, Islands × Workers at a time.
+//
 // The stub is not an instrument, and its step counts cost a giri search per
 // fragment, so under it the index stays empty.
 func (r *runner) indexGeneration(g int, all []*Individual) error {
@@ -443,6 +448,9 @@ func (r *runner) indexGeneration(g int, all []*Individual) error {
 			}
 			if _, q := queued[fr.Hash]; q {
 				continue
+			}
+			if r.p.IndexBudget > 0 && len(todo) >= r.p.IndexBudget {
+				continue // left for a later generation that still carries it
 			}
 			queued[fr.Hash] = len(todo)
 			todo = append(todo, pending{fr, ind})
@@ -476,15 +484,31 @@ func (r *runner) indexGeneration(g int, all []*Individual) error {
 			return err
 		}
 		fns := prog.Funcs()
+		// Fragments run concurrently, as many at once as all islands'
+		// workers together; results land by index, so the outcome does not
+		// depend on scheduling.
+		errs := make([]error, len(ks))
+		var wg sync.WaitGroup
+		sem := make(chan struct{}, r.p.Islands*r.p.Workers)
 		for n, k := range ks {
-			res, err := r.ev.Run(fns[named[n].Name], r.prob.Selection, eval.RunOptions{MaxSteps: r.p.MaxSteps})
-			if err != nil {
-				return err
-			}
-			if len(res.Violations) == 0 && !res.Exhausted {
-				fps[k], ok[k] = index.FromOutputs(t.GoType(), res.Outputs)
-				costs[k] = r.cost(res)
-			}
+			wg.Add(1)
+			sem <- struct{}{}
+			go func() {
+				defer func() { <-sem; wg.Done() }()
+				res, err := r.ev.Run(fns[named[n].Name], r.prob.Selection, eval.RunOptions{MaxSteps: r.p.MaxSteps})
+				if err != nil {
+					errs[n] = err
+					return
+				}
+				if len(res.Violations) == 0 && !res.Exhausted {
+					fps[k], ok[k] = index.FromOutputs(t.GoType(), res.Outputs)
+					costs[k] = r.cost(res)
+				}
+			}()
+		}
+		wg.Wait()
+		if err := errors.Join(errs...); err != nil {
+			return err
 		}
 		r.release(prog)
 		if err := os.RemoveAll(dir); err != nil {

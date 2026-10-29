@@ -39,6 +39,10 @@ type Params struct {
 	CostWeights map[string]float64 `json:"cost_weights"`
 
 	Workers int `json:"workers"` // concurrent evaluations per island
+
+	// IndexBudget bounds the new fragments evaluated for the index per
+	// generation (0 for no bound); see indexGeneration.
+	IndexBudget int `json:"index_budget"`
 }
 
 // Defaults are PROJECT.md §4.5's values and this project's recorded choices.
@@ -58,6 +62,7 @@ func Defaults() Params {
 		LenBucket:     4,
 		CostWeights:   map[string]float64{},
 		Workers:       4,
+		IndexBudget:   4096,
 	}
 }
 
@@ -70,7 +75,7 @@ func (p Params) Check() error {
 		return errors.New("pop: bad migration parameters")
 	case p.Crossover < 0 || p.Crossover > 1 || p.Substitution < 0 || p.Substitution > 1:
 		return errors.New("pop: operator probabilities must be in [0, 1]")
-	case p.Elites < 0 || p.LenBucket < 1 || p.Workers < 1:
+	case p.Elites < 0 || p.LenBucket < 1 || p.Workers < 1 || p.IndexBudget < 0:
 		return errors.New("pop: bad elites, bucket, or worker count")
 	}
 	return nil
