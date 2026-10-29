@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `pkg/ops`: repair (#45), two-point crossover (#46), point mutation (#47),
   equivalence substitution against a `Donor` index, a no-op while the index
   is empty (#48), and per-operator yield counters.
+- `pkg/eval`: the `Evaluator` interface and its input, trace, and result
+  types (`SETUP.md`, "Evaluator interface").
 
 ### Changed
 
