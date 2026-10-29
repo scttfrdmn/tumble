@@ -98,8 +98,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and leaves its slice arguments as the reference does. Both evaluators report
   post-call argument contents (`eval.Result.ArgsAfter`). `PROJECT.md` §4.3
   (#74).
-- giri pinned at 4948ac0 (`exec.Result.ArgsAfter`, scttfrdmn/giri#267) in
-  `go.mod` and CI.
+- giri pinned at the v0.99.0 release (44e4c41) in `go.mod` and CI:
+  `exec.Result.ArgsAfter` (scttfrdmn/giri#267). The code is the same as
+  4948ac0, which was pinned briefly before the tag.
 - Native elites: one genome per abstract cost not benchmarked before, the
   cheapest plus an even spread over the cost range, recorded as
   `elite_costs`. `PROJECT.md` §4.3 (#71).
