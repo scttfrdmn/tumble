@@ -155,9 +155,9 @@ func (g *Grammar) Check() error {
 	return errors.Join(errs...)
 }
 
-// binOps and unOps resolve the operator spellings.
-func (g *Grammar) binOps() []token.Token { return resolve(g.BinOps) }
-func (g *Grammar) unOps() []token.Token  { return resolve(g.UnOps) }
+// BinTokens and UnTokens are the admitted operators as tokens.
+func (g *Grammar) BinTokens() []token.Token { return resolve(g.BinOps) }
+func (g *Grammar) UnTokens() []token.Token  { return resolve(g.UnOps) }
 
 func resolve(ss []string) []token.Token {
 	out := make([]token.Token, 0, len(ss))
@@ -190,11 +190,11 @@ func (g *Grammar) Admits(f *tir.Func) error {
 		return fmt.Errorf("grammar: loop depth %d > %d", f.Depth(), g.MaxDepth)
 	}
 	bin := map[token.Token]bool{}
-	for _, t := range g.binOps() {
+	for _, t := range g.BinTokens() {
 		bin[t] = true
 	}
 	un := map[token.Token]bool{}
-	for _, t := range g.unOps() {
+	for _, t := range g.UnTokens() {
 		un[t] = true
 	}
 	var err error

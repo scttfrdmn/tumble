@@ -330,10 +330,10 @@ func (g Gen) Expr(sc *Scope, t tir.Type) tir.Expr {
 	if vs := sc.Vars(t); len(vs) > 0 {
 		add(0.25, func() (tir.Expr, bool) { return &tir.Atom{X: pick(g.R, vs)}, true })
 	}
-	for _, op := range g.G.binOps() {
+	for _, op := range g.G.BinTokens() {
 		add(1, func() (tir.Expr, bool) { return g.Binop(sc, op, t) })
 	}
-	for _, op := range g.G.unOps() {
+	for _, op := range g.G.UnTokens() {
 		add(1, func() (tir.Expr, bool) { return g.Unop(sc, op, t) })
 	}
 	for _, p := range sc.vars {
