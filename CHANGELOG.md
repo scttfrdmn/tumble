@@ -106,7 +106,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tumble depends on `github.com/scttfrdmn/giri` and builds only with
   `GOEXPERIMENT=arenas`. The `giriapi` build tag is gone (#62).
 - `PROJECT.md` §5.2: the value cache as built is per instruction (#63, #64).
-- giri pinned at 28d4253, in `go.mod` and CI: `math/bits` widths in the CLI
+- giri pinned at 5ca7f1f, in `go.mod` and CI: the CLI now reads stored
+  slice, array and struct values (scttfrdmn/giri#264), so `eval.stub`'s
+  violations and step counts follow native control flow. The stub still takes
+  outputs natively, since the CLI exposes none (#51, PROJECT.md §6.2). Before
+  that, 28d4253: `math/bits` widths in the CLI
   (scttfrdmn/giri#261), and deferred named results, `recover` of run-time
   panics and interface comparison with nil (#262). Neither changes a v0
   genome. Before that, 0d1c31f (concrete-mode review fixes, #258), and before

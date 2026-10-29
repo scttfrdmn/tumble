@@ -208,7 +208,7 @@ Collision handling: fingerprints are 128-bit; collisions are detected at substit
 ## 6. Decisions taken (override if you disagree)
 
 1. **Genome is the TIR, not Go AST and not SSA.** Reasons in §4.1.
-2. **giri is the only evaluator in the loop.** No separate tumble interpreter; no native execution inside selection. The native stage is reporting and archiving only. *Exception, scaffolding only:* `eval.stub`, which never runs an experiment, takes genome outputs from native execution, because giri does not yet carry element values through memory (scttfrdmn/giri#248) and its CLI exposes no program output (decision #51).
+2. **giri is the only evaluator in the loop.** No separate tumble interpreter; no native execution inside selection. The native stage is reporting and archiving only. *Exception, scaffolding only:* `eval.stub`, which never runs an experiment, takes genome outputs from native execution, because giri's CLI exposes no program output (decision #51).
 3. **v0 is integer-only.** Float fingerprints need bucketing (round to k ulps before hashing); do that after the integer pipeline produces its first number, not before.
 4. **Abstract cost weights are all 1 in v0.** Calibrate against native `ns/op` on the elites once there are enough pairs to fit (the fit is itself a reported result: how well does giri's instruction count predict gc-compiled ns/op on Graviton and on x86?).
 5. **No elitism across generations except through the MAP-Elites archive.** Island populations are fully replaced each generation; the archive is where good genomes persist.

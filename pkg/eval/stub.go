@@ -31,9 +31,8 @@ const DefaultMaxSteps = 1 << 20
 // not an instrument and no experiment runs against it.
 //
 // giri's CLI exposes violations and step-limit exhaustion, but no step count
-// and no program output, and today it does not carry element values through
-// memory (scttfrdmn/giri#248). So the stub takes from giri what giri can
-// give and gets outputs elsewhere:
+// and no program output. So the stub takes from giri what giri can give and
+// gets outputs elsewhere:
 //
 //   - Violations and Exhausted come from giri, run once per function under a
 //     driver main that calls it on each input vector.
