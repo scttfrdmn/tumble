@@ -42,6 +42,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   selection, the MAP-Elites archive, ring migration, run parameter defaults
   (#53), and per-generation readings with the trace-to-variable mapping for
   indexing (#55).
+- `pkg/native`: the native benchmark stage: the genome in a copy of the
+  kernel, the kernel's tests as a gate, `go test -bench -count=10`, and
+  ns/op with a 95% interval from `golang.org/x/perf/benchmath`, plus the
+  `benchstat` table (#56). `benchstat` is a tool dependency.
 
 ### Changed
 
