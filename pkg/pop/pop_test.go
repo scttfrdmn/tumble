@@ -10,7 +10,6 @@ import (
 	"hash/fnv"
 	"math/rand/v2"
 	"os"
-	"path/filepath"
 	"testing"
 
 	"golang.org/x/tools/go/ssa"
@@ -22,26 +21,21 @@ import (
 )
 
 // fakeEval is a fast deterministic evaluator for testing the loop: outputs,
-// steps, violations, and traces are functions of the SSA function's
-// instructions, not of its semantics. It builds real SSA.
+// steps, and violations are functions of the SSA function's instructions,
+// not of its semantics. It builds real SSA.
 type fakeEval struct {
-	want   [][]any
-	traces bool
+	want [][]any
 }
 
 func (fakeEval) Build(dir string) (eval.Program, error) { return eval.LoadSSA(dir) }
 
 func (e fakeEval) Run(fn *ssa.Function, in []eval.Input, opt eval.RunOptions) (eval.Result, error) {
 	h := fnv.New64a()
-	var vals []ssa.Value
 	n := uint64(0)
 	for _, b := range fn.Blocks {
 		for _, ins := range b.Instrs {
 			h.Write([]byte(ins.String() + ";"))
 			n++
-			if v, ok := ins.(ssa.Value); ok {
-				vals = append(vals, v)
-			}
 		}
 	}
 	sum := h.Sum64()
@@ -58,15 +52,6 @@ func (e fakeEval) Run(fn *ssa.Function, in []eval.Input, opt eval.RunOptions) (e
 			w++
 		}
 		res.Outputs = append(res.Outputs, []any{w})
-	}
-	if e.traces && opt.Trace {
-		for _, v := range vals {
-			seqs := make([][]any, len(in))
-			for t := range in {
-				seqs[t] = []any{len(v.String())%4 + t}
-			}
-			res.Traces = append(res.Traces, eval.ValueTrace{Value: v, Seqs: seqs})
-		}
 	}
 	return res, nil
 }
@@ -123,7 +108,7 @@ func run(t *testing.T, ev eval.Evaluator, p Params) (string, *Result) {
 
 func TestRunDeterministic(t *testing.T) {
 	prob := problem(t)
-	ev := fakeEval{want: prob.Want, traces: true}
+	ev := fakeEval{want: prob.Want}
 	a, _ := run(t, ev, smallParams())
 	b, _ := run(t, ev, smallParams())
 	if a != b {
@@ -138,7 +123,7 @@ func TestRunDeterministic(t *testing.T) {
 
 func TestRunReadingsAndIndex(t *testing.T) {
 	prob := problem(t)
-	ev := fakeEval{want: prob.Want, traces: true}
+	ev := fakeEval{want: prob.Want}
 	var rds []*Readings
 	p := smallParams()
 	res, err := Run(ev, prob, p, t.TempDir(), func(rd *Readings, a *Archive) error {
@@ -167,18 +152,28 @@ func TestRunReadingsAndIndex(t *testing.T) {
 		t.Error("empty archive")
 	}
 	if res.Index.Empty() {
-		t.Error("traces were given but the index is empty")
+		t.Error("the index is empty")
 	}
 }
 
-func TestRunWithoutTracesLeavesIndexEmpty(t *testing.T) {
+// notInstrument is fakeEval reporting itself as a non-instrument, as the
+// stub does.
+type notInstrument struct{ fakeEval }
+
+func (notInstrument) Name() string       { return "fake-stub" }
+func (notInstrument) IsInstrument() bool { return false }
+
+func TestIndexFromFragmentOutputs(t *testing.T) {
 	prob := problem(t)
 	_, res := run(t, fakeEval{want: prob.Want}, smallParams())
+	if res.Index.Empty() {
+		t.Error("index empty under an instrument: fragments are fingerprinted by their outputs, no traces needed")
+	}
+	_, res = run(t, notInstrument{fakeEval{want: prob.Want}}, smallParams())
 	if !res.Index.Empty() {
-		t.Error("index filled without traces")
+		t.Error("index filled under a non-instrument evaluator")
 	}
 }
-
 func TestMigration(t *testing.T) {
 	prob := problem(t)
 	p := smallParams()
@@ -225,45 +220,6 @@ func TestArchive(t *testing.T) {
 	}
 	if a.Len() != 1 || a.Best() != y {
 		t.Errorf("archive len %d best %+v", a.Len(), a.Best())
-	}
-}
-
-func TestVarFingerprints(t *testing.T) {
-	prob := problem(t)
-	g := grammar.Gen{G: prob.Grammar, R: rand.New(rand.NewPCG(4, 4))}
-	f := g.Random(12)
-	src := tir.PrintFile("g", []tir.Named{{Name: "g_0001", F: f}})
-	dir := filepath.Join(t.TempDir(), "gen")
-	if err := eval.WriteGeneration(dir, src); err != nil {
-		t.Fatal(err)
-	}
-	prog, err := eval.LoadSSA(dir)
-	if err != nil {
-		t.Fatal(err)
-	}
-	fn := prog.Funcs()["g_0001"]
-	var traces []eval.ValueTrace
-	for _, b := range fn.Blocks {
-		for _, ins := range b.Instrs {
-			if v, ok := ins.(ssa.Value); ok {
-				traces = append(traces, eval.ValueTrace{Value: v, Seqs: [][]any{{len(v.Name())}}})
-			}
-		}
-	}
-	fps := VarFingerprints(src, "g_0001", f, fn, traces)
-	for id := range fps {
-		found := false
-		for _, s := range f.Body {
-			if a, ok := s.(*tir.Assign); ok && a.Define && a.Dst.ID == id {
-				found = true
-			}
-		}
-		if !found {
-			t.Errorf("fingerprint attributed to v%d, not a top-level definition", id)
-		}
-	}
-	if len(fps) == 0 {
-		t.Errorf("no top-level definition got a fingerprint:\n%s", src)
 	}
 }
 

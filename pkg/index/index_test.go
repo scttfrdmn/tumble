@@ -74,25 +74,27 @@ const bitLoop = `func f(xs []uint64) int {
 	return m
 }`
 
-// top is the k-th top-level definition of f (0-based).
-func top(t *testing.T, f *tir.Func, k int) tir.Var {
+// top is the point after the k-th top-level definition of f (0-based).
+func top(t *testing.T, f *tir.Func, k int) tir.Point {
 	t.Helper()
-	for _, s := range f.Body {
+	for i, s := range f.Body {
 		if a, ok := s.(*tir.Assign); ok && a.Define {
 			if k == 0 {
-				return a.Dst
+				return tir.Point{At: i, V: a.Dst}
 			}
 			k--
 		}
 	}
 	t.Fatal("too few top-level definitions")
-	return tir.Var{}
+	return tir.Point{}
 }
+
+func slice(f *tir.Func, p tir.Point) (*Fragment, bool) { return Slice(f, p.At, p.V) }
 
 func TestSlice(t *testing.T) {
 	f := parse(t, bitLoop)
 	// Top-level definitions: 0 x, 1 n, 2 m, 3 unrelated.
-	fr, ok := Slice(f, top(t, f, 2))
+	fr, ok := slice(f, top(t, f, 2))
 	if !ok {
 		t.Fatal("no slice for m")
 	}
@@ -109,7 +111,7 @@ func TestSlice(t *testing.T) {
 	}
 
 	// The slice of x is just its definition.
-	fx, _ := Slice(f, top(t, f, 0))
+	fx, _ := slice(f, top(t, f, 0))
 	if len(fx.Stmts) != 1 {
 		t.Errorf("slice of x has %d statements", len(fx.Stmts))
 	}
@@ -124,7 +126,7 @@ func TestSliceNotClosed(t *testing.T) {
 	n := len(xs)
 	return n
 }`)
-	if _, ok := Slice(f, top(t, f, 0)); ok {
+	if _, ok := slice(f, top(t, f, 0)); ok {
 		t.Error("slice after a store is not closed over the parameters")
 	}
 	g := parse(t, `func f(xs []uint64) int {
@@ -135,10 +137,50 @@ func TestSliceNotClosed(t *testing.T) {
 	}
 	return n
 }`)
-	// k is defined inside the loop: not a top-level definition.
+	// k is defined inside the loop, which does not reassign it: no point.
 	loop := g.Body[1].(*tir.Loop)
-	if _, ok := Slice(g, loop.Body[0].(*tir.Assign).Dst); ok {
+	if _, ok := Slice(g, 1, loop.Body[0].(*tir.Assign).Dst); ok {
 		t.Error("slice of a loop-local variable")
+	}
+}
+
+// TestSliceAccumulatorAfterLoop: the value of an accumulator after the loop
+// that reassigns it is a point, and its slice is the definition and the loop.
+func TestSliceAccumulatorAfterLoop(t *testing.T) {
+	f := parse(t, `func f(xs []uint64) int {
+	n := 0
+	m := len(xs)
+	for i := 0; i < len(xs); i++ {
+		n += bits.OnesCount64(xs[i])
+	}
+	_ = m
+	return n
+}`)
+	n := top(t, f, 0).V
+	var pts []tir.Point
+	for _, p := range tir.Points(f) {
+		if p.V == n {
+			pts = append(pts, p)
+		}
+	}
+	// n := 0 is reassigned by the loop, so only the point after the loop
+	// sees every later read.
+	if len(pts) != 1 || pts[0].At != 2 {
+		t.Fatalf("points for n = %v, want one after the loop (statement 2)", pts)
+	}
+	fr, ok := Slice(f, 2, n)
+	if !ok || len(fr.Stmts) != 2 {
+		t.Fatalf("slice of n after the loop: ok %v, %d statements", ok, len(fr.Stmts))
+	}
+	if _, isLoop := fr.Stmts[1].(*tir.Loop); !isLoop {
+		t.Error("slice does not hold the loop")
+	}
+	src := string(fr.Func(f.Sig).Print("f"))
+	if strings.Contains(src, "v1 := len") {
+		t.Errorf("unrelated definition in the slice:\n%s", src)
+	}
+	if err := fr.Func(f.Sig).TypeCheck(); err != nil {
+		t.Errorf("fragment function: %v\n%s", err, src)
 	}
 }
 
@@ -147,8 +189,8 @@ func TestSliceHashAlphaInvariant(t *testing.T) {
 	// The same computation with a different preamble: IDs differ, the
 	// slice of m does not.
 	g := parse(t, strings.Replace(bitLoop, "x := xs[0]", "pad := len(xs)\n\t_ = pad\n\tx := xs[0]", 1))
-	a, _ := Slice(f, top(t, f, 2))
-	b, _ := Slice(g, top(t, g, 3))
+	a, _ := slice(f, top(t, f, 2))
+	b, _ := slice(g, top(t, g, 3))
 	if a.Hash != b.Hash {
 		t.Error("identical slices from different genomes hash differently")
 	}
@@ -157,9 +199,9 @@ func TestSliceHashAlphaInvariant(t *testing.T) {
 func TestIndexOrderAndNovelty(t *testing.T) {
 	ix := New()
 	f := parse(t, bitLoop)
-	fa, _ := Slice(f, top(t, f, 2))
-	fb, _ := Slice(f, top(t, f, 0))
-	fc, _ := Slice(f, top(t, f, 3))
+	fa, _ := slice(f, top(t, f, 2))
+	fb, _ := slice(f, top(t, f, 0))
+	fc, _ := slice(f, top(t, f, 3))
 	fp1, _ := Of(intT, [][]any{{3}})
 	fp2, _ := Of(intT, [][]any{{4}})
 	ix.Add(fp1, fa, 900, 1)
@@ -182,13 +224,13 @@ func TestIndexOrderAndNovelty(t *testing.T) {
 func TestCheaperDrivesSubstitution(t *testing.T) {
 	g := grammar.Popcount()
 	f := parse(t, bitLoop)
-	loopFrag, _ := Slice(f, top(t, f, 2))
+	loopFrag, _ := slice(f, top(t, f, 2))
 	callSrc := parse(t, `func f(xs []uint64) int {
 	x := xs[0]
 	c := bits.OnesCount64(x)
 	return c
 }`)
-	callFrag, _ := Slice(callSrc, top(t, callSrc, 1))
+	callFrag, _ := slice(callSrc, top(t, callSrc, 1))
 	fp, _ := Of(intT, [][]any{{1}, {7}})
 
 	ix := New()
@@ -253,12 +295,8 @@ func TestCollisionDetectorProperty(t *testing.T) {
 	var id uint64
 	for range 1500 {
 		f := gen.Random(4 + r.IntN(12))
-		for _, s := range f.Body {
-			a, ok := s.(*tir.Assign)
-			if !ok || !a.Define {
-				continue
-			}
-			fr, ok := Slice(f, a.Dst)
+		for _, p := range tir.Points(f) {
+			fr, ok := Slice(f, p.At, p.V)
 			if !ok {
 				continue
 			}
@@ -291,7 +329,7 @@ func TestCollisionDetectorProperty(t *testing.T) {
 	q := len(xs)
 	return q
 }`)
-	ffr, _ := Slice(forged, top(t, forged, 0))
+	ffr, _ := slice(forged, top(t, forged, 0))
 	if _, dup := outputs[ffr.Hash]; dup {
 		t.Skip("forged fragment already indexed")
 	}

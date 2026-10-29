@@ -8,7 +8,6 @@ import (
 	"cmp"
 	"fmt"
 
-	"github.com/scttfrdmn/tumble/pkg/index"
 	"github.com/scttfrdmn/tumble/pkg/tir"
 )
 
@@ -60,11 +59,10 @@ type Individual struct {
 	C       []bool // per selection vector: output equals the reference
 	Correct int    // number of true entries in C
 	Cost    uint64 // abstract cost
-	Novelty int
+	Novelty int    // point fingerprints new to the index (set at the barrier)
 
 	vcHits, vcPure uint64 // value-cache readings of the evaluation
 	vcMeasured     bool
-	FPs            []index.Fingerprint
 
 	// parentBest is the best parent's rank key, for attributing
 	// improvements to operators; donorC is a substitution donor's

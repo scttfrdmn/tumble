@@ -42,21 +42,16 @@ func (fr *Fragment) Func(sig *tir.Signature) *tir.Func {
 	return f
 }
 
-// Slice extracts the backward slice of v, a top-level definition of f. The
-// slice is the smallest set of top-level statements, in order, that holds
-// v's definition and, for every variable a member reads, its definition and
-// every loop or if that reassigns it. It is not closed over the parameters,
-// and Slice reports false, if v is not a top-level definition, if a store
-// precedes v's definition (memory reads would depend on it), or if the slice
-// holds a return (it could exit before computing v).
-func Slice(f *tir.Func, v tir.Var) (*Fragment, bool) {
-	at := -1
-	for i, s := range f.Body {
-		if a, ok := s.(*tir.Assign); ok && a.Define && a.Dst == v {
-			at = i
-		}
-	}
-	if at < 0 {
+// Slice extracts the backward slice of v at the top-level point after
+// statement at: the smallest set of top-level statements, in order, up to
+// and including at, that holds every statement defining or reassigning v
+// and, transitively, every statement defining or reassigning a variable a
+// member reads. The fragment computes v's value at that point from the
+// parameters. Slice reports false if statement at neither defines nor
+// reassigns v, if a store occurs at or before at (memory reads would depend
+// on it), or if the slice holds a return (it could exit before computing v).
+func Slice(f *tir.Func, at int, v tir.Var) (*Fragment, bool) {
+	if at < 0 || at >= len(f.Body) {
 		return nil, false
 	}
 	type info struct {
@@ -100,15 +95,14 @@ func Slice(f *tir.Func, v tir.Var) (*Fragment, bool) {
 		infos[i] = in
 	}
 
-	member := make([]bool, at+1)
-	member[at] = true
-	need := map[int]bool{}
-	for id := range infos[at].reads {
-		need[id] = true
+	if infos[at].def != v.ID && !infos[at].writes[v.ID] {
+		return nil, false
 	}
+	member := make([]bool, at+1)
+	need := map[int]bool{v.ID: true}
 	for changed := true; changed; {
 		changed = false
-		for i := range at {
+		for i := range at + 1 {
 			if member[i] {
 				continue
 			}

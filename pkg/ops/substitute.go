@@ -11,51 +11,57 @@ import (
 )
 
 // Donor is what equivalence substitution needs from the fingerprint index
-// (pkg/index): for a variable of a genome, a cheaper fragment with the same
-// fingerprint, closed over the parameters.
+// (pkg/index): for a top-level point of a genome, a cheaper fragment with the
+// same fingerprint, closed over the parameters.
 type Donor interface {
 	// Empty reports whether the index holds no fragments.
 	Empty() bool
-	// Cheaper returns a fragment cheaper than v's backward slice in f that
-	// computes v's fingerprint: statements over the signature's parameters,
-	// in the donor's ID space, and the variable holding the value.
-	Cheaper(f *tir.Func, v tir.Var) (frag []tir.Stmt, result tir.Var, ok bool)
+	// Cheaper returns a fragment cheaper than the backward slice of p.V at
+	// point p in f that computes the same value on every test vector:
+	// statements over the signature's parameters, in the donor's ID space,
+	// and the variable holding the value.
+	Cheaper(f *tir.Func, p tir.Point) (frag []tir.Stmt, result tir.Var, ok bool)
 }
 
 // Substitute is equivalence substitution (PROJECT.md §4.2). It tries the
-// child's top-level definitions in random order; for the first v the donor
-// has a cheaper fragment for, it puts the fragment in place of v's
-// definition, defines v as a copy of the fragment's result, and removes the
-// top-level statements that v's old definition kept alive and nothing else
-// does: the old backward slice. Dead code that was already dead stays.
+// child's top-level points (tir.Points) whose variable is read later, in
+// random order. For the first point p the donor has a cheaper fragment for,
+// it inserts the fragment and w := <fragment result> after p's statement,
+// makes every later read of p.V read w, and removes the top-level
+// statements that were live before and are dead after: the old backward
+// slice, which now has no reader. Code that was already dead stays.
+//
+// A point is the value of a variable after a top-level definition or after
+// a top-level loop or if that reassigns it, so an accumulator's value after
+// its loop is a candidate. The fragment replaces whole top-level statements
+// and never cuts through a loop.
 //
 // applied is false, and the child is an unchanged copy of a, when the index
-// is empty or holds nothing cheaper for any candidate; under eval.stub, which
-// produces no traces, that is always the case. Only definitions at the top
-// level are candidates: their slices are whole top-level statements, so the
-// fragment can replace them without crossing a loop boundary.
+// is empty or holds nothing cheaper for any candidate.
 func Substitute(r *rand.Rand, g *grammar.Grammar, d Donor, a *tir.Func) (child *tir.Func, applied bool, err error) {
 	child = a.Clone()
 	if d == nil || d.Empty() {
 		return child, false, nil
 	}
-	var cands []int
-	for i, s := range child.Body {
-		if as, ok := s.(*tir.Assign); ok && as.Define {
-			cands = append(cands, i)
+	var cands []tir.Point
+	for _, p := range tir.Points(child) {
+		if tir.ReadAfter(child, p.At, p.V) {
+			cands = append(cands, p)
 		}
 	}
 	for _, ci := range r.Perm(len(cands)) {
-		i := cands[ci]
-		v := child.Body[i].(*tir.Assign).Dst
-		frag, res, ok := d.Cheaper(child, v)
+		p := cands[ci]
+		frag, res, ok := d.Cheaper(child, p)
 		if !ok {
 			continue
 		}
 		before := live(child.Body)
 		seg, re := renumber(child, len(child.Sig.Params), frag)
-		seg = append(seg, &tir.Assign{Dst: v, Define: true, X: &tir.Atom{X: re(res)}})
-		child.Body = insert(remove(child.Body, i, i+1), i, seg...)
+		w := child.NewVar(p.V.T)
+		seg = append(seg, &tir.Assign{Dst: w, Define: true, X: &tir.Atom{X: re(res)}})
+		rest := renameReads(child.Body[p.At+1:], p.V, w)
+		body := append(append(append([]tir.Stmt(nil), child.Body[:p.At+1]...), seg...), rest...)
+		child.Body = body
 		after := live(child.Body)
 		kept := child.Body[:0:0]
 		for _, s := range child.Body {
@@ -71,6 +77,47 @@ func Substitute(r *rand.Rand, g *grammar.Grammar, d Donor, a *tir.Func) (child *
 		return child, true, nil
 	}
 	return child, false, nil
+}
+
+// renameReads makes every read of v in ss, nested blocks included, read w.
+// Statements without such a read keep their identity (live compares
+// statements by pointer); the others are replaced by renamed copies.
+func renameReads(ss []tir.Stmt, v, w tir.Var) []tir.Stmt {
+	out := make([]tir.Stmt, len(ss))
+	for i, s := range ss {
+		if !readsVar(s, v) {
+			out[i] = s
+			continue
+		}
+		c := tir.MapOperands(s, func(o tir.Operand) tir.Operand {
+			if x, ok := o.(tir.Var); ok && x.ID == v.ID {
+				return w
+			}
+			return o
+		})
+		switch c := c.(type) {
+		case *tir.Loop:
+			c.Body = renameReads(c.Body, v, w)
+		case *tir.If:
+			c.Then = renameReads(c.Then, v, w)
+			c.Else = renameReads(c.Else, v, w)
+		}
+		out[i] = c
+	}
+	return out
+}
+
+func readsVar(s tir.Stmt, v tir.Var) bool {
+	found := false
+	tir.Walk([]tir.Stmt{s}, func(t tir.Stmt, _ int) bool {
+		for _, u := range tir.Uses(t) {
+			if u.ID == v.ID {
+				found = true
+			}
+		}
+		return !found
+	})
+	return found
 }
 
 // live is the set of top-level statements whose effects are observable: the

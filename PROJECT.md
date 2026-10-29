@@ -129,7 +129,7 @@ All operators run against the type checker and a repair pass. A child that canno
 
 - **Two-point crossover** on the statement list, cut points restricted to statement boundaries at equal nesting depth, followed by variable-renaming repair (dangling uses are rebound to the nearest type-compatible definition in scope or the statement is dropped). This is the material-transfer operator that keeps tumble genetic in the inheritance sense.
 - **Point mutation:** change an operator, operand, constant (small integer perturbation or re-draw), loop bound, or call; insert or delete a statement. Per-statement rate ≈ 1/L.
-- **Equivalence substitution** (the semantic operator): pick a variable `v` in the child; look up `fp(v)` in the fingerprint index; if a fragment with the same fingerprint and lower cost exists (from any individual in the archive), replace the backward slice of `v` with that fragment. Fragments are closed over the function's parameters, which are identical across the population, so no free-variable mapping is needed. Probability of applying this operator is a run parameter; the ablation arm sets it to zero.
+- **Equivalence substitution** (the semantic operator): pick a top-level program point in the child, meaning the value of a variable `v` after a top-level definition, or after a top-level loop or `if` that reassigns it. Look up the fingerprint of `v`'s backward slice at that point in the index. If a fragment with the same fingerprint and lower cost exists (from any individual), insert it, make later reads of `v` read its result, and drop the old slice as dead. Fragments at top-level points are closed over the function's parameters, which are identical across the population, so no free-variable mapping is needed. Values inside loop bodies would need one, and are not substitution sites yet (#66). Probability of applying this operator is a run parameter; the ablation arm sets it to zero. (Decision #67.)
 - **Dead-code elimination** is *not* an operator — Go rejects unused variables, so the repair pass sinks them (`_ = v`), and selection on cost removes them. Keeping dead code as neutral material is deliberate (Cartesian GP's result on neutral drift).
 
 ### 4.3 Fitness cascade
@@ -189,17 +189,17 @@ Where it lives: inside giri, as a hook (§7, requirement 3). giri consults the h
 
 ### 5.3 Semantic fingerprint index (FP)
 
-For each SSA value `v` in each evaluated genome, on each test vector `t`: the sequence of concrete values `v` took during execution (one entry per assignment; loop-carried values have one per iteration). The fingerprint is
+Fingerprints are taken at **top-level program points** of each evaluated genome: the value of a variable after a top-level definition, or after a top-level loop or `if` that reassigns it (so an accumulator's value after its loop is one). The fragment at a point is the variable's backward slice there, closed over the function parameters. It is evaluated as a function returning the variable, and its output on each test vector `t` is the value. The fingerprint is
 
 ```
-fp(v) = hash( type(v) || for t in vectors: hash(sequence_t(v)) )
+fp(v) = hash( type(v) || for t in vectors: hash(value_t(v)) )
 ```
 
-The index maps `fp → [(fragment HC, cost_k, source genome id)]`, kept sorted by cost. Fragments are closed over the function parameters.
+Equal fingerprints therefore mean equal values on every test vector by construction. The same evaluation gives the fragment's cost. The index maps `fp → [(fragment HC, cost_k, source genome id)]`, kept sorted by cost. (Decision #67. The original definition took every SSA value's per-iteration trace. Values inside loop bodies need free-variable binding to be fragments, and are #66.)
 
 Uses:
 - **Equivalence substitution** (§4.2): same `fp`, lower cost.
-- **Blind library discovery:** admitted stdlib calls are evaluated on the vectors at run start and their fingerprints seeded into the index with their (interpreted) cost. An evolved loop that computes `bits.OnesCount64`'s fingerprint becomes substitutable by the call.
+- **Blind library discovery:** admitted stdlib calls are evaluated on the vectors at run start and their fingerprints seeded into the index with their (interpreted) cost. An evolved loop that computes `bits.OnesCount64`'s fingerprint becomes substitutable by the call. *Not built:* in v0 kernels such a loop sits inside the loop over the input, at a point that needs free-variable binding (#66).
 - **Novelty** (§4.5).
 - **Execution-defined schemata:** a schema is the set of genomes containing a value with fingerprint F. Frequency of F in generation t+1 is driven by the fitness of genomes containing it and the operators' preservation probability — which equivalence substitution preserves exactly and two-point crossover preserves when the fragment lies inside one segment. This is the schema theorem restated over fingerprints; §8 includes the measurement that tests whether the restated theorem predicts anything.
 

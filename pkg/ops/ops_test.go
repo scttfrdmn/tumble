@@ -186,8 +186,8 @@ type callDonor struct{}
 
 func (callDonor) Empty() bool { return false }
 
-func (callDonor) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
-	if v.T != tir.Int {
+func (callDonor) Cheaper(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, bool) {
+	if p.V.T != tir.Int {
 		return nil, tir.Var{}, false
 	}
 	x := tir.Var{ID: 100, T: tir.Uint64}
@@ -201,7 +201,7 @@ func (callDonor) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
 type emptyDonor struct{}
 
 func (emptyDonor) Empty() bool { return true }
-func (emptyDonor) Cheaper(*tir.Func, tir.Var) ([]tir.Stmt, tir.Var, bool) {
+func (emptyDonor) Cheaper(*tir.Func, tir.Point) ([]tir.Stmt, tir.Var, bool) {
 	panic("Cheaper called on an empty index")
 }
 
@@ -259,12 +259,13 @@ type copyDonor struct{}
 
 func (copyDonor) Empty() bool { return false }
 
-func (copyDonor) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
+func (copyDonor) Cheaper(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, bool) {
+	v := p.V
 	for _, s := range f.Body {
 		if a, ok := s.(*tir.Assign); ok && a.Dst == v {
 			if at, ok := a.X.(*tir.Atom); ok {
 				if _, isVar := at.X.(tir.Var); isVar {
-					return callDonor{}.Cheaper(f, v)
+					return callDonor{}.Cheaper(f, p)
 				}
 			}
 		}
@@ -291,4 +292,52 @@ func TestDiscardsAreReported(t *testing.T) {
 	if y.Survived[Crossover] == y.Attempted[Crossover] {
 		t.Error("no child discarded under a 6-statement limit")
 	}
+}
+
+// loopDonor donates the reference popcount loop for an int accumulator's
+// value after a top-level loop.
+type loopDonor struct{ ref *tir.Func }
+
+func (loopDonor) Empty() bool { return false }
+
+func (d loopDonor) Cheaper(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, bool) {
+	if _, isLoop := f.Body[p.At].(*tir.Loop); !isLoop || p.V.T != tir.Int {
+		return nil, tir.Var{}, false
+	}
+	// The reference body minus its return; its accumulator is v0.
+	body := d.ref.Body[:len(d.ref.Body)-1]
+	return tir.CloneStmts(body), body[0].(*tir.Assign).Dst, true
+}
+
+// TestSubstituteAccumulatorAfterLoop: the point after a top-level loop is a
+// substitution site; the bit loop that computed the accumulator is replaced
+// by the donor's loop and removed as dead.
+func TestSubstituteAccumulatorAfterLoop(t *testing.T) {
+	g := grammar.Popcount()
+	ref := parse(t, `func f(xs []uint64) int {
+	n := 0
+	for _, x := range xs {
+		n += bits.OnesCount64(x)
+	}
+	return n
+}`)
+	f := parse(t, `func f(xs []uint64) int {
+	n := 0
+	for i := 0; i < len(xs); i++ {
+		x := xs[i]
+		for j := 0; j < 64; j++ {
+			n += int(x >> uint64(j) & 1)
+		}
+	}
+	return n
+}`)
+	c, applied, err := Substitute(rand.New(rand.NewPCG(1, 1)), g, loopDonor{ref}, f)
+	if err != nil || !applied {
+		t.Fatalf("applied %v, err %v", applied, err)
+	}
+	src := string(c.Print("f"))
+	if !strings.Contains(src, "bits.OnesCount64") || strings.Contains(src, ">>") {
+		t.Errorf("bit loop not replaced by the donor's loop:\n%s", src)
+	}
+	checkChild(t, g, "substitution", c)
 }

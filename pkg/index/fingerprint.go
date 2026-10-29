@@ -26,6 +26,21 @@ func FromTrace(t eval.ValueTrace) (Fingerprint, bool) {
 	return Of(t.Value.Type(), t.Seqs)
 }
 
+// FromOutputs is the fingerprint of a fragment's value at its point: the
+// fragment evaluated as a function returning it, one output per test vector
+// (Fragment.Func). It is Of over one-value sequences. A vector without an
+// output (a fault, exhaustion) means no fingerprint.
+func FromOutputs(t types.Type, outputs [][]any) (Fingerprint, bool) {
+	seqs := make([][]any, len(outputs))
+	for i, o := range outputs {
+		if len(o) != 1 {
+			return Fingerprint{}, false
+		}
+		seqs[i] = o
+	}
+	return Of(t, seqs)
+}
+
 // Of is fp(v) = hash(type(v) || for each vector t: hash(sequence_t(v))). The
 // sequence hash covers the sequence's length and each value's encoding, so
 // sequences that differ in length or in any value hash differently. v0

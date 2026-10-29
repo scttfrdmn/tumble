@@ -112,7 +112,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 	if n, ok := ev.(eval.Named); ok {
 		evName = n.Name()
 	}
-	r := &runner{ev: ev, prob: prob, p: p, work: work, ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{}}
+	r := &runner{ev: ev, prob: prob, p: p, work: work, ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{}, failed: map[tir.Hash]bool{}}
 	islands := make([]*island, p.Islands)
 	for i := range islands {
 		is := &island{n: i, r: rand.New(rand.NewPCG(p.Seed, uint64(i)))}
@@ -173,10 +173,14 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 			// Lineage is only needed for this generation's readings; keeping
 			// it would chain every individual to all its ancestors.
 			ind.parentBest, ind.donorC = nil, nil
-			r.archive.Offer(ind)
 		}
 		if err := r.indexGeneration(g, all); err != nil {
 			return nil, err
+		}
+		// Placement after indexing: novelty, the archive's tiebreaker, is
+		// set there.
+		for _, ind := range all {
+			r.archive.Offer(ind)
 		}
 		if pure := rd.VCHits + rd.VCPureExecuted; pure > 0 {
 			rd.VCHitRate = float64(rd.VCHits) / float64(pure)
@@ -249,17 +253,9 @@ type runner struct {
 	archive *Archive
 	donorC  map[uint64][]bool // correctness of genomes that donated fragments
 
-	// evaluated keeps each generation's source and functions for the
-	// index update at the barrier, per island.
-	mu        sync.Mutex
-	evaluated map[int]*evalRecord
-}
-
-type evalRecord struct {
-	src    []byte
-	names  []string
-	prog   eval.Program
-	traces [][]eval.ValueTrace
+	// failed are fragments whose evaluation faulted or ran out of budget on
+	// some vector: they have no fingerprint and are not evaluated again.
+	failed map[tir.Hash]bool
 }
 
 // evaluate runs island is's generation g through the cascade's giri stage.
@@ -291,25 +287,24 @@ func (r *runner) evaluate(is *island, g int) error {
 		sem <- struct{}{}
 		go func() {
 			defer func() { <-sem; wg.Done() }()
-			results[i], errs[i] = r.ev.Run(fns[names[i]], r.prob.Selection, eval.RunOptions{MaxSteps: r.p.MaxSteps, Trace: true, TraceCap: 4096})
+			results[i], errs[i] = r.ev.Run(fns[names[i]], r.prob.Selection, eval.RunOptions{MaxSteps: r.p.MaxSteps})
 		}()
 	}
 	wg.Wait()
 	if err := errors.Join(errs...); err != nil {
 		return err
 	}
-	rec := &evalRecord{src: src, names: names, prog: prog, traces: make([][]eval.ValueTrace, len(is.pop))}
 	for i, ind := range is.pop {
 		r.score(ind, results[i])
-		rec.traces[i] = results[i].Traces
 	}
-	r.mu.Lock()
-	if r.evaluated == nil {
-		r.evaluated = map[int]*evalRecord{}
-	}
-	r.evaluated[is.n] = rec
-	r.mu.Unlock()
+	r.release(prog)
 	return nil
+}
+
+func (r *runner) release(p eval.Program) {
+	if rel, ok := r.ev.(interface{ Release(eval.Program) error }); ok {
+		_ = rel.Release(p)
+	}
 }
 
 func (r *runner) score(ind *Individual, res eval.Result) {
@@ -329,13 +324,6 @@ func (r *runner) score(ind *Individual, res eval.Result) {
 	}
 	ind.Cost = r.cost(res)
 	ind.vcHits, ind.vcPure, ind.vcMeasured = res.CacheHits, res.PureExecuted, res.CacheMeasured
-	ind.FPs = nil
-	for _, tr := range res.Traces {
-		if fp, ok := index.FromTrace(tr); ok {
-			ind.FPs = append(ind.FPs, fp)
-		}
-	}
-	ind.Novelty = r.ix.Novelty(ind.FPs) // the index is read-only while islands evaluate
 }
 
 // cost is the abstract cost: per-class counts weighted by CostWeights
@@ -369,80 +357,63 @@ func collides(ind *Individual) bool {
 	return false
 }
 
-// indexGeneration adds the generation's new fragments to the index, in
-// island and genome order: each eligible genome's top-level definitions
-// that carry a fingerprint (only when the evaluator traces), evaluated as
-// fragment functions for their cost. Under eval.stub there are no traces,
-// and nothing is added.
+// indexGeneration adds the generation's new fragments to the index and sets
+// each genome's novelty. A genome's fragments are the backward slices at its
+// top-level points (tir.Points). A fragment not seen before is evaluated as
+// a function returning its variable (Fragment.Func), one package per result
+// type; its outputs on the selection vectors are its fingerprint
+// (index.FromOutputs) and its abstract cost is the entry's cost. A fragment
+// that faults or exhausts the budget on some vector has no fingerprint.
+// Novelty is the number of distinct fingerprints a genome's fragments have
+// that were not in the index before this generation. Everything runs in
+// island and genome order, so the index is a function of the seed.
+//
+// The stub is not an instrument, and its step counts cost a giri search per
+// fragment, so under it the index stays empty.
 func (r *runner) indexGeneration(g int, all []*Individual) error {
+	if n, ok := r.ev.(eval.Named); ok && !n.IsInstrument() {
+		return nil
+	}
 	type pending struct {
-		fp     index.Fingerprint
 		fr     *index.Fragment
 		genome *Individual
 	}
 	var todo []pending
-	seen := map[tir.Hash]bool{}
-	r.mu.Lock()
-	recs := r.evaluated
-	r.evaluated = nil
-	r.mu.Unlock()
-	defer func() {
-		for _, rec := range recs {
-			if rel, ok := r.ev.(interface{ Release(eval.Program) error }); ok {
-				_ = rel.Release(rec.prog)
-			}
-		}
-	}()
-	for i := range r.p.Islands {
-		rec := recs[i]
-		if rec == nil {
+	queued := map[tir.Hash]int{} // fragment hash → index into todo
+	frags := make([][]tir.Hash, len(all))
+	for i, ind := range all {
+		if !ind.Eligible() {
 			continue
 		}
-		fns := rec.prog.Funcs()
-		for j, name := range rec.names {
-			ind := all[i*r.p.Population+j]
-			if !ind.Eligible() || len(rec.traces[j]) == 0 {
+		for _, p := range tir.Points(ind.F) {
+			fr, ok := index.Slice(ind.F, p.At, p.V)
+			if !ok || !fingerprintable(fr.Result.T) {
 				continue
 			}
-			fps := VarFingerprints(rec.src, name, ind.F, fns[name], rec.traces[j])
-			for _, s := range ind.F.Body {
-				a, ok := s.(*tir.Assign)
-				if !ok || !a.Define {
-					continue
-				}
-				fp, ok := fps[a.Dst.ID]
-				if !ok {
-					continue
-				}
-				fr, ok := index.Slice(ind.F, a.Dst)
-				if !ok || seen[fr.Hash] {
-					continue
-				}
-				if _, known := r.ix.FingerprintOf(fr.Hash); known {
-					continue
-				}
-				seen[fr.Hash] = true
-				todo = append(todo, pending{fp, fr, ind})
+			frags[i] = append(frags[i], fr.Hash)
+			if _, known := r.ix.FingerprintOf(fr.Hash); known || r.failed[fr.Hash] {
+				continue
 			}
+			if _, q := queued[fr.Hash]; q {
+				continue
+			}
+			queued[fr.Hash] = len(todo)
+			todo = append(todo, pending{fr, ind})
 		}
 	}
-	if len(todo) == 0 {
-		return nil
-	}
 
-	// Evaluate the new fragments for their cost, one package per result
-	// type (evaluators may require one signature per package).
+	fps := make([]index.Fingerprint, len(todo))
+	costs := make([]uint64, len(todo))
+	ok := make([]bool, len(todo))
 	byType := map[tir.Type][]int{}
 	var types []tir.Type
 	for k, pd := range todo {
 		t := pd.fr.Result.T
-		if _, ok := byType[t]; !ok {
+		if _, seen := byType[t]; !seen {
 			types = append(types, t)
 		}
 		byType[t] = append(byType[t], k)
 	}
-	costs := make([]uint64, len(todo))
-	ok := make([]bool, len(todo))
 	for ti, t := range types {
 		ks := byType[t]
 		named := make([]tir.Named, len(ks))
@@ -464,24 +435,49 @@ func (r *runner) indexGeneration(g int, all []*Individual) error {
 				return err
 			}
 			if len(res.Violations) == 0 && !res.Exhausted {
-				costs[k], ok[k] = r.cost(res), true
+				fps[k], ok[k] = index.FromOutputs(t.GoType(), res.Outputs)
+				costs[k] = r.cost(res)
 			}
 		}
-		if rel, isRel := r.ev.(interface{ Release(eval.Program) error }); isRel {
-			_ = rel.Release(prog)
-		}
+		r.release(prog)
 		if err := os.RemoveAll(dir); err != nil {
 			return err
 		}
 	}
-	for k, pd := range todo {
-		if ok[k] {
-			r.ix.Add(pd.fp, pd.fr, costs[k], pd.genome.ID)
-			r.donorC[pd.genome.ID] = pd.genome.C
+
+	// Novelty against the index as it stood before this generation.
+	fpOf := func(h tir.Hash) (index.Fingerprint, bool) {
+		if fp, known := r.ix.FingerprintOf(h); known {
+			return fp, true
 		}
+		if k, q := queued[h]; q && ok[k] {
+			return fps[k], true
+		}
+		return index.Fingerprint{}, false
+	}
+	for i, ind := range all {
+		var mine []index.Fingerprint
+		for _, h := range frags[i] {
+			if fp, has := fpOf(h); has {
+				mine = append(mine, fp)
+			}
+		}
+		ind.Novelty = r.ix.Novelty(mine)
+	}
+
+	for k, pd := range todo {
+		if !ok[k] {
+			r.failed[pd.fr.Hash] = true
+			continue
+		}
+		r.ix.Add(fps[k], pd.fr, costs[k], pd.genome.ID)
+		r.donorC[pd.genome.ID] = pd.genome.C
 	}
 	return nil
 }
+
+// fingerprintable reports whether v0 fingerprints cover a value of type t.
+func fingerprintable(t tir.Type) bool { return !t.Slice && t.Valid() }
 
 // top is the best n eligible individuals of pop by rank.
 func top(pop []*Individual, n int) []*Individual {
@@ -523,8 +519,8 @@ type recordingDonor struct {
 
 func (d *recordingDonor) Empty() bool { return d.ix.Empty() }
 
-func (d *recordingDonor) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
-	stmts, res, e, ok := d.ix.CheaperEntry(f, v)
+func (d *recordingDonor) Cheaper(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, bool) {
+	stmts, res, e, ok := d.ix.CheaperEntry(f, p)
 	if ok {
 		d.entry, d.used = e, true
 	}

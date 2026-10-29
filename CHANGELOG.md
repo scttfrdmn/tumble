@@ -63,11 +63,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Loop accumulators were fingerprinted by the loop-header phi attributed to
+  their definition's line, so a fragment like `v0 := 0` was filed under the
+  loop's per-iteration values. Fingerprints now come from evaluating the
+  fragment (#67).
+
 - The type checker finds the standard library in a binary built with
   `-trimpath` (as `make build` does), which does not know its GOROOT.
 
 ### Changed
 
+- Fragments, fingerprints, novelty, and equivalence substitution work at
+  top-level program points, including an accumulator's value after its loop.
+  A fragment's fingerprint is its output on each test vector when evaluated
+  as a function. Genome evaluation no longer records traces. `PROJECT.md`
+  §4.2 and §5.3 (#67).
 - tumble depends on `github.com/scttfrdmn/giri` and builds only with
   `GOEXPERIMENT=arenas`. The `giriapi` build tag is gone (#62).
 - `PROJECT.md` §5.2: the value cache as built is per instruction (#63, #64).

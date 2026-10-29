@@ -121,19 +121,20 @@ func (ix *Index) Novelty(fps []Fingerprint) int {
 	return n
 }
 
-// Cheaper implements ops.Donor: v's backward slice in f is looked up by its
-// structural hash; if the index has seen that fragment, and the cheapest
-// fragment with the same fingerprint costs less, that fragment is returned.
-// A slice the index has never seen has no known fingerprint and gets
-// nothing.
-func (ix *Index) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
-	stmts, res, _, ok := ix.CheaperEntry(f, v)
+// Cheaper implements ops.Donor: the backward slice of p.V at point p in f
+// is looked up by its structural hash; if the index has seen that fragment,
+// and the cheapest fragment with the same fingerprint costs less, that
+// fragment is returned. A slice the index has never seen has no known
+// fingerprint and gets nothing.
+func (ix *Index) Cheaper(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, bool) {
+	stmts, res, _, ok := ix.CheaperEntry(f, p)
 	return stmts, res, ok
 }
 
 // CheaperEntry is Cheaper that also returns the donor's index entry.
-func (ix *Index) CheaperEntry(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, Entry, bool) {
-	fr, ok := Slice(f, v)
+func (ix *Index) CheaperEntry(f *tir.Func, p tir.Point) ([]tir.Stmt, tir.Var, Entry, bool) {
+	v := p.V
+	fr, ok := Slice(f, p.At, v)
 	if !ok {
 		return nil, tir.Var{}, Entry{}, false
 	}
