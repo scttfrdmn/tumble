@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "tumble: a strict genetic algorithm over Go"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/scttfrdmn/tumble"
+authors:
+  - family-names: Friedman
+    given-names: Scott
+abstract: >-
+  A genetic algorithm over Go kernels that is strict in Goldberg's sense: a coded
+  representation (typed linear IR), a population, blind payoff-only operators and
+  probabilistic transitions, with no LLM in the loop. Fitness comes from giri, a
+  UB-verifying Go SSA interpreter, whose execution traces drive a structural
+  hash-cons, a Hashlife-style value cache, and a semantic fingerprint index.
+keywords:
+  - genetic algorithms
+  - genetic programming
+  - superoptimization
+  - Go
+  - program synthesis
+references:
+  - type: software
+    title: "giri: Go IR interpreter for undefined-behavior detection"
+    authors:
+      - family-names: Friedman
+        given-names: Scott
+    url: "https://github.com/scttfrdmn/giri"
+  - type: book
+    title: "Genetic Algorithms in Search, Optimization, and Machine Learning"
+    authors:
+      - family-names: Goldberg
+        given-names: David E.
+    year: 1989
