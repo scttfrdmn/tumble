@@ -16,8 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   16/1024/65536 words, fuzz target against a naive bit loop, committed fuzz
   corpus, and `Vectors()` returning 50 selection and 15 holdout test vectors
   (#38).
+- `pkg/tir`: the typed linear IR (statements assign/store/loop/if/return
+  plus the repair sink, one-level expressions over atoms), a gofmt-stable
+  printer with canonical names, a parser that normalizes plain Go seeds, the
+  structural pre-check `Validate`, the go/types check, phenotype identity, and
+  the α-renaming structural hash (#39, #40, #41, #42).
 
 ### Changed
+
+- `PROJECT.md` §4.1: expressions are one level over atoms, and `convert` is an
+  expression form (#39).
 
 - `GIRI_REQUIREMENTS.md`: requirement 11, value-faithful memory
   (scttfrdmn/giri#248).

@@ -104,12 +104,14 @@ Candidate kernels, in order:
 A genome is one function with the run's fixed signature, represented as a bounded-length list of statements over a small set of forms:
 
 ```
-assign    v := expr               (expr: binop, unop, const, index, len, call)
+assign    v := expr               (expr: binop, unop, const, index, len, call, convert)
 store     xs[i] = v
 loop      for i := lo; i < hi; i += step { body }     (structured, bounded nesting)
 if        if cond { body } [else { body }]
 return    return v
 ```
+
+Expressions are one level deep: every operand is a variable or a constant, so each statement defines one value from named inputs, and nested Go is flattened into fresh definitions. `convert` is `T(x)` between integer types; without it no genome can combine a `uint64` element with an `int` accumulator (decision #39).
 
 Types: the run's parameter and return types plus `int`, `bool`, and the element types involved. Variables are SSA-like (single definition) except loop-carried accumulators, which are declared before the loop and assigned inside.
 
