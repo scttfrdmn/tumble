@@ -31,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   is empty (#48), and per-operator yield counters.
 - `pkg/eval`: the `Evaluator` interface and its input, trace, and result
   types (`SETUP.md`, "Evaluator interface").
+- `pkg/index`: hash-cons table, fingerprints from traces (#49), backward-slice
+  fragments of top-level definitions (#50), the fingerprint index sorted by
+  cost, novelty, the `ops.Donor` lookup, and a collision checker.
 
 ### Changed
 
