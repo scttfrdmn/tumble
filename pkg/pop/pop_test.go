@@ -10,6 +10,7 @@ import (
 	"hash/fnv"
 	"math/rand/v2"
 	"os"
+	"slices"
 	"testing"
 
 	"golang.org/x/tools/go/ssa"
@@ -238,5 +239,44 @@ func TestParamsJSON(t *testing.T) {
 	}
 	if p.Islands != 8 || p.Population != 256 || p.Migrants != 4 || p.MigrateEvery != 10 {
 		t.Error("defaults differ from PROJECT.md §4.5")
+	}
+}
+
+func TestElitesSpreadAcrossCost(t *testing.T) {
+	f := problem(t).Reference
+	mk := func(cost uint64, correct bool) *Individual {
+		c := []bool{true, correct}
+		n := 1
+		if correct {
+			n = 2
+		}
+		return &Individual{F: f, C: c, Correct: n, Cost: cost}
+	}
+	var all []*Individual
+	for _, c := range []uint64{10, 10, 10, 11, 12, 15, 20, 30, 40, 50} {
+		all = append(all, mk(c, true))
+	}
+	all = append(all, mk(5, false)) // not fully correct: never an elite
+	benched := map[uint64]bool{}
+	costs := func(es []*Individual) []uint64 {
+		var out []uint64
+		for _, e := range es {
+			out = append(out, e.Cost)
+		}
+		return out
+	}
+	// Distinct costs 10 11 12 15 20 30 40 50; three spread picks.
+	if got := costs(elites(all, 3, benched)); !slices.Equal(got, []uint64{10, 20, 50}) {
+		t.Errorf("first generation's elites by cost = %v, want [10 20 50]", got)
+	}
+	// Costs once benchmarked are not offered again.
+	if got := costs(elites(all, 3, benched)); !slices.Equal(got, []uint64{11, 15, 40}) {
+		t.Errorf("second generation's elites = %v, want [11 15 40]", got)
+	}
+	if got := costs(elites(all, 8, benched)); !slices.Equal(got, []uint64{12, 30}) {
+		t.Errorf("remaining elites = %v, want [12 30]", got)
+	}
+	if got := elites(all, 8, benched); len(got) != 0 {
+		t.Errorf("elites after every cost is benchmarked: %v", costs(got))
 	}
 }

@@ -72,9 +72,12 @@ type Readings struct {
 	// vectors correct, or as many at lower cost), by operator.
 	Improvements map[string]int `json:"improvements"`
 
-	// Elites are this generation's native-stage candidates: the top E
-	// fully correct genomes by abstract cost.
-	Elites []*Individual `json:"-"`
+	// Elites are this generation's native-stage candidates (see elites):
+	// at most E fully correct genomes, one per abstract cost not benchmarked
+	// before, spread across the generation's cost range. EliteCosts are
+	// their costs.
+	Elites     []*Individual `json:"-"`
+	EliteCosts []uint64      `json:"elite_costs"`
 
 	// Steps is the generation's interpreted instructions over its genome
 	// evaluations (fragment evaluations not included).
@@ -132,7 +135,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 	if n, ok := ev.(eval.Named); ok {
 		evName = n.Name()
 	}
-	r := &runner{ev: ev, prob: prob, p: p, work: work, ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{}, failed: map[tir.Hash]bool{}}
+	r := &runner{ev: ev, prob: prob, p: p, work: work, ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{}, failed: map[tir.Hash]bool{}, benched: map[uint64]bool{}}
 	islands := make([]*island, p.Islands)
 	for i := range islands {
 		is := &island{n: i, r: rand.New(rand.NewPCG(p.Seed, uint64(i)))}
@@ -235,7 +238,10 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 				rd.BestCost = best.Cost
 			}
 		}
-		rd.Elites = elites(all, p.Elites)
+		rd.Elites = elites(all, p.Elites, r.benched)
+		for _, el := range rd.Elites {
+			rd.EliteCosts = append(rd.EliteCosts, el.Cost)
+		}
 
 		if g+1 < p.Generations {
 			var migrants [][]*Individual
@@ -288,6 +294,9 @@ type runner struct {
 	// failed are fragments whose evaluation faulted or ran out of budget on
 	// some vector: they have no fingerprint and are not evaluated again.
 	failed map[tir.Hash]bool
+
+	// benched are the abstract costs already given to the native stage.
+	benched map[uint64]bool
 }
 
 // evaluate runs island is's generation g through the cascade's giri stage.
@@ -529,22 +538,51 @@ func top(pop []*Individual, n int) []*Individual {
 	return el[:min(n, len(el))]
 }
 
-// elites are the top e fully correct individuals by abstract cost, one per
-// phenotype.
-func elites(all []*Individual, e int) []*Individual {
-	var fc []*Individual
-	seen := map[[32]byte]bool{}
+// elites picks up to e of the generation's fully correct individuals for
+// the native stage. Only one genome per abstract cost is ever benchmarked:
+// genomes that differ only in neutral dead code cost the same and tell the
+// cost-model fit nothing. Candidates are the best-ranked genome of each cost
+// not benchmarked in an earlier generation, in cost order. The cheapest is
+// always taken, since it gives the reported number, and the rest are spaced
+// evenly across the candidates' cost range, so the fit of abstract cost
+// against ns/op sees a spread (decision on #68). benched records the costs
+// taken.
+func elites(all []*Individual, e int, benched map[uint64]bool) []*Individual {
+	byCost := map[uint64]*Individual{}
 	for _, ind := range all {
-		if !ind.FullyCorrect() {
+		if !ind.FullyCorrect() || benched[ind.Cost] {
 			continue
 		}
-		if id := ind.F.Identity(); !seen[id] {
-			seen[id] = true
-			fc = append(fc, ind)
+		if cur, ok := byCost[ind.Cost]; !ok || better(ind, cur) < 0 {
+			byCost[ind.Cost] = ind
 		}
 	}
-	slices.SortStableFunc(fc, better)
-	return fc[:min(e, len(fc))]
+	cands := make([]*Individual, 0, len(byCost))
+	for _, ind := range byCost {
+		cands = append(cands, ind)
+	}
+	slices.SortFunc(cands, better) // all fully correct: by cost, then novelty, identity
+	var out []*Individual
+	switch n := len(cands); {
+	case e <= 0 || n == 0:
+	case n <= e:
+		out = cands
+	case e == 1:
+		out = cands[:1]
+	default:
+		taken := map[int]bool{}
+		for k := range e {
+			i := (k*(n-1) + (e-1)/2) / (e - 1) // round(k(n-1)/(e-1))
+			if !taken[i] {
+				taken[i] = true
+				out = append(out, cands[i])
+			}
+		}
+	}
+	for _, ind := range out {
+		benched[ind.Cost] = true
+	}
+	return out
 }
 
 // recordingDonor wraps the index for one substitution and remembers which

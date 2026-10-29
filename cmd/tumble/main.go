@@ -239,16 +239,12 @@ func runCmd(args []string, out io.Writer) error {
 	}
 
 	start := time.Now()
-	benched := map[[32]byte]bool{}
 	obs := func(rd *pop.Readings, a *pop.Archive) error {
 		nativeStart := time.Now()
 		if cfg.Native.Enabled {
+			// pop never offers a cost twice, so no genome repeats.
 			for _, el := range rd.Elites {
 				id := el.F.Identity()
-				if benched[id] {
-					continue
-				}
-				benched[id] = true
 				res, err := native.Run(nk, cfg.Native.Config, el.F, scratch)
 				if err != nil {
 					return err

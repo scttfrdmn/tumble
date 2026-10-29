@@ -142,7 +142,7 @@ Each stage is a filter; a genome stops at the first failure and its cost is reco
    - Violation or budget exhaustion → discard.
    - Per-test-case correctness vector `c ∈ {0,1}^N` from output equality with the reference.
    - Abstract cost `k` = instructions executed, summed over test vectors, weighted by class (load/store/call/branch weights are run parameters; v0 uses 1 for everything).
-4. **Native stage**, elites only (top-E by abstract cost among fully correct genomes, E a run parameter, default 8 per generation): printed to a temp package with the reference's benchmark harness, `go test -bench -count=10`, `benchstat` interval. Native `ns/op` is the terminal fitness and the reported number. It is *not* used for selection within the population, only for archiving and reporting, because its noise would swamp per-generation selection.
+4. **Native stage**, elites only (up to E per generation, a run parameter, default 8: among fully correct genomes, one per abstract cost not benchmarked before, the cheapest plus the rest spread evenly over the generation's cost range, so the cost-model fit sees a spread; decision #71): printed to a temp package with the reference's benchmark harness, `go test -bench -count=10`, `benchstat` interval. Native `ns/op` is the terminal fitness and the reported number. It is *not* used for selection within the population, only for archiving and reporting, because its noise would swamp per-generation selection.
 
 Selection uses `c` (lexicase) first, then `k`, then novelty (§4.5). A genome that is correct on all N vectors but not yet natively benchmarked is still eligible as a parent.
 
