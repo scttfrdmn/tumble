@@ -21,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   printer with canonical names, a parser that normalizes plain Go seeds, the
   structural pre-check `Validate`, the go/types check, phenotype identity, and
   the α-renaming structural hash (#39, #40, #41, #42).
+- `pkg/grammar`: the run grammar (forms, limits, types, operators, call
+  whitelist, constant ranges) with the v0 popcount grammar (#43), scope
+  tracking, and the random genome generator with ramped initialization (#44).
+- `pkg/tir`: `Sink` pass for unused locals; 10,000-genome property test
+  (type-check, print-parse-print fixpoint, hash stability).
 
 ### Changed
 
