@@ -28,10 +28,22 @@ lint: ## go vet and golangci-lint with the repo config
 	go vet ./...
 	golangci-lint run
 
+# The fuzzer writes the inputs it finds to $GOCACHE/fuzz, not the repository;
+# fuzz-seed starts each kernel's cache entry empty, fuzzes for 60 s, and copies
+# what was found into testdata/corpus/, which is committed.
 fuzz-seed: ## Regenerate kernels/*/testdata/corpus (60 s per kernel)
 	@for k in $(KERNELS); do \
-		echo "fuzz-seed $$k"; \
-		go test -run '^$$' -fuzz '^Fuzz' -fuzztime 60s ./$$k/ || exit 1; \
+		[ -f $$k/go.mod ] || [ -n "$$(ls $$k/*_test.go 2>/dev/null)" ] || continue; \
+		pkg=$$(go list ./$$k/) || exit 1; \
+		for fz in $$(grep -ho '^func Fuzz[A-Za-z0-9_]*' $$k/*_test.go | cut -c6-); do \
+			echo "fuzz-seed $$k $$fz"; \
+			cache="$$(go env GOCACHE)/fuzz/$$pkg/$$fz"; \
+			rm -rf "$$cache"; \
+			go test -run '^$$' -fuzz "^$$fz\$$" -fuzztime 60s ./$$k/ || exit 1; \
+			rm -rf $$k/testdata/corpus/$$fz; \
+			mkdir -p $$k/testdata/corpus/$$fz; \
+			cp "$$cache"/* $$k/testdata/corpus/$$fz/; \
+		done; \
 	done
 
 tidy: ## go mod tidy
