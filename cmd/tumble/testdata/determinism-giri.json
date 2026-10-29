@@ -1,0 +1,13 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "giri"},
+  "params": {
+    "seed": 1,
+    "generations": 5,
+    "islands": 2,
+    "population": 32,
+    "migrate_every": 2,
+    "migrants": 2
+  },
+  "native": {"enabled": false}
+}

@@ -5,11 +5,14 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/scttfrdmn/tumble/pkg/report"
 )
 
 func TestRunReportInspect(t *testing.T) {
@@ -70,5 +73,37 @@ func TestConfigsParse(t *testing.T) {
 		if err := cfg.Params.Check(); err != nil {
 			t.Errorf("%s: %v", p, err)
 		}
+	}
+}
+
+func TestRunGiriUnderExperiments(t *testing.T) {
+	cfg := filepath.Join(t.TempDir(), "cfg.json")
+	if err := os.WriteFile(cfg, []byte(`{"evaluator": {"name": "giri"}, "params": {"generations": 2, "islands": 2, "population": 8, "migrate_every": 1, "migrants": 1}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := filepath.Join(t.TempDir(), "experiments", "e0", "x")
+	var buf bytes.Buffer
+	if err := runCmd([]string{"--config", cfg, "--out", out, "--root", "../..", "--no-native", "--work", t.TempDir()}, &buf); err != nil {
+		t.Fatalf("giri run under experiments/: %v\n%s", err, buf.String())
+	}
+	l, err := report.Load(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !l.Record.Instrument || l.Record.Evaluator != "giri" || len(l.Record.Notes) != 0 {
+		t.Errorf("record: evaluator %s instrument %v notes %v", l.Record.Evaluator, l.Record.Instrument, l.Record.Notes)
+	}
+	if !strings.Contains(l.Record.Versions.GiriModule, "0e7b1ae5bb96") {
+		t.Errorf("giri module version not recorded: %q", l.Record.Versions.GiriModule)
+	}
+	var rd struct {
+		VCMeasured bool `json:"vc_measured"`
+		IndexSize  int  `json:"index_size"`
+	}
+	if err := json.Unmarshal(l.Generations[len(l.Generations)-1], &rd); err != nil {
+		t.Fatal(err)
+	}
+	if !rd.VCMeasured || rd.IndexSize == 0 {
+		t.Errorf("last generation: vc_measured %v, index_size %d", rd.VCMeasured, rd.IndexSize)
 	}
 }

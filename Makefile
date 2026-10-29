@@ -46,19 +46,23 @@ fuzz-seed: ## Regenerate kernels/*/testdata/corpus (60 s per kernel)
 		done; \
 	done
 
-# SETUP.md, "Build and test": 5 generations of popcount twice with one seed
-# under eval.stub (giri on PATH); the generation-by-generation archives, the
-# readings, and the best genome must be byte-identical.
-determinism: build ## Run popcount twice with one seed and diff the records
+# SETUP.md, "Build and test": 5 generations of popcount twice with one seed,
+# under eval.stub (giri on PATH) and under the giri evaluator (cache on,
+# islands in parallel); the generation-by-generation archives, the readings,
+# and the best genome must be byte-identical.
+determinism: build ## Run popcount twice with one seed per config and diff the records
 	@set -e; dir="$${DET_DIR:-$$(mktemp -d)}"; \
-	for i in 1 2; do \
-		./bin/$(BINARY) run --kernel popcount --config cmd/tumble/testdata/smoke.json \
-			--generations 5 --seed 1 --no-native --out "$$dir/run$$i" >/dev/null; \
+	for cfg in cmd/tumble/testdata/smoke.json cmd/tumble/testdata/determinism-giri.json; do \
+		name=$$(basename $$cfg .json); \
+		for i in 1 2; do \
+			./bin/$(BINARY) run --kernel popcount --config $$cfg \
+				--generations 5 --seed 1 --no-native --out "$$dir/$$name/run$$i" >/dev/null; \
+		done; \
+		diff -r "$$dir/$$name/run1/archive" "$$dir/$$name/run2/archive"; \
+		diff "$$dir/$$name/run1/generations.jsonl" "$$dir/$$name/run2/generations.jsonl"; \
+		diff "$$dir/$$name/run1/best.go" "$$dir/$$name/run2/best.go"; \
+		echo "determinism: $$name run1 and run2 are identical"; \
 	done; \
-	diff -r "$$dir/run1/archive" "$$dir/run2/archive"; \
-	diff "$$dir/run1/generations.jsonl" "$$dir/run2/generations.jsonl"; \
-	diff "$$dir/run1/best.go" "$$dir/run2/best.go"; \
-	echo "determinism: run1 and run2 in $$dir are identical"; \
 	rm -rf "$$dir"
 
 tidy: ## go mod tidy
