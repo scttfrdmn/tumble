@@ -38,6 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   from a native fuel-limited harness; #51), the evaluator registry and
   `CheckExperiment` (#52), and the giri adapter skeleton behind
   `//go:build giriapi`.
+- `pkg/pop`: lockstep islands with a deterministic barrier (#54), lexicase
+  selection, the MAP-Elites archive, ring migration, run parameter defaults
+  (#53), and per-generation readings with the trace-to-variable mapping for
+  indexing (#55).
 
 ### Changed
 
