@@ -63,6 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- CI pins giri at 0e7b1ae (main: `pkg/exec`, scttfrdmn/giri#251, plus the
+  value-cache GC-safepoint fix, scttfrdmn/giri#254), up from v0.97.0 (#58).
 - `PROJECT.md` §6.2 and §7, `SETUP.md`: how the stub evaluates, and its
   exception to "no native execution inside selection" (#51).
 - `PROJECT.md` §4.1: expressions are one level over atoms, and `convert` is an
