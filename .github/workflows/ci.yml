@@ -11,6 +11,8 @@ permissions:
 
 env:
   GOEXPERIMENT: arenas
+  # giri for eval.stub, pinned: v0.97.0.
+  GIRI_COMMIT: 49d46a8c72dab3e780a6d1af1da4827354228781
 
 jobs:
   test:
@@ -28,8 +30,24 @@ jobs:
         uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a  # v9.3.0
         with:
           version: v2.15.0
+      - name: install giri
+        run: go install github.com/scttfrdmn/giri/cmd/giri@${GIRI_COMMIT}
       - name: go test -race
         run: go test -race ./...
+
+  determinism:
+    name: determinism (popcount, 5 generations twice)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e  # v7.0.0
+        with:
+          go-version-file: go.mod
+          check-latest: true
+      - name: install giri
+        run: go install github.com/scttfrdmn/giri/cmd/giri@${GIRI_COMMIT}
+      - name: run twice with one seed and diff
+        run: DET_DIR="$RUNNER_TEMP/determinism" make determinism
 
   build:
     name: build ${{ matrix.goarch }}

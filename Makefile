@@ -11,7 +11,7 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 KERNELS := $(wildcard kernels/*)
 
-.PHONY: all vet build test lint fuzz-seed tidy clean
+.PHONY: all vet build test lint fuzz-seed determinism tidy clean
 
 all: vet build test ## vet, build, unit tests
 
@@ -45,6 +45,21 @@ fuzz-seed: ## Regenerate kernels/*/testdata/corpus (60 s per kernel)
 			cp "$$cache"/* $$k/testdata/corpus/$$fz/; \
 		done; \
 	done
+
+# SETUP.md, "Build and test": 5 generations of popcount twice with one seed
+# under eval.stub (giri on PATH); the generation-by-generation archives, the
+# readings, and the best genome must be byte-identical.
+determinism: build ## Run popcount twice with one seed and diff the records
+	@set -e; dir="$${DET_DIR:-$$(mktemp -d)}"; \
+	for i in 1 2; do \
+		./bin/$(BINARY) run --kernel popcount --config cmd/tumble/testdata/smoke.json \
+			--generations 5 --seed 1 --no-native --out "$$dir/run$$i" >/dev/null; \
+	done; \
+	diff -r "$$dir/run1/archive" "$$dir/run2/archive"; \
+	diff "$$dir/run1/generations.jsonl" "$$dir/run2/generations.jsonl"; \
+	diff "$$dir/run1/best.go" "$$dir/run2/best.go"; \
+	echo "determinism: run1 and run2 in $$dir are identical"; \
+	rm -rf "$$dir"
 
 tidy: ## go mod tidy
 	go mod tidy

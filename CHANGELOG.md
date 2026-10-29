@@ -52,6 +52,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tumble inspect` read it back. `tumble run` refuses a non-instrument
   evaluator for an output directory under `experiments/`.
 - `kernels`: the kernel registry; `experiments/e0/config.json`.
+- `make determinism` and a CI `determinism` job: 5 generations of `popcount`
+  twice with seed 1, diffing the archives, readings, and best genome; CI
+  installs giri v0.97.0 so the stub and CLI tests run (#58).
 
 ### Fixed
 
