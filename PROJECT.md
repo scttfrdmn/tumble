@@ -161,7 +161,7 @@ giri's UB detectors catch the class of false positives differential testing cann
 - **Islands:** I islands (default 8), population P each (default 256), migration of the top m every G generations (defaults 4, 10). Islands run in parallel goroutines; each holds its own `go/ssa` build per generation.
 - **MAP-Elites archive**, global, descriptors: `(abstract cost bucket, statement count bucket, max loop depth)`. v1 adds `allocs/op` from the native stage.
 - **Novelty:** number of fingerprints a genome produces that are not yet in the index. Used as the third selection key and as a MAP-Elites tiebreaker; gives selection something to grip when correctness is zero across the population (the plateau problem).
-- **Lexicase selection** (Spector & Helmuth 2015) over the N test-case correctness bits, then abstract cost, then novelty.
+- **Lexicase selection** (Spector & Helmuth 2015) over the N test-case correctness bits, then abstract cost, then statement count (parsimony: neutral dead code costs nothing, so without it genomes drift to the length limit; decision #75), then novelty.
 
 ### 4.6 Sandbox
 

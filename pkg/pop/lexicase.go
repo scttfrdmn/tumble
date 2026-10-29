@@ -8,8 +8,10 @@ import "math/rand/v2"
 // Lexicase selects one parent (Spector & Helmuth 2015; PROJECT.md §4.5): the
 // eligible candidates are filtered through the test cases in a random order,
 // keeping on each case those that pass it if any do; the survivors are then
-// filtered to the lowest abstract cost, then the highest novelty, and one of
-// those is drawn uniformly. cands must be non-empty and eligible.
+// filtered to the lowest abstract cost, then the fewest statements (parsimony:
+// neutral dead code costs nothing, so without it genomes drift to the length
+// limit; decision on #70), then the highest novelty, and one of those is
+// drawn uniformly. cands must be non-empty and eligible.
 func Lexicase(r *rand.Rand, cands []*Individual) *Individual {
 	pool := append([]*Individual(nil), cands...)
 	n := len(pool[0].C)
@@ -28,6 +30,7 @@ func Lexicase(r *rand.Rand, cands []*Individual) *Individual {
 		}
 	}
 	pool = keepBest(pool, func(c *Individual) int64 { return -int64(c.Cost) })
+	pool = keepBest(pool, func(c *Individual) int64 { return -int64(c.length()) })
 	pool = keepBest(pool, func(c *Individual) int64 { return int64(c.Novelty) })
 	return pool[r.IntN(len(pool))]
 }

@@ -315,3 +315,32 @@ func TestScoreArgsAfter(t *testing.T) {
 		t.Errorf("correctness %v, want [true false false]", ind.C)
 	}
 }
+
+// TestParsimonyTiebreak: among equally correct, equally cheap candidates,
+// lexicase and the rank prefer fewer statements; cost still comes first.
+func TestParsimonyTiebreak(t *testing.T) {
+	short, err := tir.Parse([]byte("package p\n\nfunc f(xs []uint64) int {\n\treturn len(xs)\n}\n"), "f")
+	if err != nil {
+		t.Fatal(err)
+	}
+	long, err := tir.Parse([]byte("package p\n\nfunc f(xs []uint64) int {\n\tn := len(xs)\n\tm := n + 1\n\t_ = m\n\treturn n\n}\n"), "f")
+	if err != nil {
+		t.Fatal(err)
+	}
+	c := []bool{true}
+	a := &Individual{F: short, C: c, Correct: 1, Cost: 10}
+	b := &Individual{F: long, C: c, Correct: 1, Cost: 10}
+	cheapLong := &Individual{F: long, C: c, Correct: 1, Cost: 9}
+	r := rand.New(rand.NewPCG(3, 3))
+	for range 50 {
+		if got := Lexicase(r, []*Individual{b, a}); got != a {
+			t.Fatal("lexicase did not prefer the shorter of two equal-cost genomes")
+		}
+		if got := Lexicase(r, []*Individual{a, cheapLong}); got != cheapLong {
+			t.Fatal("parsimony overrode cost")
+		}
+	}
+	if better(a, b) >= 0 || better(cheapLong, a) >= 0 {
+		t.Error("rank: want shorter first at equal cost, cheaper first otherwise")
+	}
+}
