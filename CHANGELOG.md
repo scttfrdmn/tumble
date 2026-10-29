@@ -106,7 +106,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tumble depends on `github.com/scttfrdmn/giri` and builds only with
   `GOEXPERIMENT=arenas`. The `giriapi` build tag is gone (#62).
 - `PROJECT.md` §5.2: the value cache as built is per instruction (#63, #64).
-- giri pinned at 5ca7f1f, in `go.mod` and CI: the CLI now reads stored
+- giri pinned at the v0.98.0 release (04128bd), in `go.mod` and CI. Its only
+  code change since 5ca7f1f is the CLI cache key (scttfrdmn/giri#265), and
+  the stub runs giri with `-no-cache`. Before that, 5ca7f1f: the CLI now reads stored
   slice, array and struct values (scttfrdmn/giri#264), so `eval.stub`'s
   violations and step counts follow native control flow. The stub still takes
   outputs natively, since the CLI exposes none (#51, PROJECT.md §6.2). Before
