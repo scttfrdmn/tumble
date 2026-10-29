@@ -66,4 +66,6 @@ Implement, in this order, with tests, committing after each:
 
 9. **API doc** — `docs/exec-api.md` describing the surface, its stability promise (additive, versioned alongside giri), and the purity classification. Update `README.md` with one paragraph and a link.
 
-Decide names, internal structure, and test shape yourself; record anything that departs from `GIRI_REQUIREMENTS.md` as a comment on the giri issue for that requirement, with the reason. Do not change CLI behaviour. End the session with a comment on giri's tumble tracking issue stating what exists, what is tested, the perf numbers measured, and what is blocked.
+Requirements 1–10 are tracked as issues on this repo (tumble req 1 … tumble req 10); close each in the commit that lands it.
+
+Decide names, internal structure, and test shape yourself; record anything that departs from `GIRI_REQUIREMENTS.md` as a comment on the giri issue for that requirement, with the reason. Do not change CLI behaviour. End the session with a comment on scttfrdmn/tumble#14 stating what exists, what is tested, the perf numbers measured, and what is blocked.
