@@ -62,10 +62,16 @@ func (f *Func) Clone() *Func {
 	return &Func{Sig: f.Sig, Body: CloneStmts(f.Body), NextID: f.NextID}
 }
 
-// Len is the number of statements in f, counting nested ones.
+// Len is the number of statements in f, counting nested ones and not
+// counting sinks, which are repair artifacts rather than genetic material.
 func (f *Func) Len() int {
 	n := 0
-	Walk(f.Body, func(Stmt, int) bool { n++; return true })
+	Walk(f.Body, func(s Stmt, _ int) bool {
+		if _, ok := s.(*Sink); !ok {
+			n++
+		}
+		return true
+	})
 	return n
 }
 
