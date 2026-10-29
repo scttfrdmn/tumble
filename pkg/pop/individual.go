@@ -63,6 +63,7 @@ type Individual struct {
 
 	vcHits, vcPure uint64 // value-cache readings of the evaluation
 	vcMeasured     bool
+	steps          uint64 // interpreted instructions of the evaluation
 
 	// parentBest is the best parent's rank key, for attributing
 	// improvements to operators; donorC is a substitution donor's

@@ -12,6 +12,7 @@ import (
 	"reflect"
 	"slices"
 	"sync"
+	"time"
 
 	"github.com/scttfrdmn/tumble/pkg/eval"
 	"github.com/scttfrdmn/tumble/pkg/grammar"
@@ -74,6 +75,25 @@ type Readings struct {
 	// Elites are this generation's native-stage candidates: the top E
 	// fully correct genomes by abstract cost.
 	Elites []*Individual `json:"-"`
+
+	// Steps is the generation's interpreted instructions over its genome
+	// evaluations (fragment evaluations not included).
+	Steps uint64 `json:"steps"`
+
+	// Timing is the generation's wall time by phase. It varies run to
+	// run, so it stays out of the readings' JSON; the run record writes it
+	// to a file of its own.
+	Timing Timing `json:"-"`
+}
+
+// Timing is one generation's wall time by phase, in seconds. Build and
+// Interpret are summed over islands, which run them concurrently.
+type Timing struct {
+	Evaluate  float64 `json:"evaluate"`  // the parallel evaluation phase, wall
+	Build     float64 `json:"build"`     // writing, type-checking and building packages, island sum
+	Interpret float64 `json:"interpret"` // running genomes, island sum
+	Index     float64 `json:"index"`     // the barrier: fragments evaluated and indexed
+	Breed     float64 `json:"breed"`     // the next generation's operators, wall
 }
 
 // Observer receives each generation's readings and the archive after it.
@@ -131,15 +151,22 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 	for g := range p.Generations {
 		rd := &Readings{Gen: g, Evaluator: evName, Discards: map[string]int{}, Improvements: map[string]int{}}
 		errs := make([]error, len(islands))
+		times := make([][2]float64, len(islands))
+		t0 := time.Now()
 		var wg sync.WaitGroup
 		for i, is := range islands {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				errs[i] = r.evaluate(is, g)
+				times[i], errs[i] = r.evaluate(is, g)
 			}()
 		}
 		wg.Wait()
+		rd.Timing.Evaluate = time.Since(t0).Seconds()
+		for _, tm := range times {
+			rd.Timing.Build += tm[0]
+			rd.Timing.Interpret += tm[1]
+		}
 		if err := errors.Join(errs...); err != nil {
 			return nil, err
 		}
@@ -151,6 +178,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		}
 		for _, ind := range all {
 			rd.Evaluations++
+			rd.Steps += ind.steps
 			rd.VCMeasured = rd.VCMeasured || ind.vcMeasured
 			rd.VCHits += ind.vcHits
 			rd.VCPureExecuted += ind.vcPure
@@ -174,9 +202,11 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 			// it would chain every individual to all its ancestors.
 			ind.parentBest, ind.donorC = nil, nil
 		}
+		t1 := time.Now()
 		if err := r.indexGeneration(g, all); err != nil {
 			return nil, err
 		}
+		rd.Timing.Index = time.Since(t1).Seconds()
 		// Placement after indexing: novelty, the archive's tiebreaker, is
 		// set there.
 		for _, ind := range all {
@@ -216,6 +246,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 			}
 			ys := make([]ops.Yield, len(islands))
 			discards := make([]int, len(islands))
+			t2 := time.Now()
 			for i, is := range islands {
 				wg.Add(1)
 				go func() {
@@ -228,6 +259,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 				}()
 			}
 			wg.Wait()
+			rd.Timing.Breed = time.Since(t2).Seconds()
 			for i := range islands {
 				rd.Yield.Add(ys[i])
 				rd.Discards["typecheck"] += discards[i]
@@ -259,7 +291,9 @@ type runner struct {
 }
 
 // evaluate runs island is's generation g through the cascade's giri stage.
-func (r *runner) evaluate(is *island, g int) error {
+// evaluate returns the island's build and interpretation wall seconds.
+func (r *runner) evaluate(is *island, g int) (times [2]float64, err error) {
+	start := time.Now()
 	dir := filepath.Join(r.work, fmt.Sprintf("island%02d", is.n), fmt.Sprintf("gen%04d", g))
 	named := make([]tir.Named, len(is.pop))
 	names := make([]string, len(is.pop))
@@ -271,12 +305,14 @@ func (r *runner) evaluate(is *island, g int) error {
 	}
 	src := tir.PrintFile("g", named)
 	if err := eval.WriteGeneration(dir, src); err != nil {
-		return err
+		return times, err
 	}
 	prog, err := r.ev.Build(dir)
 	if err != nil {
-		return fmt.Errorf("pop: island %d generation %d: %w", is.n, g, err)
+		return times, fmt.Errorf("pop: island %d generation %d: %w", is.n, g, err)
 	}
+	times[0] = time.Since(start).Seconds()
+	start = time.Now()
 	fns := prog.Funcs()
 	results := make([]eval.Result, len(is.pop))
 	errs := make([]error, len(is.pop))
@@ -291,14 +327,15 @@ func (r *runner) evaluate(is *island, g int) error {
 		}()
 	}
 	wg.Wait()
+	times[1] = time.Since(start).Seconds()
 	if err := errors.Join(errs...); err != nil {
-		return err
+		return times, err
 	}
 	for i, ind := range is.pop {
 		r.score(ind, results[i])
 	}
 	r.release(prog)
-	return nil
+	return times, nil
 }
 
 func (r *runner) release(p eval.Program) {
@@ -324,6 +361,7 @@ func (r *runner) score(ind *Individual, res eval.Result) {
 	}
 	ind.Cost = r.cost(res)
 	ind.vcHits, ind.vcPure, ind.vcMeasured = res.CacheHits, res.PureExecuted, res.CacheMeasured
+	ind.steps = res.Steps
 }
 
 // cost is the abstract cost: per-class counts weighted by CostWeights

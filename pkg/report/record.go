@@ -159,13 +159,23 @@ func writeLine(f *os.File, v any) error {
 	return err
 }
 
-// Generation records one generation's readings and the archive after it.
-func (w *Writer) Generation(rd *pop.Readings, a *pop.Archive) error {
+// TimingEntry is one generation's line in TimingFile: wall seconds since
+// the previous generation's line, the search's phases, and the native stage.
+type TimingEntry struct {
+	Gen     int        `json:"gen"`
+	Seconds float64    `json:"seconds"`
+	Phases  pop.Timing `json:"phases"`
+	Native  float64    `json:"native"`
+}
+
+// Generation records one generation's readings, the archive after it, and
+// its timing (nativeSeconds: the native stage's wall time for it).
+func (w *Writer) Generation(rd *pop.Readings, a *pop.Archive, nativeSeconds float64) error {
 	if err := writeLine(w.gens, rd); err != nil {
 		return err
 	}
 	now := time.Now()
-	if err := writeLine(w.timing, map[string]any{"gen": rd.Gen, "seconds": now.Sub(w.last).Seconds()}); err != nil {
+	if err := writeLine(w.timing, TimingEntry{Gen: rd.Gen, Seconds: now.Sub(w.last).Seconds(), Phases: rd.Timing, Native: nativeSeconds}); err != nil {
 		return err
 	}
 	w.last = now
