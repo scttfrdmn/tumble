@@ -11,8 +11,8 @@ permissions:
 
 env:
   GOEXPERIMENT: arenas
-  # giri for eval.stub, pinned: main at the pkg/exec merge plus the cache GC-safepoint fix (#254).
-  GIRI_COMMIT: 0e7b1ae5bb96d471db5d1969cb368129d06523c9
+  # giri for eval.stub, pinned: main at the concrete-mode review fixes (#258).
+  GIRI_COMMIT: 0d1c31f2acebeb872d38bd5000cafb40a41c63b6
 
 jobs:
   test:

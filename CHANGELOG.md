@@ -70,6 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Run records under `experiments/` are their own Go module, so a recorded
+  genome (`best.go`, which keeps unreachable code by design) is not vetted
+  or linted as tumble code. CI had failed since the E0 record was committed.
 - A native result whose interval is unbounded (too few samples for the
   confidence) made the run record unwritable (JSON has no infinity). It is now
   recorded with `no_interval` and left out of the cost-model fit.
@@ -95,6 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tumble depends on `github.com/scttfrdmn/giri` and builds only with
   `GOEXPERIMENT=arenas`. The `giriapi` build tag is gone (#62).
 - `PROJECT.md` §5.2: the value cache as built is per instruction (#63, #64).
+- giri pinned at 0d1c31f, in `go.mod` and CI (concrete-mode review fixes,
+  scttfrdmn/giri#258). Before that:
 - CI pins giri at 0e7b1ae (main: `pkg/exec`, scttfrdmn/giri#251, plus the
   value-cache GC-safepoint fix, scttfrdmn/giri#254), up from v0.97.0 (#58).
 - `PROJECT.md` §6.2 and §7, `SETUP.md`: how the stub evaluates, and its

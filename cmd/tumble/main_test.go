@@ -102,8 +102,18 @@ func TestRunGiriUnderExperiments(t *testing.T) {
 	if !l.Record.Instrument || l.Record.Evaluator != "giri" || len(l.Record.Notes) != 0 {
 		t.Errorf("record: evaluator %s instrument %v notes %v", l.Record.Evaluator, l.Record.Instrument, l.Record.Notes)
 	}
-	if !strings.Contains(l.Record.Versions.GiriModule, "0e7b1ae5bb96") {
-		t.Errorf("giri module version not recorded: %q", l.Record.Versions.GiriModule)
+	mod, err := os.ReadFile("../../go.mod")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var want string
+	for _, line := range strings.Split(string(mod), "\n") {
+		if f := strings.Fields(line); len(f) >= 2 && f[0] == "github.com/scttfrdmn/giri" {
+			want = f[1]
+		}
+	}
+	if want == "" || l.Record.Versions.GiriModule != want {
+		t.Errorf("giri module version %q recorded, go.mod requires %q", l.Record.Versions.GiriModule, want)
 	}
 	var rd struct {
 		VCMeasured bool `json:"vc_measured"`
