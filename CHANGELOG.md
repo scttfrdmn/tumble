@@ -26,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   tracking, and the random genome generator with ramped initialization (#44).
 - `pkg/tir`: `Sink` pass for unused locals; 10,000-genome property test
   (type-check, print-parse-print fixpoint, hash stability).
+- `pkg/ops`: repair (#45), two-point crossover (#46), point mutation (#47),
+  equivalence substitution against a `Donor` index, a no-op while the index
+  is empty (#48), and per-operator yield counters.
 
 ### Changed
 
