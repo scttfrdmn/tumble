@@ -6,6 +6,7 @@ package pop
 import (
 	"bytes"
 	"cmp"
+	"fmt"
 
 	"github.com/scttfrdmn/tumble/pkg/index"
 	"github.com/scttfrdmn/tumble/pkg/tir"
@@ -31,6 +32,17 @@ func (o Origin) String() string { return originNames[o] }
 
 // MarshalText writes the origin's name.
 func (o Origin) MarshalText() ([]byte, error) { return []byte(o.String()), nil }
+
+// UnmarshalText reads an origin's name.
+func (o *Origin) UnmarshalText(b []byte) error {
+	for i, n := range originNames {
+		if n == string(b) {
+			*o = Origin(i)
+			return nil
+		}
+	}
+	return fmt.Errorf("pop: unknown origin %q", b)
+}
 
 // Individual is one evaluated genome.
 type Individual struct {

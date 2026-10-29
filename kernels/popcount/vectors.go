@@ -20,6 +20,12 @@ import (
 //go:embed testdata/corpus
 var corpus embed.FS
 
+// Source is the reference implementation's source file, from which the
+// seed genome is parsed.
+//
+//go:embed popcount.go
+var Source []byte
+
 // HoldoutStride is the holdout split: after sorting the fuzz-derived and
 // random-fill vectors by content hash, every HoldoutStride-th one is held out
 // of selection.

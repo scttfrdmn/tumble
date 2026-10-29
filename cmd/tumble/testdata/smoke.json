@@ -1,0 +1,12 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "stub"},
+  "params": {
+    "seed": 1,
+    "generations": 10,
+    "islands": 1,
+    "population": 32,
+    "migrants": 0
+  },
+  "native": {"enabled": true}
+}

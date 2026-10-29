@@ -46,6 +46,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   kernel, the kernel's tests as a gate, `go test -bench -count=10`, and
   ns/op with a 95% interval from `golang.org/x/perf/benchmath`, plus the
   `benchstat` table (#56). `benchstat` is a tool dependency.
+- `pkg/report` and `cmd/tumble`: `tumble run` writes the run record
+  (hardware, versions, parameters, per-generation readings and archive
+  snapshots, native results, best genome; #57); `tumble report` and
+  `tumble inspect` read it back. `tumble run` refuses a non-instrument
+  evaluator for an output directory under `experiments/`.
+- `kernels`: the kernel registry; `experiments/e0/config.json`.
 
 ### Changed
 

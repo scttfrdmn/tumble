@@ -69,7 +69,11 @@ type Readings struct {
 }
 
 // Observer receives each generation's readings and the archive after it.
+// Returning ErrStop ends the run after that generation, without error.
 type Observer func(r *Readings, a *Archive) error
+
+// ErrStop is an Observer's request to end the run (a wall-clock budget).
+var ErrStop = errors.New("pop: stop")
 
 // Result is a finished run.
 type Result struct {
@@ -204,7 +208,9 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 			}
 		}
 		if obs != nil {
-			if err := obs(rd, r.archive); err != nil {
+			if err := obs(rd, r.archive); errors.Is(err, ErrStop) {
+				return &Result{Archive: r.archive, Index: r.ix, Gens: g + 1}, nil
+			} else if err != nil {
 				return nil, err
 			}
 		}
