@@ -43,8 +43,10 @@ type ssaProgram struct {
 
 func (p *ssaProgram) Funcs() map[string]*ssa.Function { return p.funcs }
 
-// loadSSA type-checks and builds the package in dir with go/ssa: one build
+// LoadSSA type-checks and builds the package in dir with go/ssa: one build
 // for every function of the generation.
+func LoadSSA(dir string) (Program, error) { return loadSSA(dir) }
+
 func loadSSA(dir string) (*ssaProgram, error) {
 	cfg := &packages.Config{
 		Mode: packages.NeedName | packages.NeedFiles | packages.NeedSyntax |

@@ -25,11 +25,12 @@ func (fr *Fragment) program() []tir.Stmt {
 	return append(tir.CloneStmts(fr.Stmts), &tir.Return{X: fr.Result})
 }
 
-// Func is the fragment as a function over sig returning its result, sunk so
-// that it type-checks: the form in which a fragment can itself be evaluated
-// for its cost. It is a genome when the result has sig's result type.
+// Func is the fragment as a function over sig's parameters returning its
+// result (so its result type is the fragment's, not necessarily sig's),
+// sunk so that it type-checks: the form in which a fragment is evaluated for
+// its cost.
 func (fr *Fragment) Func(sig *tir.Signature) *tir.Func {
-	f := tir.NewFunc(sig)
+	f := tir.NewFunc(&tir.Signature{Params: sig.Params, Result: fr.Result.T})
 	f.Body = fr.program()
 	tir.Walk(f.Body, func(s tir.Stmt, _ int) bool {
 		for _, d := range tir.Defs(s) {

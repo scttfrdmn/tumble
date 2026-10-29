@@ -127,23 +127,29 @@ func (ix *Index) Novelty(fps []Fingerprint) int {
 // A slice the index has never seen has no known fingerprint and gets
 // nothing.
 func (ix *Index) Cheaper(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, bool) {
+	stmts, res, _, ok := ix.CheaperEntry(f, v)
+	return stmts, res, ok
+}
+
+// CheaperEntry is Cheaper that also returns the donor's index entry.
+func (ix *Index) CheaperEntry(f *tir.Func, v tir.Var) ([]tir.Stmt, tir.Var, Entry, bool) {
 	fr, ok := Slice(f, v)
 	if !ok {
-		return nil, tir.Var{}, false
+		return nil, tir.Var{}, Entry{}, false
 	}
 	fp, ok := ix.fpOf[fr.Hash]
 	if !ok {
-		return nil, tir.Var{}, false
+		return nil, tir.Var{}, Entry{}, false
 	}
 	best := ix.byFP[fp][0]
 	if best.Fragment == fr.Hash || best.Cost >= ix.costOf[fr.Hash] {
-		return nil, tir.Var{}, false
+		return nil, tir.Var{}, Entry{}, false
 	}
 	donor, _ := ix.HC.Get(best.Fragment)
 	if donor.Result.T != v.T {
-		return nil, tir.Var{}, false
+		return nil, tir.Var{}, Entry{}, false
 	}
-	return tir.CloneStmts(donor.Stmts), donor.Result, true
+	return tir.CloneStmts(donor.Stmts), donor.Result, best, true
 }
 
 // Collision is a fingerprint whose fragments disagree on some test vector.
