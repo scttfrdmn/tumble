@@ -129,6 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   expression form (#39).
 
 - `GIRI_REQUIREMENTS.md`: requirement 11, value-faithful memory
-  (scttfrdmn/giri#248).
+  (scttfrdmn/giri#248), and requirement 12, slice argument contents after the
+  call (scttfrdmn/giri#266, #73).
 - `make fuzz-seed` copies the fuzzer's finds from `$GOCACHE/fuzz` into
   `testdata/corpus/`.
