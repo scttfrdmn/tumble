@@ -81,7 +81,7 @@ type Evaluator interface {
 }
 ```
 
-Two implementations: `giri` (the real one, against the API in `GIRI_REQUIREMENTS.md`) and `stub` (shells out to `giri -v`, parses the instruction dump, no traces). The stub exists so tumble's population and operator code can be developed and tested before the giri API lands. **No experiment runs against the stub.** `experiments/` tooling refuses to start with `eval.stub`.
+Two implementations: `giri` (the real one, against the API in `GIRI_REQUIREMENTS.md`) and `stub` (shells out to the `giri` CLI for violations and, by searching `-max-steps`, step counts; outputs from a native harness; no traces; decision #51). The stub exists so tumble's population and operator code can be developed and tested before the giri API lands. **No experiment runs against the stub.** `experiments/` tooling refuses to start with `eval.stub`.
 
 ## Working with giri
 

@@ -34,9 +34,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `pkg/index`: hash-cons table, fingerprints from traces (#49), backward-slice
   fragments of top-level definitions (#50), the fingerprint index sorted by
   cost, novelty, the `ops.Donor` lookup, and a collision checker.
+- `pkg/eval`: `eval.stub` (violations and steps from the giri CLI, outputs
+  from a native fuel-limited harness; #51), the evaluator registry and
+  `CheckExperiment` (#52), and the giri adapter skeleton behind
+  `//go:build giriapi`.
 
 ### Changed
 
+- `PROJECT.md` §6.2 and §7, `SETUP.md`: how the stub evaluates, and its
+  exception to "no native execution inside selection" (#51).
 - `PROJECT.md` §4.1: expressions are one level over atoms, and `convert` is an
   expression form (#39).
 
