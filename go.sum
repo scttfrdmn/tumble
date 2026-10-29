@@ -2,6 +2,10 @@ github.com/aclements/go-moremath v0.0.0-20210112150236-f10218a38794 h1:xlwdaKcTN
 github.com/aclements/go-moremath v0.0.0-20210112150236-f10218a38794/go.mod h1:7e+I0LQFUI9AXWxOfsQROs9xPhoJtbsyWcjJqDd4KPY=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+github.com/scttfrdmn/giri v0.97.1-0.20261029032029-0e7b1ae5bb96 h1:JL0z3r5izUsirvofcnoVaVpsPocjVMrXFeot533RD6c=
+github.com/scttfrdmn/giri v0.97.1-0.20261029032029-0e7b1ae5bb96/go.mod h1:WNrm3tFe+ImD3rdeo7CI20X2HMP80H05fvTI5Iv1iKA=
+github.com/scttfrdmn/safearena v0.5.2 h1:zj5WlFm5TKaiOqavBdaj3AY6IcXup8Kxs02fRSpI9Aw=
+github.com/scttfrdmn/safearena v0.5.2/go.mod h1:M5+oLh/SVV0VBgVPv48aXKEnFhgmxX0H6xOgCHJb4Og=
 golang.org/x/mod v0.42.0 h1:ICeL3t2L30ljSPHHxDnR4fqVcBt/zR2zJAb9juavmQg=
 golang.org/x/mod v0.42.0/go.mod h1:u5fzIrRInkL8MaO1cbRkUHT64v303YIT5KEqpNr7jRs=
 golang.org/x/perf v0.0.0-20261009192801-be2c69fb417e h1:IB9P+pA897fozv0n9ldn+jTDNWtEMfbomaXXa4dKr74=

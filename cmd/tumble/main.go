@@ -193,6 +193,15 @@ func runCmd(args []string, out io.Writer) error {
 	if err != nil {
 		return err
 	}
+	// Requirement 5: a grammar may admit only calls the evaluator models
+	// concretely; an opaque call would poison the fingerprint index.
+	if c, ok := ev.(interface{ IsConcrete(pkg, name string) bool }); ok {
+		for _, call := range prob.Grammar.Calls {
+			if call.Pkg != "" && !c.IsConcrete(call.Pkg, call.Name) {
+				return fmt.Errorf("grammar admits %s, which %s does not model concretely", call, ev.Name())
+			}
+		}
+	}
 	if underExperiments(*outDir) {
 		if err := eval.CheckExperiment(ev); err != nil {
 			return fmt.Errorf("%s is under experiments/: %w", *outDir, err)

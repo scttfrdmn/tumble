@@ -21,6 +21,13 @@ type Named interface {
 type Config struct {
 	Name string `json:"name"`           // "stub" or "giri"
 	Giri string `json:"giri,omitempty"` // the giri binary, for the stub ("" = PATH)
+
+	// For the giri evaluator: the seed for giri's modelled randomness, and
+	// the value cache (on unless NoCache; CacheEntries bounds it, 0 for
+	// DefaultCacheEntries).
+	Seed         int64 `json:"seed,omitempty"`
+	NoCache      bool  `json:"no_cache,omitempty"`
+	CacheEntries int   `json:"cache_entries,omitempty"`
 }
 
 // Constructor builds an evaluator using scratch space under work.
@@ -30,8 +37,7 @@ var constructors = map[string]Constructor{
 	"stub": func(cfg Config, work string) (Named, error) { return NewStub(cfg.Giri, work) },
 }
 
-// Register adds an evaluator constructor; the giri adapter registers itself
-// when built with -tags giriapi.
+// Register adds an evaluator constructor.
 func Register(name string, c Constructor) { constructors[name] = c }
 
 // New builds the evaluator cfg names.
@@ -43,11 +49,7 @@ func New(cfg Config, work string) (Named, error) {
 			names = append(names, n)
 		}
 		slices.Sort(names)
-		hint := ""
-		if cfg.Name == "giri" {
-			hint = " (the giri adapter needs giri's library API and -tags giriapi; see scttfrdmn/tumble#14)"
-		}
-		return nil, fmt.Errorf("eval: unknown evaluator %q, have %s%s", cfg.Name, strings.Join(names, ", "), hint)
+		return nil, fmt.Errorf("eval: unknown evaluator %q, have %s", cfg.Name, strings.Join(names, ", "))
 	}
 	return c(cfg, work)
 }

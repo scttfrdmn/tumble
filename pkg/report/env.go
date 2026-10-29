@@ -35,6 +35,10 @@ type Versions struct {
 	Tumble      string `json:"tumble"`       // tumble commit, "+dirty" if modified
 	Giri        string `json:"giri"`         // giri commit, "+dirty" if modified; "" if unused
 	GiriPath    string `json:"giri_path,omitempty"`
+	// GiriModule is the giri library tumble is linked against (the giri
+	// evaluator): its module version, which for a pseudo-version ends in
+	// the commit, or the local directory of a replace directive.
+	GiriModule string `json:"giri_module,omitempty"`
 }
 
 // DetectHardware reads the machine's description.
@@ -114,6 +118,14 @@ func DetectVersions(giriPath string) Versions {
 	v := Versions{Go: output("go", "env", "GOVERSION"), TumbleBuild: runtime.Version()}
 	if bi, ok := debug.ReadBuildInfo(); ok {
 		v.Tumble = vcs(bi.Settings)
+		for _, d := range bi.Deps {
+			if d.Path == "github.com/scttfrdmn/giri" {
+				v.GiriModule = d.Version
+				if d.Replace != nil {
+					v.GiriModule = d.Version + " => " + d.Replace.Path + " " + d.Replace.Version
+				}
+			}
+		}
 	}
 	if v.Tumble == "" {
 		v.Tumble = output("git", "rev-parse", "HEAD")

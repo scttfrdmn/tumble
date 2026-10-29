@@ -36,8 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   cost, novelty, the `ops.Donor` lookup, and a collision checker.
 - `pkg/eval`: `eval.stub` (violations and steps from the giri CLI, outputs
   from a native fuel-limited harness; #51), the evaluator registry and
-  `CheckExperiment` (#52), and the giri adapter skeleton behind
-  `//go:build giriapi`.
+  `CheckExperiment` (#52).
 - `pkg/pop`: lockstep islands with a deterministic barrier (#54), lexicase
   selection, the MAP-Elites archive, ring migration, run parameter defaults
   (#53), and per-generation readings with the trace-to-variable mapping for
@@ -52,6 +51,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tumble inspect` read it back. `tumble run` refuses a non-instrument
   evaluator for an output directory under `experiments/`.
 - `kernels`: the kernel registry; `experiments/e0/config.json`.
+- `pkg/eval`: the giri evaluator on giri's `pkg/exec` (#62): outcome and
+  trace mapping, the concreteness check on the grammar's calls, and the
+  linked giri version in run records. Also the value cache (#63), whose
+  readings (`vc_hit_rate`, `vc_hits`, `vc_pure_executed`, `vc_entries`) are
+  now recorded per generation. `make determinism` also runs the giri
+  evaluator.
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).
@@ -63,6 +68,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- tumble depends on `github.com/scttfrdmn/giri` and builds only with
+  `GOEXPERIMENT=arenas`. The `giriapi` build tag is gone (#62).
+- `PROJECT.md` §5.2: the value cache as built is per instruction (#63, #64).
 - CI pins giri at 0e7b1ae (main: `pkg/exec`, scttfrdmn/giri#251, plus the
   value-cache GC-safepoint fix, scttfrdmn/giri#254), up from v0.97.0 (#58).
 - `PROJECT.md` §6.2 and §7, `SETUP.md`: how the stub evaluates, and its

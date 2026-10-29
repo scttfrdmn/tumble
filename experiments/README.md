@@ -8,5 +8,4 @@ discipline") requires; the commit that adds a result changes no code.
 evaluator is an instrument, so nothing here can come from `eval.stub`.
 
 - `e0/config.json`: E0, instrument validation on `popcount`, 50 generations,
-  `PROJECT.md` §4.5 defaults, on the `giri` evaluator (needs giri's library API
-  and `-tags giriapi`; see #14).
+  `PROJECT.md` §4.5 defaults, on the `giri` evaluator.

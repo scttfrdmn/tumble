@@ -7,7 +7,7 @@ This file is read by Claude Code at the start of every session. It states the re
 - Module: `github.com/scttfrdmn/tumble`
 - License: Apache License 2.0. Every source file carries `// Copyright 2026 Scott Friedman` and the SPDX line `// SPDX-License-Identifier: Apache-2.0`.
 - Language: Go, latest stable at repo creation; pin in `go.mod` to whatever `github.com/scttfrdmn/giri` requires or newer. giri's own build needs `GOEXPERIMENT=arenas`; the `Makefile` exports it for every target so this is never a surprise.
-- Dependencies, v0: `golang.org/x/tools` (go/ssa, go/packages, go/analysis), `github.com/scttfrdmn/giri` (once its library API exists — see `GIRI_REQUIREMENTS.md`), `golang.org/x/perf/cmd/benchstat` (tool dependency). Nothing else without a recorded reason (a `type: decision` issue, see below).
+- Dependencies, v0: `golang.org/x/tools` (go/ssa, go/packages, go/analysis), `github.com/scttfrdmn/giri` (its `pkg/exec` library API, `GIRI_REQUIREMENTS.md`; tumble then builds only with `GOEXPERIMENT=arenas`, which the Makefile and CI export), `golang.org/x/perf/cmd/benchstat` (tool dependency). Nothing else without a recorded reason (a `type: decision` issue, see below).
 
 ## Standing decisions
 

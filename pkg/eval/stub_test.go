@@ -161,7 +161,11 @@ func TestCheckExperimentRefusesStub(t *testing.T) {
 	if CheckExperiment(s) == nil {
 		t.Fatal("experiments accepted the stub")
 	}
-	if _, err := New(Config{Name: "giri"}, t.TempDir()); err == nil {
-		t.Error("giri evaluator available without -tags giriapi")
+	g, err := New(Config{Name: "giri"}, t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := CheckExperiment(g); err != nil {
+		t.Errorf("experiments refused the giri evaluator: %v", err)
 	}
 }

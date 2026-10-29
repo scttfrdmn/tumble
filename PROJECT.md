@@ -183,7 +183,9 @@ A table keyed by `(HC(fragment), hash(input vector))` → fragment's output sequ
 
 Since most of every child is inherited from already-evaluated parents, the fraction of a generation's values served from cache should rise quickly. **The cache hit rate per generation is a primary instrument reading** (§8). If it does not exceed ~0.9 after the first few generations, the per-generation cost model in §9 is wrong and the budget has to be re-estimated.
 
-Where it lives: inside giri, as a hook (§7, requirement 3). tumble supplies the structural hashes as a side table keyed by `ssa.Value`; giri consults the hook before executing an instruction whose value has a hash.
+Where it lives: inside giri, as a hook (§7, requirement 3). giri consults the hook before executing each pure instruction. tumble's side (`eval.ValueCache`, decision #63) keys an entry on the instruction's shape (operator, types, callee) and its operand values, and commits new entries at each generation barrier, so the readings are deterministic with islands in parallel.
+
+**As built, the cache is per instruction:** a hit skips that instruction, not the computation of its operands. The Hashlife saving described above, skipping whole inherited fragments, needs a giri hook that can skip a fragment's instructions, which does not exist. Until it does, the hit rate measures reuse of pure operations, and a high reading does not mean the §9 cost model holds. Whether to build fragment-level skipping is open (#64).
 
 ### 5.3 Semantic fingerprint index (FP)
 

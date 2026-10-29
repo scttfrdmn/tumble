@@ -37,6 +37,13 @@ type Result struct {
 	Violations []Violation
 	Exhausted  bool // the step budget was hit
 	Partial    bool // Outputs is missing vectors (budget exhaustion or a fault)
+
+	// Value-cache readings: pure instructions served from the cache and
+	// pure instructions executed. CacheMeasured is false when the evaluator
+	// has no value cache (the stub, or the cache switched off).
+	CacheHits     uint64
+	PureExecuted  uint64
+	CacheMeasured bool
 }
 
 // RunOptions are per-run evaluator options.
