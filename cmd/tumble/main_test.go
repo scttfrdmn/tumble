@@ -41,9 +41,13 @@ func TestRunReportInspect(t *testing.T) {
 		t.Errorf("report does not flag the stub:\n%s", buf.String())
 	}
 	// The last generation breeds nothing: its yields are not measured.
-	lines := strings.Split(strings.TrimSpace(buf.String()), "\n")
+	table, _, _ := strings.Cut(buf.String(), "\nover the run:")
+	lines := strings.Split(strings.TrimSpace(table), "\n")
 	if last := lines[len(lines)-1]; !strings.Contains(last, "n/m/n/m/n/m") {
 		t.Errorf("last generation's yields shown as rates: %q", last)
+	}
+	if !strings.Contains(buf.String(), "fp collisions") {
+		t.Errorf("report has no run summary:\n%s", buf.String())
 	}
 	buf.Reset()
 	if err := inspectCmd([]string{out}, &buf); err != nil {

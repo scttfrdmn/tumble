@@ -57,12 +57,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   readings (`vc_hit_rate`, `vc_hits`, `vc_pure_executed`, `vc_entries`) are
   now recorded per generation. `make determinism` also runs the giri
   evaluator.
+- `timing.jsonl` records each generation's wall time by phase (evaluate,
+  build, interpret, index, breed, native), and the readings record the
+  generation's interpreted steps (#21).
+- `tumble report` prints the run's E0 summary: operator yields, the FP
+  collision rate, the cost-model fit (Spearman, abstract cost against
+  native ns/op per benchmark), and seconds and ns/instruction per
+  generation. `make e0` runs E0 into `experiments/e0/<timestamp>/` (#19, #20).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).
 
 ### Fixed
 
+- A native result whose interval is unbounded (too few samples for the
+  confidence) made the run record unwritable (JSON has no infinity). It is now
+  recorded with `no_interval` and left out of the cost-model fit.
 - `tumble report` shows an operator yield over zero attempts as `n/m`, not
   as a rate of 0 (#59).
 - Loop accumulators were fingerprinted by the loop-header phi attributed to

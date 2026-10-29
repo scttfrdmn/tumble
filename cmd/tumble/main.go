@@ -241,11 +241,7 @@ func runCmd(args []string, out io.Writer) error {
 	start := time.Now()
 	benched := map[[32]byte]bool{}
 	obs := func(rd *pop.Readings, a *pop.Archive) error {
-		if err := w.Generation(rd, a); err != nil {
-			return err
-		}
-		_, _ = fmt.Fprintf(stdout, "gen %4d  evals %5d  fully-correct %4d  archive %4d  discards %v\n",
-			rd.Gen, rd.Evaluations, rd.FullyCorrect, rd.ArchiveSize, rd.Discards)
+		nativeStart := time.Now()
 		if cfg.Native.Enabled {
 			for _, el := range rd.Elites {
 				id := el.F.Identity()
@@ -262,6 +258,11 @@ func runCmd(args []string, out io.Writer) error {
 				}
 			}
 		}
+		if err := w.Generation(rd, a, time.Since(nativeStart).Seconds()); err != nil {
+			return err
+		}
+		_, _ = fmt.Fprintf(stdout, "gen %4d  evals %5d  fully-correct %4d  archive %4d  discards %v\n",
+			rd.Gen, rd.Evaluations, rd.FullyCorrect, rd.ArchiveSize, rd.Discards)
 		if cfg.WallClock > 0 && time.Since(start) >= cfg.WallClock {
 			return pop.ErrStop
 		}
@@ -328,6 +329,30 @@ func reportCmd(args []string, out io.Writer) error {
 	if err := tw.Flush(); err != nil {
 		return err
 	}
+	sum, err := report.Summarize(fs.Arg(0), l)
+	if err != nil {
+		return err
+	}
+	rateStr := func(r report.Rate) string {
+		if !r.Measured {
+			return fmt.Sprintf("n/m (%d/%d)", r.Num, r.Den)
+		}
+		return fmt.Sprintf("%.4g (%d/%d)", r.Value, r.Num, r.Den)
+	}
+	_, _ = fmt.Fprintf(stdout, "\nover the run:\n")
+	for _, k := range []string{"crossover", "mutation", "substitution"} {
+		_, _ = fmt.Fprintf(stdout, "  yield %-12s %s\n", k, rateStr(sum.Yield[k]))
+	}
+	_, _ = fmt.Fprintf(stdout, "  fp collisions      %s\n", rateStr(sum.Collisions))
+	for _, f := range sum.CostFit {
+		_, _ = fmt.Fprintf(stdout, "  cost fit %-20s spearman %.3f over %d genomes\n", f.Benchmark, f.Spearman, f.N)
+	}
+	if len(sum.CostFit) == 0 {
+		_, _ = fmt.Fprintf(stdout, "  cost fit           n/m (no verified native results)\n")
+	}
+	_, _ = fmt.Fprintf(stdout, "  seconds/generation %.2f (evaluate %.2f, index %.2f, breed %.2f, native %.2f)\n",
+		sum.MeanSeconds, sum.MeanPhases["evaluate"], sum.MeanPhases["index"], sum.MeanPhases["breed"], sum.MeanPhases["native"])
+	_, _ = fmt.Fprintf(stdout, "  interpret ns/instr %.1f (island wall time over interpreted instructions)\n", sum.NsPerInstr)
 	return stdout.err
 }
 

@@ -11,7 +11,7 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 KERNELS := $(wildcard kernels/*)
 
-.PHONY: all vet build test lint fuzz-seed determinism tidy clean
+.PHONY: all vet build test lint fuzz-seed determinism e0 tidy clean
 
 all: vet build test ## vet, build, unit tests
 
@@ -64,6 +64,13 @@ determinism: build ## Run popcount twice with one seed per config and diff the r
 		echo "determinism: $$name run1 and run2 are identical"; \
 	done; \
 	rm -rf "$$dir"
+
+# Experiments: each writes experiments/<name>/<UTC timestamp>/; tumble run
+# refuses an evaluator that is not an instrument there. Commit the record by
+# itself (SETUP.md: the commit that adds a result changes no code).
+e0: build ## E0, instrument validation on popcount (PROJECT.md §8)
+	./bin/$(BINARY) run --kernel popcount --config experiments/e0/config.json \
+		--out experiments/e0/$$(date -u +%Y%m%dT%H%M%SZ)
 
 tidy: ## go mod tidy
 	go mod tidy
