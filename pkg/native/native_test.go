@@ -4,6 +4,7 @@
 package native
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"strings"
@@ -37,6 +38,21 @@ func TestSummarize(t *testing.T) {
 	r := rows[0]
 	if !(r.Lo < r.NsOp && r.NsOp < r.Hi) || r.NsOp < 4.9 || r.NsOp > 5.1 {
 		t.Errorf("interval %v [%v, %v]", r.NsOp, r.Lo, r.Hi)
+	}
+}
+
+func TestSummarizeTooFewSamples(t *testing.T) {
+	raw := "BenchmarkPopcount/16-8 \t 1000000\t 5.0 ns/op\nBenchmarkPopcount/16-8 \t 1000000\t 5.1 ns/op\nBenchmarkPopcount/16-8 \t 1000000\t 4.9 ns/op\n"
+	rows, err := summarize([]byte(raw), 0.95)
+	if err != nil {
+		t.Fatal(err)
+	}
+	r := rows[0]
+	if !r.NoInterval || r.Lo != 0 || r.Hi != 0 {
+		t.Errorf("3 samples at 95%%: %+v", r)
+	}
+	if _, err := json.Marshal(rows); err != nil {
+		t.Errorf("row does not marshal: %v", err)
 	}
 }
 

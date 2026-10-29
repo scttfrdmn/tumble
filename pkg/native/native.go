@@ -8,6 +8,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -66,6 +67,10 @@ type Row struct {
 	Hi     float64 `json:"hi"`
 	Conf   float64 `json:"confidence"`
 	Warned bool    `json:"warned,omitempty"` // benchmath warned (too few samples for the confidence)
+	// NoInterval is set when too few samples bound the interval at the
+	// confidence: benchmath's bounds are infinite, and Lo and Hi are 0. A
+	// row without an interval is not a result (SETUP.md).
+	NoInterval bool `json:"no_interval,omitempty"`
 }
 
 // Result is one genome through the native stage.
@@ -212,11 +217,15 @@ func summarize(raw []byte, conf float64) ([]Row, error) {
 	for _, name := range order {
 		s := benchmath.NewSample(samples[name], &benchmath.DefaultThresholds)
 		sum := benchmath.AssumeNothing.Summary(s, conf)
-		rows = append(rows, Row{
+		row := Row{
 			Name: name, N: len(samples[name]),
 			NsOp: sum.Center, Lo: sum.Lo, Hi: sum.Hi, Conf: sum.Confidence,
 			Warned: len(sum.Warnings) > 0,
-		})
+		}
+		if math.IsInf(row.Lo, 0) || math.IsInf(row.Hi, 0) || math.IsNaN(row.Lo) || math.IsNaN(row.Hi) {
+			row.Lo, row.Hi, row.NoInterval = 0, 0, true
+		}
+		rows = append(rows, row)
 	}
 	return rows, nil
 }
