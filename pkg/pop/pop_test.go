@@ -316,31 +316,57 @@ func TestScoreArgsAfter(t *testing.T) {
 	}
 }
 
-// TestParsimonyTiebreak: among equally correct, equally cheap candidates,
-// lexicase and the rank prefer fewer statements; cost still comes first.
-func TestParsimonyTiebreak(t *testing.T) {
+// TestBoundedParsimony: statements above Params.ParsimonyAbove break cost
+// ties; below it length is free; cost always comes first.
+func TestBoundedParsimony(t *testing.T) {
 	short, err := tir.Parse([]byte("package p\n\nfunc f(xs []uint64) int {\n\treturn len(xs)\n}\n"), "f")
 	if err != nil {
 		t.Fatal(err)
 	}
-	long, err := tir.Parse([]byte("package p\n\nfunc f(xs []uint64) int {\n\tn := len(xs)\n\tm := n + 1\n\t_ = m\n\treturn n\n}\n"), "f")
+	long, err := tir.Parse([]byte("package p\n\nfunc f(xs []uint64) int {\n\tn := len(xs)\n\tm := n + 1\n\tk := m + 1\n\t_ = k\n\treturn n\n}\n"), "f")
 	if err != nil {
 		t.Fatal(err)
 	}
-	c := []bool{true}
-	a := &Individual{F: short, C: c, Correct: 1, Cost: 10}
-	b := &Individual{F: long, C: c, Correct: 1, Cost: 10}
-	cheapLong := &Individual{F: long, C: c, Correct: 1, Cost: 9}
-	r := rand.New(rand.NewPCG(3, 3))
+	score := func(f *tir.Func, cost uint64, above int) *Individual {
+		r := &runner{prob: Problem{Want: [][]any{{1}}}, p: Params{ParsimonyAbove: above}}
+		ind := &Individual{F: f}
+		r.score(ind, eval.Result{Outputs: [][]any{{1}}, Steps: cost})
+		return ind
+	}
+	rng := rand.New(rand.NewPCG(3, 3))
+
+	// Both under the limit (lengths 2 and 4, limit 24): no length preference.
+	a, b := score(short, 10, 24), score(long, 10, 24)
+	if a.excess != 0 || b.excess != 0 {
+		t.Fatalf("excess under the limit: %d, %d", a.excess, b.excess)
+	}
+	seen := map[*Individual]bool{}
+	for range 100 {
+		seen[Lexicase(rng, []*Individual{a, b})] = true
+	}
+	if !seen[a] || !seen[b] {
+		t.Error("under the limit, lexicase preferred one length")
+	}
+
+	// Limit 2: short (2 statements) is at it, long (4) exceeds it by 2, so
+	// short wins at equal cost.
+	a, b = score(short, 10, 2), score(long, 10, 2)
+	if a.excess != 0 || b.excess != 2 {
+		t.Fatalf("excess over the limit: %d, %d", a.excess, b.excess)
+	}
 	for range 50 {
-		if got := Lexicase(r, []*Individual{b, a}); got != a {
-			t.Fatal("lexicase did not prefer the shorter of two equal-cost genomes")
-		}
-		if got := Lexicase(r, []*Individual{a, cheapLong}); got != cheapLong {
-			t.Fatal("parsimony overrode cost")
+		if Lexicase(rng, []*Individual{b, a}) != a {
+			t.Fatal("over the limit, lexicase did not prefer fewer statements")
 		}
 	}
-	if better(a, b) >= 0 || better(cheapLong, a) >= 0 {
-		t.Error("rank: want shorter first at equal cost, cheaper first otherwise")
+	if better(a, b) >= 0 {
+		t.Error("rank: fewer statements over the limit should rank first at equal cost")
+	}
+	// Cost first: the long genome wins if it is cheaper.
+	cheapLong := score(long, 9, 2)
+	for range 50 {
+		if Lexicase(rng, []*Individual{a, cheapLong}) != cheapLong {
+			t.Fatal("parsimony overrode cost")
+		}
 	}
 }

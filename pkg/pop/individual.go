@@ -64,7 +64,9 @@ type Individual struct {
 	vcHits, vcPure uint64 // value-cache readings of the evaluation
 	vcMeasured     bool
 	steps          uint64 // interpreted instructions of the evaluation
-	stmts          int    // F.Len(), cached by length
+	// excess is the genome's statements above Params.ParsimonyAbove, set
+	// when it is scored: the length that selection counts against it.
+	excess int
 
 	// parentBest is the best parent's rank key, for attributing
 	// improvements to operators; donorC is a substitution donor's
@@ -80,14 +82,14 @@ func (ind *Individual) Eligible() bool { return ind.Discard == "" }
 func (ind *Individual) FullyCorrect() bool { return ind.Eligible() && ind.Correct == len(ind.C) }
 
 // better orders individuals by rank: eligible first, then more vectors
-// correct, then lower cost, then fewer statements, then higher novelty, then
-// identity, which makes the order total and independent of evaluation order.
+// correct, then lower cost, then fewer statements above the parsimony
+// limit, then higher novelty, then identity, which makes the order total and independent of evaluation order.
 func better(a, b *Individual) int {
 	return cmp.Or(
 		-cmp.Compare(boolInt(a.Eligible()), boolInt(b.Eligible())),
 		-cmp.Compare(a.Correct, b.Correct),
 		cmp.Compare(a.Cost, b.Cost),
-		cmp.Compare(a.length(), b.length()),
+		cmp.Compare(a.excess, b.excess),
 		-cmp.Compare(a.Novelty, b.Novelty),
 		compareIdentity(a.F, b.F),
 	)
@@ -103,12 +105,4 @@ func boolInt(b bool) int {
 		return 1
 	}
 	return 0
-}
-
-// length is the genome's statement count (tir.Func.Len), computed once.
-func (ind *Individual) length() int {
-	if ind.stmts == 0 {
-		ind.stmts = ind.F.Len()
-	}
-	return ind.stmts
 }

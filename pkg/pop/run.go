@@ -380,7 +380,8 @@ func (r *runner) score(ind *Individual, res eval.Result) {
 	ind.Cost = r.cost(res)
 	ind.vcHits, ind.vcPure, ind.vcMeasured = res.CacheHits, res.PureExecuted, res.CacheMeasured
 	ind.steps = res.Steps
-	ind.stmts = ind.F.Len() // set here, on the island's goroutine, before any comparison
+	// Set here, on the island's goroutine, before any comparison.
+	ind.excess = max(0, ind.F.Len()-r.p.ParsimonyAbove)
 }
 
 // cost is the abstract cost: per-class counts weighted by CostWeights

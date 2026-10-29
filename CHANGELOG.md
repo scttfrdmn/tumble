@@ -94,8 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Selection breaks abstract-cost ties on statement count before novelty, in
-  lexicase and in the rank (parsimony). `PROJECT.md` §4.5 (#75).
+- Selection breaks abstract-cost ties on statements above `parsimony_above`
+  (default 24), before novelty, in lexicase and in the rank: bounded
+  parsimony (#76), replacing the full parsimony of #75. `PROJECT.md` §4.5.
 - A genome is correct on a vector only if it returns the reference's values
   and leaves its slice arguments as the reference does. Both evaluators report
   post-call argument contents (`eval.Result.ArgsAfter`). `PROJECT.md` §4.3
