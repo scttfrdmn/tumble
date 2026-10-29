@@ -34,6 +34,8 @@ giri also does three things no compile-and-run evaluator can:
 
 **10. Stability.** Everything above is behind a documented Go API with a version. giri's CLI behaviour, output formats, exit codes, and detector semantics are unchanged. The API is additive.
 
+**11. Value-faithful memory.** Every load returns the value last stored at that address, at every offset: slice elements, array elements, struct fields, for the v0 types. giri today records concrete values only at offset 0 of an allocation, because its detectors need bounds and provenance, not element values. A nonzero-offset load returns the address's provenance instead, so `xs[2]` after `xs[2] = 7` doesn't read 7. Without this, requirement 1's outputs and requirement 2's traces are wrong for any kernel over a slice, which is every v0 kernel. Found while building the M0 stub; tracked as scttfrdmn/giri#248.
+
 Performance target to report back (not a gate): nanoseconds per interpreted instruction on a straight-line integer loop, with shadow memory on and off, on arm64 and amd64.
 
 ---
@@ -66,6 +68,6 @@ Implement, in this order, with tests, committing after each:
 
 9. **API doc** — `docs/exec-api.md` describing the surface, its stability promise (additive, versioned alongside giri), and the purity classification. Update `README.md` with one paragraph and a link.
 
-Requirements 1–10 are tracked as issues on this repo (tumble req 1 … tumble req 10); close each in the commit that lands it.
+Requirements 1–11 are tracked as issues on this repo (tumble req 1 … tumble req 11). Requirement 11 (value-faithful memory) is a prerequisite for the round-trip tests in step 1 and for step 4; close each in the commit that lands it.
 
 Decide names, internal structure, and test shape yourself; record anything that departs from `GIRI_REQUIREMENTS.md` as a comment on the giri issue for that requirement, with the reason. Do not change CLI behaviour. End the session with a comment on scttfrdmn/tumble#14 stating what exists, what is tested, the perf numbers measured, and what is blocked.
