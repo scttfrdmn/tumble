@@ -314,7 +314,14 @@ func reportCmd(args []string, out io.Writer) error {
 		if rd.VCMeasured {
 			vc = fmt.Sprintf("%.3f", rd.VCHitRate)
 		}
-		y := func(k string) string { return fmt.Sprintf("%.2f", rd.Yield[k]["rate"]) }
+		// A rate over zero attempts is not a reading: the last generation
+		// breeds nothing, and substitution may never apply.
+		y := func(k string) string {
+			if n, _ := rd.Yield[k]["attempted"].(float64); n == 0 {
+				return "n/m"
+			}
+			return fmt.Sprintf("%.2f", rd.Yield[k]["rate"])
+		}
 		_, _ = fmt.Fprintf(tw, "%d\t%d\t%d\t%d\t%d\t%s\t%s/%s/%s\t%v\n", rd.Gen, rd.Evaluations, rd.FullyCorrect,
 			rd.ArchiveSize, rd.IndexSize, vc, y("crossover"), y("mutation"), y("substitution"), rd.Discards)
 	}

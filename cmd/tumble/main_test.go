@@ -40,6 +40,11 @@ func TestRunReportInspect(t *testing.T) {
 	if !strings.Contains(buf.String(), "not an instrument") {
 		t.Errorf("report does not flag the stub:\n%s", buf.String())
 	}
+	// The last generation breeds nothing: its yields are not measured.
+	lines := strings.Split(strings.TrimSpace(buf.String()), "\n")
+	if last := lines[len(lines)-1]; !strings.Contains(last, "n/m/n/m/n/m") {
+		t.Errorf("last generation's yields shown as rates: %q", last)
+	}
 	buf.Reset()
 	if err := inspectCmd([]string{out}, &buf); err != nil {
 		t.Fatalf("inspect: %v\n%s", err, buf.String())

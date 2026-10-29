@@ -63,6 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `tumble report` shows an operator yield over zero attempts as `n/m`, not
+  as a rate of 0 (#59).
 - Loop accumulators were fingerprinted by the loop-header phi attributed to
   their definition's line, so a fragment like `v0 := 0` was filed under the
   loop's per-iteration values. Fingerprints now come from evaluating the
