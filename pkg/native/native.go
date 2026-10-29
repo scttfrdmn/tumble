@@ -108,14 +108,17 @@ func RunSource(k Kernel, cfg Config, src []byte, work string) (res *Result, err 
 	}
 
 	res = &Result{}
-	out, err := run(cfg, dir, "go", "test", "-count=1", "-run", "^Test", ".")
+	// -vet=off: go test's default vet checks reject legal Go that evolution
+	// produces as neutral material (x || x, x == x). Vet style is not part
+	// of a genome's correctness; the kernel's tests are.
+	out, err := run(cfg, dir, "go", "test", "-vet=off", "-count=1", "-run", "^Test", ".")
 	if err != nil {
 		res.TestOutput = string(out)
 		return res, nil
 	}
 	res.Verified = true
 
-	raw, err := run(cfg, dir, "go", "test", "-run", "^$", "-bench", "^Benchmark",
+	raw, err := run(cfg, dir, "go", "test", "-vet=off", "-run", "^$", "-bench", "^Benchmark",
 		"-count", strconv.Itoa(cfg.Count), "-benchtime", cfg.Benchtime, ".")
 	if err != nil {
 		return nil, fmt.Errorf("native: benchmark: %v\n%s", err, raw)

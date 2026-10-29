@@ -72,6 +72,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The native stage ran `go test` with its default vet checks, which reject
+  legal Go that evolution produces as neutral material (`x || x`): 11 of 153
+  genomes in E0 run 20261029T165651Z were reported unverified for it. The
+  stage now runs `go test -vet=off`.
 - Run records under `experiments/` are their own Go module, so a recorded
   genome (`best.go`, which keeps unreachable code by design) is not vetted
   or linted as tumble code. CI had failed since the E0 record was committed.

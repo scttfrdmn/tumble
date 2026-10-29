@@ -56,6 +56,35 @@ func TestSummarizeTooFewSamples(t *testing.T) {
 	}
 }
 
+// TestVetStyleNotACorrectnessFailure: a correct genome carrying neutral
+// redundancy that go test's default vet rejects (x || x) is verified.
+func TestVetStyleNotACorrectnessFailure(t *testing.T) {
+	src := []byte(`package popcount
+
+import "math/bits"
+
+func Popcount(xs []uint64) int {
+	n := 0
+	for _, x := range xs {
+		b := x > 3
+		c := b || b
+		_ = c
+		n += bits.OnesCount64(x)
+	}
+	return n
+}
+`)
+	cfg := Defaults()
+	cfg.Count, cfg.Benchtime, cfg.Benchstat = 1, "1x", nil
+	res, err := RunSource(popcountKernel(t), cfg, src, t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !res.Verified {
+		t.Errorf("correct genome with x || x not verified:\n%s", res.TestOutput)
+	}
+}
+
 func TestWrongGenomeNotVerified(t *testing.T) {
 	src := []byte("package popcount\n\nfunc Popcount(xs []uint64) int {\n\treturn len(xs)\n}\n")
 	res, err := RunSource(popcountKernel(t), Defaults(), src, t.TempDir())
