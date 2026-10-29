@@ -57,6 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   readings (`vc_hit_rate`, `vc_hits`, `vc_pure_executed`, `vc_entries`) are
   now recorded per generation. `make determinism` also runs the giri
   evaluator.
+- `timing.jsonl` records the host's 1-minute load average per generation, and
+  `tumble report` prints the maximum (#72).
 - `timing.jsonl` records each generation's wall time by phase (evaluate,
   build, interpret, index, breed, native), and the readings record the
   generation's interpreted steps (#21).
@@ -88,6 +90,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Native elites: one genome per abstract cost not benchmarked before, the
+  cheapest plus an even spread over the cost range, recorded as
+  `elite_costs`. `PROJECT.md` §4.3 (#71).
+- Fragment indexing runs concurrently, Islands × Workers at a time, and is
+  bounded by `index_budget` (default 4096) new fragments per generation
+  (#72).
 - `PROJECT.md` §9: the budget model rewritten from E0's recorded timing, with
   the original estimate's errors stated (#60).
 - Fragments, fingerprints, novelty, and equivalence substitution work at

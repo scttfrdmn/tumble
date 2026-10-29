@@ -349,6 +349,11 @@ func reportCmd(args []string, out io.Writer) error {
 	_, _ = fmt.Fprintf(stdout, "  seconds/generation %.2f (evaluate %.2f, index %.2f, breed %.2f, native %.2f)\n",
 		sum.MeanSeconds, sum.MeanPhases["evaluate"], sum.MeanPhases["index"], sum.MeanPhases["breed"], sum.MeanPhases["native"])
 	_, _ = fmt.Fprintf(stdout, "  interpret ns/instr %.1f (island wall time over interpreted instructions)\n", sum.NsPerInstr)
+	if sum.MaxLoad >= 0 {
+		_, _ = fmt.Fprintf(stdout, "  max load average   %.1f on %d CPUs\n", sum.MaxLoad, l.Record.Hardware.NumCPU)
+	} else {
+		_, _ = fmt.Fprintf(stdout, "  max load average   not recorded\n")
+	}
 	return stdout.err
 }
 

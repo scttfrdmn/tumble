@@ -33,6 +33,9 @@ type Summary struct {
 	MeanSeconds float64            `json:"mean_seconds_per_generation"`
 	MeanPhases  map[string]float64 `json:"mean_phase_seconds"`
 	NsPerInstr  float64            `json:"interpret_ns_per_instruction"`
+
+	// MaxLoad is the highest 1-minute load average recorded (-1 if none).
+	MaxLoad float64 `json:"max_load1"`
 }
 
 // Rate is a count over a count; Value is 0, and Measured false, over zero.
@@ -129,6 +132,7 @@ func Summarize(dir string, l *Loaded) (*Summary, error) {
 		steps += rd.Steps
 	}
 	var interp float64
+	s.MaxLoad = -1
 	for _, ln := range lines {
 		var t TimingEntry
 		if err := json.Unmarshal(ln, &t); err != nil {
@@ -142,6 +146,9 @@ func Summarize(dir string, l *Loaded) (*Summary, error) {
 		s.MeanPhases["breed"] += t.Phases.Breed
 		s.MeanPhases["native"] += t.Native
 		interp += t.Phases.Interpret
+		if t.Load != nil {
+			s.MaxLoad = max(s.MaxLoad, *t.Load)
+		}
 	}
 	if n := float64(len(lines)); n > 0 {
 		s.MeanSeconds /= n

@@ -5,6 +5,7 @@ package report
 
 import (
 	"math"
+	"runtime"
 	"testing"
 )
 
@@ -25,5 +26,14 @@ func TestSpearman(t *testing.T) {
 	}
 	if !math.IsNaN(Spearman([]float64{1, 2}, []float64{1, 2})) || !math.IsNaN(Spearman([]float64{1, 1, 1}, []float64{1, 2, 3})) {
 		t.Error("Spearman defined with fewer than 3 pairs or a constant side")
+	}
+}
+
+func TestLoadAverage(t *testing.T) {
+	if runtime.GOOS != "darwin" && runtime.GOOS != "linux" {
+		t.Skip("load average read on darwin and linux only")
+	}
+	if l := LoadAverage(); l < 0 {
+		t.Errorf("load average not read: %v", l)
 	}
 }

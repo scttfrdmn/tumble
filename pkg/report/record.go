@@ -166,6 +166,11 @@ type TimingEntry struct {
 	Seconds float64    `json:"seconds"`
 	Phases  pop.Timing `json:"phases"`
 	Native  float64    `json:"native"`
+	// Load is the host's 1-minute load average when the line was written,
+	// with the CPU count in the record's hardware: native ns/op taken on a
+	// loaded machine is not comparable with ns/op taken on a quiet one.
+	// Nil when it could not be read, and in records from before it existed.
+	Load *float64 `json:"load1,omitempty"`
 }
 
 // Generation records one generation's readings, the archive after it, and
@@ -175,7 +180,7 @@ func (w *Writer) Generation(rd *pop.Readings, a *pop.Archive, nativeSeconds floa
 		return err
 	}
 	now := time.Now()
-	if err := writeLine(w.timing, TimingEntry{Gen: rd.Gen, Seconds: now.Sub(w.last).Seconds(), Phases: rd.Timing, Native: nativeSeconds}); err != nil {
+	if err := writeLine(w.timing, TimingEntry{Gen: rd.Gen, Seconds: now.Sub(w.last).Seconds(), Phases: rd.Timing, Native: nativeSeconds, Load: loadPtr()}); err != nil {
 		return err
 	}
 	w.last = now
@@ -185,6 +190,13 @@ func (w *Writer) Generation(rd *pop.Readings, a *pop.Archive, nativeSeconds floa
 	}
 	w.rec.Gens = rd.Gen + 1
 	return os.WriteFile(filepath.Join(w.dir, ArchiveDir, fmt.Sprintf("gen%04d.json", rd.Gen)), append(b, '\n'), 0o644)
+}
+
+func loadPtr() *float64 {
+	if l := LoadAverage(); l >= 0 {
+		return &l
+	}
+	return nil
 }
 
 // Native records a native-stage result.

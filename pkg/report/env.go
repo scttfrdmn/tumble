@@ -13,6 +13,7 @@ import (
 	"os/exec"
 	"runtime"
 	"runtime/debug"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -182,4 +183,29 @@ func output(name string, args ...string) string {
 		return ""
 	}
 	return strings.TrimSpace(string(out))
+}
+
+// LoadAverage is the host's 1-minute load average, or -1 if it cannot be
+// read: vm.loadavg on darwin, /proc/loadavg on linux.
+func LoadAverage() float64 {
+	var text string
+	switch runtime.GOOS {
+	case "darwin":
+		text = strings.Trim(output("sysctl", "-n", "vm.loadavg"), "{} ")
+	case "linux":
+		b, err := os.ReadFile("/proc/loadavg")
+		if err != nil {
+			return -1
+		}
+		text = string(b)
+	}
+	f := strings.Fields(text)
+	if len(f) == 0 {
+		return -1
+	}
+	v, err := strconv.ParseFloat(f[0], 64)
+	if err != nil {
+		return -1
+	}
+	return v
 }
