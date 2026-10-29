@@ -53,6 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   evaluator for an output directory under `experiments/`.
 - `kernels`: the kernel registry; `experiments/e0/config.json`.
 
+### Fixed
+
+- The type checker finds the standard library in a binary built with
+  `-trimpath` (as `make build` does), which does not know its GOROOT.
+
 ### Changed
 
 - `PROJECT.md` §6.2 and §7, `SETUP.md`: how the stub evaluates, and its

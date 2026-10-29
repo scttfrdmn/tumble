@@ -7,10 +7,13 @@ import (
 	"errors"
 	"fmt"
 	"go/ast"
+	"go/build"
 	"go/importer"
 	"go/parser"
 	"go/token"
 	"go/types"
+	"os/exec"
+	"strings"
 	"sync"
 )
 
@@ -303,17 +306,28 @@ func CheckSource(src []byte) error {
 
 // stdImporter is shared because importing math/bits from source is the
 // expensive part of a check; go/types importers are not safe for concurrent
-// use, hence the lock.
-var stdImporter = struct {
+// use, hence the lock. It is created on first use.
+var stdImporter struct {
 	sync.Mutex
 	types.Importer
-}{Importer: importer.ForCompiler(token.NewFileSet(), "source", nil)}
+}
 
 type lockedImporter struct{}
 
 func (lockedImporter) Import(path string) (*types.Package, error) {
 	stdImporter.Lock()
 	defer stdImporter.Unlock()
+	if stdImporter.Importer == nil {
+		// A binary built with -trimpath does not know its GOROOT, and the
+		// source importer reads the standard library from build.Default;
+		// ask the go command, as go/packages would.
+		if build.Default.GOROOT == "" {
+			if out, err := exec.Command("go", "env", "GOROOT").Output(); err == nil {
+				build.Default.GOROOT = strings.TrimSpace(string(out))
+			}
+		}
+		stdImporter.Importer = importer.ForCompiler(token.NewFileSet(), "source", nil)
+	}
 	return stdImporter.Import(path)
 }
 
