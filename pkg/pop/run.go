@@ -23,12 +23,15 @@ import (
 
 // Problem is what a run searches: the grammar (with the kernel signature),
 // the selection vectors and the reference's outputs on them, and the parsed
-// reference for seeding.
+// reference for seeding. WantAfter, if set, is the reference's slice
+// arguments after each call (eval.Result.ArgsAfter): a genome is correct on
+// a vector only if it returns Want and leaves its arguments as WantAfter.
 type Problem struct {
 	Grammar   *grammar.Grammar
 	Reference *tir.Func
 	Selection []eval.Input
 	Want      [][]any
+	WantAfter [][]any
 }
 
 // Readings are one generation's instrument readings (PROJECT.md §8). Under
@@ -363,10 +366,16 @@ func (r *runner) score(ind *Individual, res eval.Result) {
 	ind.C = make([]bool, len(r.prob.Want))
 	ind.Correct = 0
 	for t, w := range r.prob.Want {
-		if t < len(res.Outputs) && reflect.DeepEqual(res.Outputs[t], w) {
-			ind.C[t] = true
-			ind.Correct++
+		if t >= len(res.Outputs) || !reflect.DeepEqual(res.Outputs[t], w) {
+			continue
 		}
+		// An evaluator that reports no post-call arguments cannot show the
+		// genome left them as the reference does: not correct.
+		if r.prob.WantAfter != nil && (t >= len(res.ArgsAfter) || !reflect.DeepEqual(res.ArgsAfter[t], r.prob.WantAfter[t])) {
+			continue
+		}
+		ind.C[t] = true
+		ind.Correct++
 	}
 	ind.Cost = r.cost(res)
 	ind.vcHits, ind.vcPure, ind.vcMeasured = res.CacheHits, res.PureExecuted, res.CacheMeasured

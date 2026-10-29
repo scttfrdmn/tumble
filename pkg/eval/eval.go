@@ -30,7 +30,12 @@ type Violation struct {
 
 // Result is one function's evaluation over a set of input vectors.
 type Result struct {
-	Outputs    [][]any           // per input vector: the return values
+	Outputs [][]any // per input vector: the return values
+	// ArgsAfter is, per input vector, the contents of each slice argument
+	// after the call (one entry per parameter, nil for a non-slice one), as
+	// the caller would see them: what the genome wrote into its arguments
+	// is part of its result (#73). An entry is nil where Outputs is.
+	ArgsAfter  [][]any
 	Traces     []ValueTrace      // empty when RunOptions.Trace is off, and always under the stub
 	Steps      uint64            // instructions executed, summed over vectors
 	StepsBy    map[string]uint64 // by instruction class; nil if the evaluator cannot break steps down

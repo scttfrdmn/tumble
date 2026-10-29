@@ -117,6 +117,7 @@ func (g *Giri) Run(fn *ssa.Function, in []Input, opt RunOptions) (Result, error)
 
 	res := Result{
 		Outputs:       make([][]any, len(in)),
+		ArgsAfter:     make([][]any, len(in)),
 		Steps:         r.Steps,
 		StepsBy:       map[string]uint64{},
 		Exhausted:     r.Exhausted,
@@ -137,6 +138,7 @@ func (g *Giri) Run(fn *ssa.Function, in []Input, opt RunOptions) (Result, error)
 		switch oc {
 		case gexec.Returned:
 			res.Outputs[i] = r.Outputs[i]
+			res.ArgsAfter[i] = r.ArgsAfter[i]
 		case gexec.Exhausted:
 			res.Exhausted, res.Partial = true, true
 		case gexec.Opaque:

@@ -300,3 +300,18 @@ func TestIndexBudget(t *testing.T) {
 		t.Error("nothing indexed under a budget")
 	}
 }
+
+// TestScoreArgsAfter: a vector is correct only if the genome also leaves its
+// arguments as the reference does; an evaluator reporting none is not trusted.
+func TestScoreArgsAfter(t *testing.T) {
+	prob := Problem{Want: [][]any{{3}, {3}, {3}}, WantAfter: [][]any{{[]uint64{1, 2}}, {[]uint64{1, 2}}, {[]uint64{1, 2}}}}
+	r := &runner{prob: prob}
+	ind := &Individual{F: problem(t).Reference}
+	r.score(ind, eval.Result{
+		Outputs:   [][]any{{3}, {3}, {3}},
+		ArgsAfter: [][]any{{[]uint64{1, 2}}, {[]uint64{1, 0x16}}, nil},
+	})
+	if !slices.Equal(ind.C, []bool{true, false, false}) {
+		t.Errorf("correctness %v, want [true false false]", ind.C)
+	}
+}

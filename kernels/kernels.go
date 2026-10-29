@@ -8,6 +8,7 @@ package kernels
 
 import (
 	"fmt"
+	"reflect"
 	"slices"
 
 	"github.com/scttfrdmn/tumble/kernels/popcount"
@@ -26,20 +27,46 @@ type Kernel struct {
 	Func    string // the reference function in Source
 	Native  native.Kernel
 
-	vectors   func() (sel, hold []eval.Input, err error)
-	reference func(eval.Input) []any
+	vectors func() (sel, hold []eval.Input, err error)
+	// reference calls the reference on in, whose slices it may modify, and
+	// returns its results.
+	reference func(in eval.Input) []any
 }
 
 // Vectors are the selection and holdout inputs.
 func (k *Kernel) Vectors() (sel, hold []eval.Input, err error) { return k.vectors() }
 
-// Reference computes the reference outputs for in.
-func (k *Kernel) Reference(in []eval.Input) [][]any {
-	out := make([][]any, len(in))
+// Reference computes the reference's outputs for in, and the contents of
+// its slice arguments after each call (nil for a non-slice argument). Each
+// call gets copies, so in is not modified.
+func (k *Kernel) Reference(in []eval.Input) (outputs, after [][]any) {
+	outputs, after = make([][]any, len(in)), make([][]any, len(in))
 	for i, v := range in {
-		out[i] = k.reference(v)
+		cp := eval.Input{Args: make([]any, len(v.Args))}
+		after[i] = make([]any, len(v.Args))
+		for j, a := range v.Args {
+			cp.Args[j] = copySlice(a)
+		}
+		outputs[i] = k.reference(cp)
+		for j, a := range cp.Args {
+			if reflect.ValueOf(a).Kind() == reflect.Slice {
+				after[i][j] = a
+			}
+		}
 	}
-	return out
+	return outputs, after
+}
+
+// copySlice copies a slice argument (keeping nil nil); other values are
+// returned as they are.
+func copySlice(a any) any {
+	rv := reflect.ValueOf(a)
+	if rv.Kind() != reflect.Slice || rv.IsNil() {
+		return a
+	}
+	c := reflect.MakeSlice(rv.Type(), rv.Len(), rv.Len())
+	reflect.Copy(c, rv)
+	return c.Interface()
 }
 
 // Problem is the kernel as a pop.Problem over its selection vectors.
@@ -53,7 +80,8 @@ func (k *Kernel) Problem() (pop.Problem, error) {
 	if err != nil {
 		return pop.Problem{}, err
 	}
-	return pop.Problem{Grammar: g, Reference: ref, Selection: sel, Want: k.Reference(sel)}, nil
+	want, wantAfter := k.Reference(sel)
+	return pop.Problem{Grammar: g, Reference: ref, Selection: sel, Want: want, WantAfter: wantAfter}, nil
 }
 
 var registry = map[string]*Kernel{

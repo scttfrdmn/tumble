@@ -3,7 +3,10 @@
 
 package kernels
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestPopcountProblem(t *testing.T) {
 	k, err := Get("popcount")
@@ -22,5 +25,18 @@ func TestPopcountProblem(t *testing.T) {
 	}
 	if len(p.Selection) != len(p.Want) || len(p.Selection) == 0 {
 		t.Fatalf("%d vectors, %d outputs", len(p.Selection), len(p.Want))
+	}
+}
+
+func TestReferenceArgsAfter(t *testing.T) {
+	k, _ := Get("popcount")
+	p, err := k.Problem()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i, in := range p.Selection {
+		if !reflect.DeepEqual(p.WantAfter[i], in.Args) {
+			t.Fatalf("vector %d: reference left %#v, want its input unchanged", i, p.WantAfter[i])
+		}
 	}
 }

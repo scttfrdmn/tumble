@@ -140,7 +140,7 @@ Each stage is a filter; a genome stops at the first failure and its cost is reco
 2. **SSA build** — all genomes of the generation printed as functions `g_0001 … g_NNNN` in one package, one `go/ssa` build.
 3. **giri interpretation** on the N test vectors under a step budget. Produces: outputs, per-value traces, instruction count by class, violations.
    - Violation or budget exhaustion → discard.
-   - Per-test-case correctness vector `c ∈ {0,1}^N` from output equality with the reference.
+   - Per-test-case correctness vector `c ∈ {0,1}^N`: a vector is correct when the genome returns the reference's values and leaves every slice argument holding what the reference leaves there after the call (decision #74).
    - Abstract cost `k` = instructions executed, summed over test vectors, weighted by class (load/store/call/branch weights are run parameters; v0 uses 1 for everything).
 4. **Native stage**, elites only (up to E per generation, a run parameter, default 8: among fully correct genomes, one per abstract cost not benchmarked before, the cheapest plus the rest spread evenly over the generation's cost range, so the cost-model fit sees a spread; decision #71): printed to a temp package with the reference's benchmark harness, `go test -bench -count=10`, `benchstat` interval. Native `ns/op` is the terminal fitness and the reported number. It is *not* used for selection within the population, only for archiving and reporting, because its noise would swamp per-generation selection.
 

@@ -94,6 +94,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- A genome is correct on a vector only if it returns the reference's values
+  and leaves its slice arguments as the reference does. Both evaluators report
+  post-call argument contents (`eval.Result.ArgsAfter`). `PROJECT.md` §4.3
+  (#74).
+- giri pinned at 4948ac0 (`exec.Result.ArgsAfter`, scttfrdmn/giri#267) in
+  `go.mod` and CI.
 - Native elites: one genome per abstract cost not benchmarked before, the
   cheapest plus an even spread over the cost range, recorded as
   `elite_costs`. `PROJECT.md` §4.3 (#71).

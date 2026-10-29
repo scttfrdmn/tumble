@@ -190,3 +190,28 @@ func TestGiriCacheDeterministicUnderConcurrency(t *testing.T) {
 		t.Fatalf("cache readings depend on scheduling:\n%s\nvs\n%s", a, b)
 	}
 }
+
+// TestArgsAfterBothEvaluators: both evaluators report what a genome left in
+// its slice arguments: g_0005 zeroes its input, g_0001 leaves it alone.
+func TestArgsAfterBothEvaluators(t *testing.T) {
+	check := func(name string, rs map[string]Result) {
+		t.Helper()
+		zeroed, kept := rs["g_0005"], rs["g_0001"]
+		for i, in := range testInputs {
+			xs := in.Args[0].([]uint64)
+			zeros := make([]uint64, len(xs))
+			if !reflect.DeepEqual(zeroed.ArgsAfter[i], []any{zeros}) {
+				t.Errorf("%s: g_0005 vector %d left %#v, want %#v", name, i, zeroed.ArgsAfter[i], []any{zeros})
+			}
+			if !reflect.DeepEqual(kept.ArgsAfter[i], []any{xs}) {
+				t.Errorf("%s: g_0001 vector %d left %#v, want its input %#v", name, i, kept.ArgsAfter[i], []any{xs})
+			}
+		}
+		if rs["g_0002"].ArgsAfter[0] != nil {
+			t.Errorf("%s: a faulting vector reported post-call arguments", name)
+		}
+	}
+	g := NewGiri(Config{})
+	check("giri", runGiri(t, g, buildGen(t, g), RunOptions{MaxSteps: 100000}))
+	check("stub", runAll(t, newTestStub(t)))
+}

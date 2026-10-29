@@ -137,8 +137,9 @@ type tumbleArgs struct {
 	b.WriteString(`}
 
 type tumbleOut struct {
-	Out   []string ` + "`json:\"out\"`" + `
-	Fault string   ` + "`json:\"fault,omitempty\"`" + `
+	Out   []string          ` + "`json:\"out\"`" + `
+	After []json.RawMessage ` + "`json:\"after\"`" + `
+	Fault string            ` + "`json:\"fault,omitempty\"`" + `
 }
 
 var tumbleFns = []struct {
@@ -177,7 +178,9 @@ func tumbleCall(f ` + shape.funcType() + `, v tumbleArgs, fuel int64) (o tumbleO
 	var args, rets []string
 	for i, p := range shape.params {
 		if strings.HasPrefix(p, "[]") {
-			fmt.Fprintf(&b, "\ta%d := append(%s(nil), v.A%d...)\n", i, p, i)
+			// A copy that keeps nil nil and empty empty: the genome, and
+			// its post-call arguments, see exactly what the caller passed.
+			fmt.Fprintf(&b, "\ta%d := v.A%d\n\tif a%d != nil {\n\t\ta%d = append(make(%s, 0, len(v.A%d)), v.A%d...)\n\t}\n", i, i, i, i, p, i, i)
 		} else {
 			fmt.Fprintf(&b, "\ta%d := v.A%d\n", i, i)
 		}
@@ -200,6 +203,15 @@ func tumbleCall(f ` + shape.funcType() + `, v tumbleArgs, fuel int64) (o tumbleO
 	fmt.Fprintf(&b, "\t%s := f(%s)\n", strings.Join(rets, ", "), strings.Join(args, ", "))
 	for _, r := range rets {
 		fmt.Fprintf(&b, "\to.Out = append(o.Out, fmt.Sprint(%s))\n", r)
+	}
+	// What the call left in its (copied) slice arguments, as JSON; a
+	// non-slice parameter gets null.
+	for i, p := range shape.params {
+		if strings.HasPrefix(p, "[]") {
+			fmt.Fprintf(&b, "\tif j, err := json.Marshal(a%d); err == nil {\n\t\to.After = append(o.After, j)\n\t} else {\n\t\tpanic(err)\n\t}\n", i)
+		} else {
+			b.WriteString("\to.After = append(o.After, json.RawMessage(\"null\"))\n")
+		}
 	}
 	b.WriteString("\treturn o\n}\n")
 	out, err := format.Source([]byte(b.String()))

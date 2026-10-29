@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"reflect"
 	"regexp"
 	"slices"
 	"strconv"
@@ -95,8 +96,9 @@ type inputState struct {
 }
 
 type nativeOut struct {
-	Out   []string `json:"out"`
-	Fault string   `json:"fault,omitempty"`
+	Out   []string          `json:"out"`
+	After []json.RawMessage `json:"after"`
+	Fault string            `json:"fault,omitempty"`
 }
 
 // Build loads the generation package in pkgDir.
@@ -147,7 +149,7 @@ func (s *Stub) Run(fn *ssa.Function, in []Input, opt RunOptions) (Result, error)
 		return Result{}, err
 	}
 
-	res := Result{Outputs: make([][]any, len(in))}
+	res := Result{Outputs: make([][]any, len(in)), ArgsAfter: make([][]any, len(in))}
 	outs, ok := st.native[fn.Name()]
 	if !ok {
 		return Result{}, fmt.Errorf("eval: %s has no harness entry (signature differs from the generation's)", fn.Name())
@@ -165,6 +167,11 @@ func (s *Stub) Run(fn *ssa.Function, in []Input, opt RunOptions) (Result, error)
 				return Result{}, fmt.Errorf("eval: %s: %w", fn.Name(), err)
 			}
 			res.Outputs[i] = vals
+			after, err := parseArgsAfter(o.After, fn.Signature.Params())
+			if err != nil {
+				return Result{}, fmt.Errorf("eval: %s: %w", fn.Name(), err)
+			}
+			res.ArgsAfter[i] = after
 		}
 	}
 
@@ -385,6 +392,57 @@ func vectorOf(stack string) int {
 		return n
 	}
 	return -1
+}
+
+// parseArgsAfter decodes the harness's post-call slice arguments into Go
+// values of the parameters' types; non-slice parameters give nil.
+func parseArgsAfter(after []json.RawMessage, params *types.Tuple) ([]any, error) {
+	if len(after) != params.Len() {
+		return nil, fmt.Errorf("%d post-call arguments for %d parameters", len(after), params.Len())
+	}
+	out := make([]any, params.Len())
+	for i := range out {
+		t := params.At(i).Type()
+		if _, ok := t.Underlying().(*types.Slice); !ok {
+			continue
+		}
+		rt, ok := reflectType(t)
+		if !ok {
+			return nil, fmt.Errorf("parameter type %s", t)
+		}
+		v := reflect.New(rt)
+		if err := json.Unmarshal(after[i], v.Interface()); err != nil {
+			return nil, err
+		}
+		out[i] = v.Elem().Interface()
+	}
+	return out, nil
+}
+
+// reflectType is the Go type of a supported kernel type: an integer or bool,
+// or a slice of one.
+func reflectType(t types.Type) (reflect.Type, bool) {
+	if s, ok := t.Underlying().(*types.Slice); ok {
+		e, ok := reflectType(s.Elem())
+		if !ok {
+			return nil, false
+		}
+		return reflect.SliceOf(e), true
+	}
+	b, ok := t.Underlying().(*types.Basic)
+	if !ok {
+		return nil, false
+	}
+	rt, ok := basicReflect[b.Kind()]
+	return rt, ok
+}
+
+var basicReflect = map[types.BasicKind]reflect.Type{
+	types.Bool: reflect.TypeFor[bool](),
+	types.Int:  reflect.TypeFor[int](), types.Int8: reflect.TypeFor[int8](), types.Int16: reflect.TypeFor[int16](),
+	types.Int32: reflect.TypeFor[int32](), types.Int64: reflect.TypeFor[int64](),
+	types.Uint: reflect.TypeFor[uint](), types.Uint8: reflect.TypeFor[uint8](), types.Uint16: reflect.TypeFor[uint16](),
+	types.Uint32: reflect.TypeFor[uint32](), types.Uint64: reflect.TypeFor[uint64](),
 }
 
 // parseOutputs converts the harness's printed results back to Go values.
