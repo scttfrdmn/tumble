@@ -248,12 +248,35 @@ Nothing in this list is declared done by the document; it is the list of numbers
 
 ## 9. Budget model
 
-Per generation, per island, P genomes, N test vectors of length n:
-- type check + SSA build: ~5 ms + ~0.1 ms × P
-- giri interpretation: P × N × (instructions executed × ~20–50 ns per instruction) × (1 − VC hit rate)
-- native stage: E × (compile ~0.5 s + bench ~2 s)
+A generation is one barrier-synchronised round: all islands evaluate in parallel, then the barrier indexes new fragments, then all islands breed, and the native stage benchmarks that generation's elites. Its wall time is
 
-With P=256, N=64, n=1024, a `popcount` genome executing ~5k instructions per vector, 30 ns/instruction, hit rate 0.9: ≈ 256 × 64 × 5000 × 30 ns × 0.1 ≈ 2.5 s of interpretation per island-generation, ≈ 20 s for 8 islands on 8 cores in parallel → ~700 generations in 4 hours, ≈ 1.4M evaluations. If the hit rate is 0.5 the same budget yields ~140 generations. The E0 hit-rate reading decides whether the design is in the GA-scale regime.
+```
+T_gen = T_evaluate + T_index + T_breed + T_native
+T_evaluate ≈ max over islands of (build + interpret)
+interpret  ≈ (P × instructions per genome × ns per instruction) / workers per island
+T_index    ≈ new fragments this generation × (one evaluation each, sequential)
+T_native   ≈ newly benchmarked elites × (copy, test, go test -bench -count=10)
+```
+
+**Measured (E0 run `experiments/e0/20261029T042951Z`, #20).** popcount; I = 8, P = 256, N = 50 vectors of 1–32 words; 4 workers per island; value cache on; Apple M4 Pro, 12 cores. These are the record's means over 50 generations:
+
+| Term | Mean s/gen | Notes |
+|---|---:|---|
+| `T_evaluate` | 2.30 | 2,048 genomes, about 16–25 M interpreted instructions per generation; 806 ns per instruction as island wall time (giri's single-threaded figures are in its `docs/perf.md`) |
+| `T_index` | 36.1 | grows with the fragment count: 0.9 s at generation 0, 99 s at generation 49 (#69) |
+| `T_breed` | 1.40 | |
+| `T_native` | 39.1 | E = 8 elites per generation, all tied at the minimum cost (#68) |
+| **`T_gen`** | **81.0** | 4,050 s over 50 generations |
+
+At that mean, a 4-hour budget is about 178 generations, or about 364k genome evaluations. The mean is not stationary: `T_index` rises through the run, so later generations cost more. Evaluation and breeding alone are about 3.7 s per generation. That is the floor if indexing (#69) and the native stage (#68) are bounded or moved off the critical path.
+
+**What changed from the original model.** The original estimate (P = 256, N = 64, n = 1024, 5k instructions per vector, 30 ns per instruction, value-cache hit rate 0.9) had three problems:
+
+- *Arithmetic.* It omitted its own ×0.1 hit-rate factor (≈0.25 s, not ≈2.5 s), and it multiplied by eight islands that run concurrently.
+- *Inputs.* Vectors are at most 32 words (#38), not 1,024. giri's per-instruction cost is above 20–50 ns with detectors on (giri `docs/perf.md`).
+- *The value-cache term.* The `(1 − hit rate)` factor assumed hits skip whole inherited fragments. The cache as built saves one instruction per hit (§5.2, #63, #64), so the hit rate (0.997–1.000 from generation 2 in E0) doesn't scale interpretation cost.
+
+The terms that bound a run are the barrier's fragment indexing and the native stage, not interpretation.
 
 ## 10. Risks
 

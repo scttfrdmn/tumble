@@ -85,6 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `PROJECT.md` §9: the budget model rewritten from E0's recorded timing, with
+  the original estimate's errors stated (#60).
 - Fragments, fingerprints, novelty, and equivalence substitution work at
   top-level program points, including an accumulator's value after its loop.
   A fragment's fingerprint is its output on each test vector when evaluated
