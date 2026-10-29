@@ -11,8 +11,8 @@ permissions:
 
 env:
   GOEXPERIMENT: arenas
-  # giri for eval.stub, pinned: v0.98.0.
-  GIRI_COMMIT: 04128bd0e1b2ccb55ab95454600046df1083826b
+  # giri for eval.stub, pinned: main at ArgsAfter (#267), after v0.98.0.
+  GIRI_COMMIT: 4948ac0b1cbcbaabbd777cfe9dacdb8a58d0cdf2
 
 jobs:
   test:
