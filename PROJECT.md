@@ -239,6 +239,7 @@ Every experiment records: kernel, arm, wall-clock budget, hardware, versions, ra
 - A: tumble, full.
 - B: tumble, substitution rate 0 (no semantic index; the structural hash-cons and value cache stay on).
 - C: OpenEvolve, same reference, same test vectors, same giri evaluator as its fitness function, same wall clock, recorded model and token spend.
+- D (labelled separately): A plus a blind gene-duplication mutation (copy a statement range, then repair). It is designed and frozen on `argmax` before E1 and never tuned on popcount (decision #81). Each arm's method is frozen at the commit E1 runs from.
 - Report: best verified `ns/op` with `benchstat` 95% interval vs the gc-compiled reference; generations completed; evaluations completed; for A, fraction of fitness improvements attributable to substitution vs crossover vs mutation.
 
 **E2 — `prefixsum`, `argmax`,** same arms.

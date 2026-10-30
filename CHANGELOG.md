@@ -100,6 +100,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `PROJECT.md` §8: E1 runs arms A, B and C as specified, plus arm D (A with
+  gene duplication, frozen on `argmax` first), labelled separately (#81).
 - `PROJECT.md` §1: the design claim restated as hypotheses H1–H4 with what
   tests each and its measured status; §8 records E0's outcome (#80).
 - Selection breaks abstract-cost ties on statements above `parsimony_above`
