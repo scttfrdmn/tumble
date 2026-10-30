@@ -18,3 +18,6 @@ evaluator is an instrument, so nothing here can come from `eval.stub`.
 - `dfreeze/`: the runs that freeze arm D's `duplication` rate on `argmax`, at
   0, 0.1 and 0.25, E0's settings otherwise, native stage off. The rule for
   choosing is stated on #82 before the runs.
+- `parsimony78/`: `parsimony_above` at 20, 24 and 28 on `argmax`, E0's settings
+  otherwise, native stage off: a robustness check of the frozen value (24),
+  run off popcount so it can't tune the E1 kernel (#78, #81). Run on castor.

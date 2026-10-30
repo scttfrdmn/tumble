@@ -1,0 +1,10 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "giri"},
+  "params": {
+    "seed": 1,
+    "generations": 50,
+    "parsimony_above": 24
+  },
+  "native": {"enabled": false}
+}
