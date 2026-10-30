@@ -1,0 +1,9 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "giri"},
+  "params": {
+    "seed": 1,
+    "seed_islands": 2, "generations": 50
+  },
+  "native": {"enabled": false}
+}
