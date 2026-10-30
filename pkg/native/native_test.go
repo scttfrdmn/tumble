@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/scttfrdmn/tumble/pkg/tir"
 )
@@ -115,4 +116,42 @@ func TestRunPrintsGenomeAsReference(t *testing.T) {
 	if !res.Verified || len(res.Rows) != 3 {
 		t.Errorf("parsed reference through the stage: verified %v, %d rows\n%s", res.Verified, len(res.Rows), res.TestOutput)
 	}
+}
+
+func TestFuzz(t *testing.T) {
+	k := popcountKernel(t)
+	cfg := Defaults()
+	ref, err := tir.Parse(mustRead(t, filepath.Join(k.Dir, k.RefFile)), k.Func)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := Fuzz(k, cfg, ref, t.TempDir(), 2*time.Second)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !res.Passed || res.Execs == 0 {
+		t.Errorf("reference fuzz: passed %v, execs %d\n%s", res.Passed, res.Execs, res.Output)
+	}
+	// A genome that is right on the committed vectors' shapes but wrong in
+	// general: it ignores every word past the first.
+	wrong, err := tir.Parse([]byte("package popcount\n\nimport \"math/bits\"\n\nfunc Popcount(xs []uint64) int {\n\tif len(xs) == 0 {\n\t\treturn 0\n\t}\n\treturn bits.OnesCount64(xs[0])\n}\n"), "Popcount")
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err = Fuzz(k, cfg, wrong, t.TempDir(), 10*time.Second)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Passed {
+		t.Error("fuzzing did not catch a genome that reads only the first word")
+	}
+}
+
+func mustRead(t *testing.T, path string) []byte {
+	t.Helper()
+	b, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return b
 }
