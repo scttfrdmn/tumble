@@ -97,6 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `PROJECT.md` §1: the design claim restated as hypotheses H1–H4 with what
+  tests each and its measured status; §8 records E0's outcome (#80).
 - Selection breaks abstract-cost ties on statements above `parsimony_above`
   (default 24), before novelty, in lexicase and in the rank: bounded
   parsimony (#76), replacing the full parsimony of #75. `PROJECT.md` §4.5.

@@ -17,11 +17,14 @@ AlphaEvolve, OpenEvolve, and their descendants are called genetic but fail three
 
 tumble asks the complementary question: what does a *strict* GA — coded representation, population, blind payoff-only operators, probabilistic transitions — achieve on the same problem class, when the language is Go and the evaluator is a UB-verifying SSA interpreter?
 
-The design claim is that three hash structures over the population, fed by execution traces from [giri](https://github.com/scttfrdmn/giri), close the gaps that historically kept blind program search small:
+The design began from a claim: that three hash structures over the population, fed by execution traces from [giri](https://github.com/scttfrdmn/giri), close the gaps that historically kept blind program search small. The claim came from judgement, not measurement. The project now states it as hypotheses (decision #80), each with the measurement that tests it and that measurement's current status. A hypothesis is kept, revised or dropped on its measurement, and the goal below does not depend on any one of them holding.
 
-1. **Structural hash-consing of SSA** across the population removes redundant evaluation.
-2. **A Hashlife-style value cache** inside the interpreter makes per-generation cost proportional to *novel* code, not total code.
-3. **A semantic fingerprint index** (hash of each SSA value's trace across the test vectors → fragments computing it, with their instruction cost) gives a blind, payoff-only *semantic* crossover: substitute a fragment with any cheaper fragment of identical fingerprint. Linkage is observed from execution rather than learned statistically (BOA) or imported (LLM).
+| # | Hypothesis | Tested by | Status (2026-10-29) |
+|---|---|---|---|
+| H1 | **Structural hash-consing** across the population removes redundant evaluation. | Evaluations avoided per generation. | Built only for fragments: it dedupes the fingerprint index (#67). Genomes are not deduped before evaluation. Untested. |
+| H2 | **A Hashlife-style value cache** inside the interpreter makes per-generation cost proportional to *novel* code, not total code. | E0: hit rate and per-generation cost. | Not supported as built. giri's hook saves one instruction per hit, so the hit rate (0.997–1.000) measures reuse of pure operations, not saved computation (#63, #64, §5.2). The evaluation phase (build plus interpretation) was 3–10% of generation time across E0's runs, so fragment-level skipping is deferred (#64). |
+| H3 | **A semantic fingerprint index** gives a blind, payoff-only *semantic* crossover: substitute a fragment with a cheaper fragment of the same fingerprint. Linkage is observed from execution rather than learned statistically (BOA) or imported (LLM). | E0: collision rate and substitution yield. E1: arm A vs arm B. | Sound where built: 0 collisions in 2,780 substitutions; yield 0.738 with bounded parsimony (#76). Built at top-level program points only (#67). The motivating case, an inner loop matched to a library call, needs points inside loop bodies (#66). Arm A vs arm B is not yet measured. |
+| H4 | A strict GA can improve on a correct seed under the abstract cost. Implicit in the goal below, and not stated before E0. | E0, #77. | Not shown. A genome 35% cheaper than the reference exists inside the v0 grammar (`kernels/headroom_test.go`), and no E0 run found anything cheaper than the reference (#77). |
 
 Each piece has prior art (Krawiec's behavioral GP, Bansal–Aiken fingerprints, Keijzer/Handley subtree caching, STOKE's cost model, Moraglio's semantic operators). The combination on a real language, with a verifying interpreter, a native benchmark as the terminal fitness, and `unsafe` admitted to the grammar because the interpreter checks pointer rules, does not exist.
 
@@ -243,6 +246,16 @@ Every experiment records: kernel, arm, wall-clock budget, hardware, versions, ra
 **E3 — schema measurement.** For the top 20 fingerprints by final-elite frequency: track their population frequency per generation and compare against the restated schema theorem's prediction from their mean fitness and preservation probability. The reading is whether the prediction tracks the observed curve at all; this is the result that says whether "execution-defined linkage" is a theory or a slogan.
 
 **E4 (v1) — `sdot`** with bucketed float fingerprints; the same three arms.
+
+**E0 outcome** (closed 2026-10-29; records under `experiments/e0/`, readings on #20 and #70):
+- VC hit rate: 0.997–1.000 from generation 2. The expectation is met, but as built the reading does not test what it was meant to (H2).
+- FP collision rate: 0 in 2,780 substitution children.
+- Operator yield:
+  - mutation 0.998–1.000;
+  - crossover 0.956 with bounded parsimony (#76), 0.78–0.81 without;
+  - substitution 0.738 with bounded parsimony, 0.21–0.29 without. The shortfall is the 32-statement length limit, not repair failures.
+- Cost-model fit (Spearman): 0.88–0.93 at 16 words, 0.81–0.88 at 1,024 words, 0.78–0.84 at 65,536 words.
+- No improvement on the seeded reference in any run (H4, #77).
 
 Nothing in this list is declared done by the document; it is the list of numbers the project exists to produce.
 
