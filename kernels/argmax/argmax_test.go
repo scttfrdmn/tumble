@@ -99,8 +99,13 @@ func FuzzArgmax(f *testing.F) {
 	}
 	f.Fuzz(func(t *testing.T, data []byte) {
 		xs := Ints(data)
-		if got, want := Argmax(xs), naive(xs); got != want {
-			t.Fatalf("Argmax(%v) = %d, naive = %d", xs, got, want)
+		in := slices.Clone(xs)
+		want := naive(in)
+		if got := Argmax(xs); got != want {
+			t.Fatalf("Argmax(%v) = %d, naive = %d", in, got, want)
+		}
+		if !slices.Equal(xs, in) {
+			t.Fatalf("Argmax modified its input %v -> %v", in, xs)
 		}
 	})
 }

@@ -5,6 +5,7 @@ package popcount
 
 import (
 	"math/rand/v2"
+	"slices"
 	"strconv"
 	"testing"
 )
@@ -98,8 +99,13 @@ func FuzzPopcount(f *testing.F) {
 	}
 	f.Fuzz(func(t *testing.T, data []byte) {
 		xs := Words(data)
-		if got, want := Popcount(xs), naive(xs); got != want {
-			t.Fatalf("Popcount(%#x) = %d, naive = %d", xs, got, want)
+		in := slices.Clone(xs)
+		want := naive(in)
+		if got := Popcount(xs); got != want {
+			t.Fatalf("Popcount(%#x) = %d, naive = %d", in, got, want)
+		}
+		if !slices.Equal(xs, in) {
+			t.Fatalf("Popcount modified its input %#x -> %#x", in, xs)
 		}
 	})
 }
