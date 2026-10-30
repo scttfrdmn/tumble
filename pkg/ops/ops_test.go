@@ -408,3 +408,76 @@ func TestDuplicateCopiesRange(t *testing.T) {
 	}
 	t.Fatal("no seed duplicated the loop body's two statements")
 }
+
+// libDonor donates c := bits.OnesCount64(x) for an int point after an inner
+// loop, binding x to the latest uint64 variable in scope: it stands in for a
+// body index that has matched the inner loop's per-iteration values to the
+// call's.
+type libDonor struct{}
+
+func (libDonor) Empty() bool { return false }
+
+func (libDonor) CheaperAt(f *tir.Func, p tir.BlockPoint) ([]tir.Stmt, tir.Var, map[int]tir.Var, bool) {
+	if _, isLoop := (*f.Block(p.Path))[p.At].(*tir.Loop); !isLoop || p.V.T != tir.Int {
+		return nil, tir.Var{}, nil, false
+	}
+	var x tir.Var
+	found := false
+	for _, v := range f.VisibleAt(p.Path, p.At) {
+		if v.T == tir.Uint64 {
+			x, found = v, true
+		}
+	}
+	if !found {
+		return nil, tir.Var{}, nil, false
+	}
+	in := tir.Var{ID: 900, T: tir.Uint64}
+	c := tir.Var{ID: 901, T: tir.Int}
+	frag := []tir.Stmt{&tir.Assign{Dst: c, Define: true, X: &tir.Call{Pkg: "math/bits", Name: "OnesCount64", Args: []tir.Operand{in}}}}
+	return frag, c, map[int]tir.Var{in.ID: x}, true
+}
+
+// TestSubstituteBodyReplacesInnerLoop: the motivating case of #66. A bit
+// loop inside the loop over xs is replaced by the call, bound to x, and the
+// inner loop is removed as dead.
+func TestSubstituteBodyReplacesInnerLoop(t *testing.T) {
+	g := grammar.Popcount()
+	f := parse(t, `func f(xs []uint64) int {
+	n := 0
+	for i := 0; i < len(xs); i++ {
+		x := xs[i]
+		c := 0
+		for j := 0; j < 64; j++ {
+			c += int(x >> uint64(j) & 1)
+		}
+		n += c
+	}
+	return n
+}`)
+	c, applied, err := SubstituteBody(rand.New(rand.NewPCG(1, 1)), g, libDonor{}, f)
+	if err != nil || !applied {
+		t.Fatalf("applied %v, err %v", applied, err)
+	}
+	src := string(c.Print("f"))
+	if !strings.Contains(src, "bits.OnesCount64(v1)") || strings.Contains(src, ">>") || strings.Count(src, "for ") != 1 {
+		t.Errorf("inner loop not replaced by the bound call:\n%s", src)
+	}
+	checkChild(t, g, "body substitution", c)
+}
+
+func TestSubstituteBodyNoOp(t *testing.T) {
+	g, ps := parents(t, 5, 4)
+	for _, d := range []BodyDonor{nil, emptyBodyDonor{}} {
+		c, applied, err := SubstituteBody(rand.New(rand.NewPCG(1, 1)), g, d, ps[3])
+		if err != nil || applied || c.Identity() != ps[3].Identity() {
+			t.Errorf("empty body donor changed the genome (applied %v, err %v)", applied, err)
+		}
+	}
+}
+
+type emptyBodyDonor struct{}
+
+func (emptyBodyDonor) Empty() bool { return true }
+func (emptyBodyDonor) CheaperAt(*tir.Func, tir.BlockPoint) ([]tir.Stmt, tir.Var, map[int]tir.Var, bool) {
+	panic("CheaperAt called on an empty index")
+}

@@ -120,12 +120,21 @@ func readsVar(s tir.Stmt, v tir.Var) bool {
 	return found
 }
 
-// live is the set of top-level statements whose effects are observable: the
-// returns and stores, and transitively whatever they read. A definition is
-// live if a live statement reads it; a loop or if is live if it holds a store
-// or return, or reassigns a variable a live statement other than itself
-// reads. Sinks are never live; Repair re-adds the ones needed.
+// live is the set of a block's statements whose effects are observable: the
+// returns and stores, the reassignments of variables defined outside the
+// block (an enclosing loop's accumulators), and transitively whatever they
+// read. A definition is live if a live statement reads it; a loop or if is
+// live if it holds an effect, or reassigns a variable a live statement other
+// than itself reads. Sinks are never live; Repair re-adds the ones needed.
+// For the function body every reassigned variable is defined in the body,
+// so only stores and returns are effects there.
 func live(body []tir.Stmt) map[tir.Stmt]bool {
+	own := map[int]bool{}
+	for _, s := range body {
+		for _, d := range tir.Defs(s) {
+			own[d.ID] = true
+		}
+	}
 	reads := make([]map[int]bool, len(body))
 	effects := make([]bool, len(body))
 	writes := make([]map[int]bool, len(body))
@@ -141,6 +150,9 @@ func live(body []tir.Stmt) map[tir.Stmt]bool {
 			case *tir.Assign:
 				if !t.Define && !local[t.Dst.ID] {
 					writes[i][t.Dst.ID] = true
+					if !own[t.Dst.ID] {
+						effects[i] = true
+					}
 				}
 			}
 			for _, d := range tir.Defs(t) {
