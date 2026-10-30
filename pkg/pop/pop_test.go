@@ -370,3 +370,21 @@ func TestBoundedParsimony(t *testing.T) {
 		}
 	}
 }
+
+func TestNearMissReadings(t *testing.T) {
+	prob := problem(t)
+	total := 0
+	_, err := Run(fakeEval{want: prob.Want}, prob, smallParams(), t.TempDir(), func(rd *Readings, a *Archive) error {
+		if rd.NearMissCheaper > rd.NearMiss || rd.NearMissBelowBest > rd.NearMiss {
+			t.Errorf("gen %d: near misses %d, cheaper %d, below best %d", rd.Gen, rd.NearMiss, rd.NearMissCheaper, rd.NearMissBelowBest)
+		}
+		total += rd.NearMiss
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if total == 0 {
+		t.Error("no near misses recorded; the fake evaluator makes genomes wrong on single vectors")
+	}
+}

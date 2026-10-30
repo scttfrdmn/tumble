@@ -75,6 +75,15 @@ type Readings struct {
 	// vectors correct, or as many at lower cost), by operator.
 	Improvements map[string]int `json:"improvements"`
 
+	// Near misses (#77): eligible genomes correct on all but one vector.
+	// NearMissCheaper counts those cheaper than their best parent, and
+	// NearMissBelowBest those cheaper than this generation's cheapest fully
+	// correct genome: candidate stepping stones that lexicase, given a fully
+	// correct pool, never selects.
+	NearMiss          int `json:"near_miss"`
+	NearMissCheaper   int `json:"near_miss_cheaper"`
+	NearMissBelowBest int `json:"near_miss_below_best"`
+
 	// Elites are this generation's native-stage candidates (see elites):
 	// at most E fully correct genomes, one per abstract cost not benchmarked
 	// before, spread across the generation's cost range. EliteCosts are
@@ -182,7 +191,22 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		for _, is := range islands {
 			all = append(all, is.pop...)
 		}
+		var bestFC uint64 // cheapest fully correct cost this generation, 0 if none
 		for _, ind := range all {
+			if ind.FullyCorrect() && (bestFC == 0 || ind.Cost < bestFC) {
+				bestFC = ind.Cost
+			}
+		}
+		for _, ind := range all {
+			if ind.Eligible() && len(ind.C) > 0 && ind.Correct == len(ind.C)-1 {
+				rd.NearMiss++
+				if pb := ind.parentBest; pb != nil && ind.Cost < pb.Cost {
+					rd.NearMissCheaper++
+				}
+				if bestFC > 0 && ind.Cost < bestFC {
+					rd.NearMissBelowBest++
+				}
+			}
 			rd.Evaluations++
 			rd.Steps += ind.steps
 			rd.VCMeasured = rd.VCMeasured || ind.vcMeasured
