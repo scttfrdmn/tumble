@@ -1,0 +1,11 @@
+{
+  "arm": "B",
+  "evaluator": {"name": "giri"},
+  "wall_clock": "4h",
+  "params": {
+    "seed": 1,
+    "generations": 100000,
+    "substitution": 0
+  },
+  "native": {"enabled": true, "cpus": "5-9,15-19"}
+}
