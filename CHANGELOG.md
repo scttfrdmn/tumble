@@ -91,6 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   unchanged (#85).
 - `native.cpus` pins the native stage to a CPU list with `taskset` (Linux);
   Linux run records name CPU models from `lscpu`. E1's host is castor (#86).
+- `tumble score` and `experiments/e1/openevolve/evaluator.py`: E1 arm C's
+  scoring, using tumble's own evaluator, vectors, correctness and cost (#87).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

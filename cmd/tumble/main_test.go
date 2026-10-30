@@ -12,6 +12,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/scttfrdmn/tumble/kernels"
 	"github.com/scttfrdmn/tumble/pkg/report"
 )
 
@@ -173,5 +174,40 @@ func TestVerifyAndBaseline(t *testing.T) {
 		if r.NoInterval || r.N != 10 {
 			t.Errorf("baseline row without an interval: %+v", r)
 		}
+	}
+}
+
+func TestScore(t *testing.T) {
+	k, err := kernels.Get("popcount")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref := score(k, k.Source, 1<<20)
+	if ref.Error != "" || ref.Correct != ref.Total || ref.CombinedScore != 2 {
+		t.Fatalf("reference scores %+v, want 50/50 at combined 2", ref)
+	}
+	unrolled, err := os.ReadFile("../../kernels/popcount/testdata/candidates/candidates.go")
+	if err != nil {
+		t.Fatal(err)
+	}
+	// candidates.go defines Unroll2 and Unroll4; score the unrolled-by-4
+	// genome under the kernel's function name.
+	src := strings.Replace(string(unrolled), "func Unroll4(", "func Popcount(", 1)
+	src = strings.Replace(src, "func Ref(", "func ref(", 1)
+	cheap := score(k, []byte(src), 1<<20)
+	if cheap.Error != "" || cheap.Correct != cheap.Total || cheap.CombinedScore <= ref.CombinedScore {
+		t.Errorf("unrolled scores %+v, want correct and above the reference's %v", cheap, ref.CombinedScore)
+	}
+	wrong := score(k, []byte("package popcount\n\nfunc Popcount(xs []uint64) int { return len(xs) }\n"), 1<<20)
+	if wrong.CombinedScore >= 1 || wrong.Correct == wrong.Total {
+		t.Errorf("wrong program scores %+v", wrong)
+	}
+	bad := score(k, []byte("package popcount\n\nimport \"unsafe\"\n\nfunc Popcount(xs []uint64) int { return int(unsafe.Sizeof(xs)) }\n"), 1<<20)
+	if bad.Error == "" || bad.CombinedScore != 0 {
+		t.Errorf("unsafe import scored %+v", bad)
+	}
+	broken := score(k, []byte("package popcount\n\nfunc Popcount(xs []uint64) int { return y }\n"), 1<<20)
+	if broken.Error == "" || broken.CombinedScore != 0 {
+		t.Errorf("program that does not type-check scored %+v", broken)
 	}
 }

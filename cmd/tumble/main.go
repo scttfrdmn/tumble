@@ -36,6 +36,7 @@ commands:
   inspect   print a run record's archive and best genome
   verify    check a run record's best genome on holdout vectors and by fuzzing
   baseline  benchmark a kernel's gc-compiled reference into a record
+  score     score a candidate program as tumble does (E1 arm C, OpenEvolve)
   version   print the tumble version
 `
 
@@ -58,6 +59,8 @@ func main() {
 		err = verifyCmd(os.Args[2:], os.Stdout)
 	case "baseline":
 		err = baselineCmd(os.Args[2:], os.Stdout)
+	case "score":
+		err = scoreCmd(os.Args[2:], os.Stdout)
 	default:
 		fmt.Fprint(os.Stderr, usage)
 		os.Exit(2)
