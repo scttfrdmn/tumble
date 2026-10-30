@@ -112,6 +112,23 @@ func Popcount() *Grammar {
 	}
 }
 
+// Argmax is the v0 grammar for argmax(xs []int32) int: popcount's forms,
+// limits, operators and constant ranges, over int, bool and int32 locals,
+// with the min and max builtins as the only calls (no stdlib call applies).
+func Argmax() *Grammar {
+	g := Popcount()
+	g.Sig = &tir.Signature{
+		Params: []tir.Param{{Name: "xs", T: tir.Int32s}},
+		Result: tir.Int,
+	}
+	g.Types = []tir.Type{tir.Int, tir.Bool, tir.Int32}
+	g.Calls = []Callee{
+		{Name: "min", Poly: true, Arity: 2},
+		{Name: "max", Poly: true, Arity: 2},
+	}
+	return g
+}
+
 var tokens = map[string]token.Token{
 	"+": token.ADD, "-": token.SUB, "*": token.MUL, "/": token.QUO, "%": token.REM,
 	"&": token.AND, "|": token.OR, "^": token.XOR, "&^": token.AND_NOT,

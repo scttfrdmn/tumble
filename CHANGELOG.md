@@ -72,6 +72,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Per-generation near-miss readings (`near_miss`, `near_miss_cheaper`,
   `near_miss_below_best`), the `seed_islands` parameter, and
   `experiments/probe77/` configs for #77's search-power probes.
+- `kernels/argmax`: reference (first-max index, −1 for empty), tests,
+  benchmark, fuzz target and corpus, 60 selection and 16 holdout vectors, and
+  `grammar.Argmax`, registered as kernel `argmax` (#83). Kernels may import
+  only the standard library, which a test now enforces.
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

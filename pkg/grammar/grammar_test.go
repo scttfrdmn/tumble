@@ -12,9 +12,11 @@ import (
 	"github.com/scttfrdmn/tumble/pkg/tir"
 )
 
-func TestPopcountGrammarChecks(t *testing.T) {
-	if err := Popcount().Check(); err != nil {
-		t.Fatal(err)
+func TestGrammarsCheck(t *testing.T) {
+	for _, g := range []*Grammar{Popcount(), Argmax()} {
+		if err := g.Check(); err != nil {
+			t.Fatal(err)
+		}
 	}
 }
 
@@ -46,7 +48,12 @@ func TestRandomDeterministic(t *testing.T) {
 }
 
 func TestRandomValidAndAdmitted(t *testing.T) {
-	g := Popcount()
+	for name, g := range map[string]*Grammar{"popcount": Popcount(), "argmax": Argmax()} {
+		t.Run(name, func(t *testing.T) { randomValidAndAdmitted(t, g) })
+	}
+}
+
+func randomValidAndAdmitted(t *testing.T, g *Grammar) {
 	gen := Gen{G: g, R: rand.New(rand.NewPCG(1, 2))}
 	lens := map[int]int{}
 	for i := range 2000 {

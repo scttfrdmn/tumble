@@ -11,6 +11,7 @@ import (
 	"reflect"
 	"slices"
 
+	"github.com/scttfrdmn/tumble/kernels/argmax"
 	"github.com/scttfrdmn/tumble/kernels/popcount"
 	"github.com/scttfrdmn/tumble/pkg/eval"
 	"github.com/scttfrdmn/tumble/pkg/grammar"
@@ -85,6 +86,18 @@ func (k *Kernel) Problem() (pop.Problem, error) {
 }
 
 var registry = map[string]*Kernel{
+	"argmax": {
+		Name:    "argmax",
+		Grammar: grammar.Argmax,
+		Source:  argmax.Source,
+		Func:    "Argmax",
+		Native:  native.Kernel{Name: "argmax", Dir: "kernels/argmax", Package: "argmax", Func: "Argmax", RefFile: "argmax.go"},
+		vectors: func() ([]eval.Input, []eval.Input, error) {
+			sel, hold, err := argmax.Vectors()
+			return inputs32(sel), inputs32(hold), err
+		},
+		reference: func(in eval.Input) []any { return []any{argmax.Argmax(in.Args[0].([]int32))} },
+	},
 	"popcount": {
 		Name:    "popcount",
 		Grammar: grammar.Popcount,
@@ -100,6 +113,14 @@ var registry = map[string]*Kernel{
 }
 
 func inputs(vs [][]uint64) []eval.Input {
+	out := make([]eval.Input, len(vs))
+	for i, v := range vs {
+		out[i] = eval.Input{Args: []any{v}}
+	}
+	return out
+}
+
+func inputs32(vs [][]int32) []eval.Input {
 	out := make([]eval.Input, len(vs))
 	for i, v := range vs {
 		out[i] = eval.Input{Args: []any{v}}
