@@ -84,6 +84,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   per-iteration fingerprint from probed clones, and library discovery of
   admitted calls (§5.3). Readings `body_index_size`, `body_substitutions`
   (#84).
+- `tumble verify` (selection and holdout vectors through giri, then a 60 s
+  native fuzz run against the kernel's oracle; `verify.json`) and
+  `tumble baseline` (the gc-compiled reference's ns/op record). The kernels'
+  fuzz targets check against an untouched copy and that the input is left
+  unchanged (#85).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

@@ -127,3 +127,51 @@ func TestRunGiriUnderExperiments(t *testing.T) {
 		t.Errorf("last generation: vc_measured %v, index_size %d", rd.VCMeasured, rd.IndexSize)
 	}
 }
+
+func TestVerifyAndBaseline(t *testing.T) {
+	cfg := filepath.Join(t.TempDir(), "cfg.json")
+	if err := os.WriteFile(cfg, []byte(`{"evaluator": {"name": "giri"}, "params": {"generations": 2, "islands": 1, "population": 8, "migrants": 0}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	rec := filepath.Join(t.TempDir(), "rec")
+	if err := runCmd([]string{"--config", cfg, "--out", rec, "--root", "../..", "--no-native", "--work", t.TempDir()}, &bytes.Buffer{}); err != nil {
+		t.Fatal(err)
+	}
+	var buf bytes.Buffer
+	if err := verifyCmd([]string{"--root", "../..", "--fuzztime", "2s", rec}, &buf); err != nil {
+		t.Fatalf("verify: %v\n%s", err, buf.String())
+	}
+	var v Verification
+	b, err := os.ReadFile(filepath.Join(rec, VerifyFile))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &v); err != nil {
+		t.Fatal(err)
+	}
+	// The best genome of a reference-seeded run is fully correct.
+	if !v.Verified || v.SelCorrect != v.SelTotal || v.HoldCorrect != v.HoldTotal || v.HoldTotal == 0 || !v.Fuzz.Passed {
+		t.Errorf("verification: %+v", v)
+	}
+	if err := verifyCmd([]string{"--root", "../..", rec}, &buf); err == nil {
+		t.Error("verify overwrote an existing verification")
+	}
+
+	out := filepath.Join(t.TempDir(), "base")
+	if err := baselineCmd([]string{"--kernel", "argmax", "--root", "../..", "--out", out}, &buf); err != nil {
+		t.Fatal(err)
+	}
+	var bl Baseline
+	b, _ = os.ReadFile(filepath.Join(out, "baseline.json"))
+	if err := json.Unmarshal(b, &bl); err != nil {
+		t.Fatal(err)
+	}
+	if bl.Kernel != "argmax" || bl.Result == nil || len(bl.Result.Rows) != 3 || bl.Result.Table == "" {
+		t.Fatalf("baseline: %+v", bl)
+	}
+	for _, r := range bl.Result.Rows {
+		if r.NoInterval || r.N != 10 {
+			t.Errorf("baseline row without an interval: %+v", r)
+		}
+	}
+}

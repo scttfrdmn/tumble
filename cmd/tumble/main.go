@@ -34,6 +34,8 @@ commands:
   run       run a kernel under a config and write a run record
   report    summarise a run record
   inspect   print a run record's archive and best genome
+  verify    check a run record's best genome on holdout vectors and by fuzzing
+  baseline  benchmark a kernel's gc-compiled reference into a record
   version   print the tumble version
 `
 
@@ -52,6 +54,10 @@ func main() {
 		err = reportCmd(os.Args[2:], os.Stdout)
 	case "inspect":
 		err = inspectCmd(os.Args[2:], os.Stdout)
+	case "verify":
+		err = verifyCmd(os.Args[2:], os.Stdout)
+	case "baseline":
+		err = baselineCmd(os.Args[2:], os.Stdout)
 	default:
 		fmt.Fprint(os.Stderr, usage)
 		os.Exit(2)
