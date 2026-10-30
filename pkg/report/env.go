@@ -13,6 +13,7 @@ import (
 	"os/exec"
 	"runtime"
 	"runtime/debug"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -64,6 +65,19 @@ func DetectHardware() Hardware {
 }
 
 func linuxCPU() string {
+	// lscpu names every core type of a heterogeneous ARM part (for example
+	// "Cortex-X925, Cortex-A725"); /proc/cpuinfo has no model name on ARM.
+	var names []string
+	for line := range strings.Lines(output("lscpu")) {
+		if k, v, ok := strings.Cut(line, ":"); ok && strings.TrimSpace(k) == "Model name" {
+			if n := strings.TrimSpace(v); !slices.Contains(names, n) {
+				names = append(names, n)
+			}
+		}
+	}
+	if len(names) > 0 {
+		return strings.Join(names, ", ")
+	}
 	f, err := os.Open("/proc/cpuinfo")
 	if err != nil {
 		return ""

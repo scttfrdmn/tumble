@@ -6,6 +6,7 @@ package native
 import (
 	"encoding/json"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -154,4 +155,17 @@ func mustRead(t *testing.T, path string) []byte {
 		t.Fatal(err)
 	}
 	return b
+}
+
+func TestPinnedCPUs(t *testing.T) {
+	if _, err := exec.LookPath("taskset"); err != nil {
+		t.Skip("taskset not available (Linux only)")
+	}
+	cfg := Defaults()
+	cfg.Count, cfg.Benchtime, cfg.Benchstat, cfg.CPUs = 1, "1x", nil, "0"
+	k := popcountKernel(t)
+	res, err := RunSource(k, cfg, mustRead(t, filepath.Join(k.Dir, k.RefFile)), t.TempDir())
+	if err != nil || !res.Verified {
+		t.Fatalf("pinned run: %v %+v", err, res)
+	}
 }

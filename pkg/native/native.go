@@ -42,6 +42,10 @@ type Config struct {
 	Benchstat    []string `json:"benchstat"`
 	BenchstatDir string   `json:"benchstat_dir"`
 	Confidence   float64  `json:"confidence"`
+	// CPUs, if set, pins the native stage's go test runs to these CPUs with
+	// taskset -c (Linux), e.g. a host's performance cores, so benchmarks do
+	// not move between core types. Empty runs unpinned.
+	CPUs string `json:"cpus,omitempty"`
 }
 
 // Defaults is -count=10 (SETUP.md's minimum), -benchtime=100ms, a 5-minute
@@ -175,6 +179,10 @@ func copyKernel(k Kernel, dir string, src []byte) error {
 }
 
 func run(cfg Config, dir, name string, args ...string) ([]byte, error) {
+	if cfg.CPUs != "" && name == "go" {
+		args = append([]string{"-c", cfg.CPUs, name}, args...)
+		name = "taskset"
+	}
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.Timeout)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, name, args...)
