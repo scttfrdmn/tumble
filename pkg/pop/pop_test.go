@@ -17,7 +17,6 @@ import (
 
 	"github.com/scttfrdmn/tumble/pkg/eval"
 	"github.com/scttfrdmn/tumble/pkg/grammar"
-	"github.com/scttfrdmn/tumble/pkg/index"
 	"github.com/scttfrdmn/tumble/pkg/tir"
 )
 
@@ -180,7 +179,7 @@ func TestMigration(t *testing.T) {
 	p := smallParams()
 	is := &island{n: 0, r: rand.New(rand.NewPCG(1, 1))}
 	src := []*Individual{{F: prob.Reference, C: []bool{true}, Correct: 1}}
-	r := &runner{prob: prob, p: p, ix: index.New(), donorC: map[uint64][]bool{}}
+	r := newRunner(nil, prob, p, t.TempDir())
 	is.pop = src
 	r.breed(is, 0, src)
 	if is.pop[0].Origin != Migrant || len(is.pop) != p.Population {
@@ -305,7 +304,7 @@ func TestIndexBudget(t *testing.T) {
 // arguments as the reference does; an evaluator reporting none is not trusted.
 func TestScoreArgsAfter(t *testing.T) {
 	prob := Problem{Want: [][]any{{3}, {3}, {3}}, WantAfter: [][]any{{[]uint64{1, 2}}, {[]uint64{1, 2}}, {[]uint64{1, 2}}}}
-	r := &runner{prob: prob}
+	r := newRunner(nil, prob, Params{}, t.TempDir())
 	ind := &Individual{F: problem(t).Reference}
 	r.score(ind, eval.Result{
 		Outputs:   [][]any{{3}, {3}, {3}},
@@ -328,7 +327,7 @@ func TestBoundedParsimony(t *testing.T) {
 		t.Fatal(err)
 	}
 	score := func(f *tir.Func, cost uint64, above int) *Individual {
-		r := &runner{prob: Problem{Want: [][]any{{1}}}, p: Params{ParsimonyAbove: above}}
+		r := newRunner(nil, Problem{Want: [][]any{{1}}}, Params{ParsimonyAbove: above}, t.TempDir())
 		ind := &Individual{F: f}
 		r.score(ind, eval.Result{Outputs: [][]any{{1}}, Steps: cost})
 		return ind

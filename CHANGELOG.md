@@ -80,6 +80,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   1–4 statements to directly after itself, with fresh locals, then repairs.
   The `duplication` parameter (default 0) is its probability; at 0 a run is
   unchanged. It is for arm D (#81, #82).
+- Substitution inside loop bodies and if branches, with free inputs bound by
+  per-iteration fingerprint from probed clones, and library discovery of
+  admitted calls (§5.3). Readings `body_index_size`, `body_substitutions`
+  (#84).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

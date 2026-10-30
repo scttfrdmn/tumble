@@ -69,6 +69,8 @@ type Individual struct {
 	// when it is scored: the length that selection counts against it.
 	excess int
 
+	bodySub bool // made by substitution at a point inside a nested block
+
 	// parentBest is the best parent's rank key, for attributing
 	// improvements to operators; donorC is a substitution donor's
 	// correctness, for the collision reading.

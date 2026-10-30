@@ -80,6 +80,12 @@ type Readings struct {
 	// NearMissBelowBest those cheaper than this generation's cheapest fully
 	// correct genome: candidate stepping stones that lexicase, given a fully
 	// correct pool, never selects.
+	// BodyIndexSize is the body index's distinct fingerprints (#66), and
+	// BodySubstitutions the substitution children made at points inside
+	// loop bodies or if branches.
+	BodyIndexSize     int `json:"body_index_size"`
+	BodySubstitutions int `json:"body_substitutions"`
+
 	NearMiss          int `json:"near_miss"`
 	NearMissCheaper   int `json:"near_miss_cheaper"`
 	NearMissBelowBest int `json:"near_miss_below_best"`
@@ -147,7 +153,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 	if n, ok := ev.(eval.Named); ok {
 		evName = n.Name()
 	}
-	r := &runner{ev: ev, prob: prob, p: p, work: work, ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{}, failed: map[tir.Hash]bool{}, benched: map[uint64]bool{}}
+	r := newRunner(ev, prob, p, work)
 	islands := make([]*island, p.Islands)
 	for i := range islands {
 		is := &island{n: i, r: rand.New(rand.NewPCG(p.Seed, uint64(i)))}
@@ -220,6 +226,9 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 			}
 			if ind.Origin == FromSubstitution && ind.Eligible() {
 				rd.Substitutions++
+				if ind.bodySub {
+					rd.BodySubstitutions++
+				}
 				if collides(ind) {
 					rd.FPCollisions++
 				}
@@ -236,6 +245,10 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		if err := r.indexGeneration(g, all); err != nil {
 			return nil, err
 		}
+		if err := r.bodyGeneration(g, all); err != nil {
+			return nil, err
+		}
+		rd.BodyIndexSize = r.body.Len()
 		rd.Timing.Index = time.Since(t1).Seconds()
 		// Placement after indexing: novelty, the archive's tiebreaker, is
 		// set there.
@@ -309,6 +322,23 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 	return &Result{Archive: r.archive, Index: r.ix, Gens: p.Generations}, nil
 }
 
+// newRunner returns a runner with all its state initialised.
+func newRunner(ev eval.Evaluator, prob Problem, p Params, work string) *runner {
+	r := &runner{ev: ev, prob: prob, p: p, work: work,
+		ix: index.New(), archive: NewArchive(p.LenBucket), donorC: map[uint64][]bool{},
+		failed: map[tir.Hash]bool{}, benched: map[uint64]bool{},
+		body: index.NewBodyIndex(), libTypes: map[tir.Type]bool{},
+		libSeqs: map[index.Fingerprint][][]any{}, libSeen: map[string]bool{}}
+	if prob.Grammar != nil {
+		for _, c := range prob.Grammar.Calls {
+			if !c.Poly && len(c.Params) == 1 {
+				r.libTypes[c.Params[0]] = true
+			}
+		}
+	}
+	return r
+}
+
 type runner struct {
 	ev      eval.Evaluator
 	prob    Problem
@@ -324,6 +354,16 @@ type runner struct {
 
 	// benched are the abstract costs already given to the native stage.
 	benched map[uint64]bool
+
+	// Body substitution (#66): the body index, the point data of the
+	// current generation's genomes by structural hash (the next
+	// generation's parents), and library seeding's state.
+	body       *index.BodyIndex
+	points     map[tir.Hash][]pointData
+	probedPrev map[tir.Hash][]pointData
+	libTypes   map[tir.Type]bool
+	libSeqs    map[index.Fingerprint][][]any
+	libSeen    map[string]bool
 }
 
 // evaluate runs island is's generation g through the cascade's giri stage.
@@ -698,6 +738,10 @@ func (r *runner) breed(is *island, g int, in []*Individual) (ops.Yield, int) {
 			parent := Lexicase(is.r, eligible)
 			d := &recordingDonor{ix: r.ix}
 			child, applied, err := ops.Substitute(is.r, gram, d, parent.F)
+			bd := &bodyDonor{r: r}
+			if !applied {
+				child, applied, err = ops.SubstituteBody(is.r, gram, bd, parent.F)
+			}
 			if applied {
 				y.Record(ops.Substitution, err == nil)
 				if err != nil {
@@ -705,8 +749,14 @@ func (r *runner) breed(is *island, g int, in []*Individual) (ops.Yield, int) {
 					continue
 				}
 				ind := &Individual{F: child, Origin: FromSubstitution, parentBest: parent}
-				if d.used {
+				switch {
+				case d.used:
 					ind.donorC = r.donorC[d.entry.Genome]
+				case bd.used:
+					ind.bodySub = true
+					if !bd.entry.Library {
+						ind.donorC = r.donorC[bd.entry.Genome]
+					}
 				}
 				next = append(next, ind)
 				continue
