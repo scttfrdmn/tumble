@@ -23,9 +23,10 @@ const (
 	FromCrossover
 	FromMutation
 	FromSubstitution
+	FromDuplication
 )
 
-var originNames = []string{"random", "seed", "migrant", "crossover", "mutation", "substitution"}
+var originNames = []string{"random", "seed", "migrant", "crossover", "mutation", "substitution", "duplication"}
 
 func (o Origin) String() string { return originNames[o] }
 

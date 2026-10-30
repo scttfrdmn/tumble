@@ -341,3 +341,70 @@ func TestSubstituteAccumulatorAfterLoop(t *testing.T) {
 	}
 	checkChild(t, g, "substitution", c)
 }
+
+func TestDuplicate(t *testing.T) {
+	g, ps := parents(t, 60, 9)
+	run := func(seed uint64) []string {
+		r := rand.New(rand.NewPCG(seed, 2))
+		var out []string
+		for _, p := range ps {
+			if c, err := Duplicate(r, g, p); err == nil {
+				out = append(out, string(c.Print("f")))
+			} else {
+				out = append(out, "discarded")
+			}
+		}
+		return out
+	}
+	if a, b := run(4), run(4); strings.Join(a, "|") != strings.Join(b, "|") {
+		t.Fatal("Duplicate is not deterministic in its seed")
+	}
+	r := rand.New(rand.NewPCG(5, 5))
+	var y Yield
+	grew := 0
+	for range 1000 {
+		p := ps[r.IntN(len(ps))]
+		c, err := Duplicate(r, g, p)
+		y.Record(Duplication, err == nil)
+		if err != nil {
+			var d *Discarded
+			if !errors.As(err, &d) || d.Op != Duplication {
+				t.Fatalf("unexpected error %v", err)
+			}
+			continue
+		}
+		checkChild(t, g, "duplication", c)
+		if c.Len() > p.Len() {
+			grew++
+		}
+	}
+	if y.Survived[Duplication] == 0 || grew == 0 {
+		t.Errorf("duplication: %d of %d survived, %d grew", y.Survived[Duplication], y.Attempted[Duplication], grew)
+	}
+}
+
+// TestDuplicateCopiesRange: duplicating a loop body's statements gives the
+// copy fresh locals that read the same outer variables.
+func TestDuplicateCopiesRange(t *testing.T) {
+	g := grammar.Popcount()
+	f := parse(t, `func f(xs []uint64) int {
+	n := 0
+	for i := 0; i < len(xs); i++ {
+		x := xs[i]
+		n += bits.OnesCount64(x)
+	}
+	return n
+}`)
+	for seed := range uint64(200) {
+		c, err := Duplicate(rand.New(rand.NewPCG(seed, 0)), g, f)
+		if err != nil {
+			continue
+		}
+		src := string(c.Print("f"))
+		if strings.Count(src, "bits.OnesCount64") == 2 && strings.Count(src, ":= xs[i0]") == 2 {
+			checkChild(t, g, "duplication", c)
+			return
+		}
+	}
+	t.Fatal("no seed duplicated the loop body's two statements")
+}

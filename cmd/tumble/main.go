@@ -336,7 +336,7 @@ func reportCmd(args []string, out io.Writer) error {
 		return fmt.Sprintf("%.4g (%d/%d)", r.Value, r.Num, r.Den)
 	}
 	_, _ = fmt.Fprintf(stdout, "\nover the run:\n")
-	for _, k := range []string{"crossover", "mutation", "substitution"} {
+	for _, k := range []string{"crossover", "mutation", "substitution", "duplication"} {
 		_, _ = fmt.Fprintf(stdout, "  yield %-12s %s\n", k, rateStr(sum.Yield[k]))
 	}
 	_, _ = fmt.Fprintf(stdout, "  fp collisions      %s\n", rateStr(sum.Collisions))

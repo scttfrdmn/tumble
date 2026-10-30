@@ -21,6 +21,11 @@ type Params struct {
 	// Crossover, otherwise mutation. Substitution 0 is the ablation arm.
 	Crossover    float64 `json:"crossover"`
 	Substitution float64 `json:"substitution"`
+	// Duplication is the probability a child comes from gene duplication
+	// (ops.Duplicate), tried after substitution and before crossover. Arms
+	// A, B and C use 0, which draws no random number, so their runs are
+	// unchanged; arm D sets it (decision #81).
+	Duplication float64 `json:"duplication"`
 
 	// SeedReference puts the parsed reference into each island's first
 	// generation alongside the random genomes.
@@ -83,7 +88,7 @@ func (p Params) Check() error {
 		return errors.New("pop: need at least one generation, one island, and two genomes per island")
 	case p.Migrants < 0 || p.Migrants >= p.Population || p.MigrateEvery < 1:
 		return errors.New("pop: bad migration parameters")
-	case p.Crossover < 0 || p.Crossover > 1 || p.Substitution < 0 || p.Substitution > 1:
+	case p.Crossover < 0 || p.Crossover > 1 || p.Substitution < 0 || p.Substitution > 1 || p.Duplication < 0 || p.Duplication > 1:
 		return errors.New("pop: operator probabilities must be in [0, 1]")
 	case p.Elites < 0 || p.LenBucket < 1 || p.Workers < 1 || p.IndexBudget < 0 || p.ParsimonyAbove < 0 || p.SeedIslands < 0:
 		return errors.New("pop: bad elites, bucket, or worker count")

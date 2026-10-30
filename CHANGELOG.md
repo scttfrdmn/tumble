@@ -76,6 +76,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   benchmark, fuzz target and corpus, 60 selection and 16 holdout vectors, and
   `grammar.Argmax`, registered as kernel `argmax` (#83). Kernels may import
   only the standard library, which a test now enforces.
+- `ops.Duplicate`, gene duplication: a blind mutation that copies a range of
+  1–4 statements to directly after itself, with fresh locals, then repairs.
+  The `duplication` parameter (default 0) is its probability; at 0 a run is
+  unchanged. It is for arm D (#81, #82).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

@@ -13,20 +13,21 @@ import (
 // Kind is a variation operator.
 type Kind int
 
-// The operators of PROJECT.md §4.2.
+// The operators of PROJECT.md §4.2, and gene duplication (arm D, #81).
 const (
 	Crossover Kind = iota
 	Mutation
 	Substitution
+	Duplication
 	numKinds
 )
 
-var kindNames = [numKinds]string{"crossover", "mutation", "substitution"}
+var kindNames = [numKinds]string{"crossover", "mutation", "substitution", "duplication"}
 
 func (k Kind) String() string { return kindNames[k] }
 
 // Kinds are all operators, in order.
-func Kinds() []Kind { return []Kind{Crossover, Mutation, Substitution} }
+func Kinds() []Kind { return []Kind{Crossover, Mutation, Substitution, Duplication} }
 
 // Yield counts, per operator, the children attempted and the children that
 // survived repair and the type checker (PROJECT.md §8, operator yield).

@@ -712,6 +712,17 @@ func (r *runner) breed(is *island, g int, in []*Individual) (ops.Yield, int) {
 				continue
 			}
 		}
+		if r.p.Duplication > 0 && is.r.Float64() < r.p.Duplication {
+			parent := Lexicase(is.r, eligible)
+			child, err := ops.Duplicate(is.r, gram, parent.F)
+			y.Record(ops.Duplication, err == nil)
+			if err != nil {
+				discarded++
+				continue
+			}
+			next = append(next, &Individual{F: child, Origin: FromDuplication, parentBest: parent})
+			continue
+		}
 		if is.r.Float64() < r.p.Crossover {
 			a, b := Lexicase(is.r, eligible), Lexicase(is.r, eligible)
 			child, err := ops.TwoPoint(is.r, gram, a.F, b.F)
