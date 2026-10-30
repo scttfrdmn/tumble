@@ -15,3 +15,6 @@ evaluator is an instrument, so nothing here can come from `eval.stub`.
   - `seed2of8.json`: the reference in 2 of 8 islands;
   - `long.json`: seeded, 200 generations.
   Queue them on one host through pueue's `measured` group.
+- `dfreeze/`: the runs that freeze arm D's `duplication` rate on `argmax`, at
+  0, 0.1 and 0.25, E0's settings otherwise, native stage off. The rule for
+  choosing is stated on #82 before the runs.
