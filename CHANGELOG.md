@@ -66,6 +66,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   collision rate, the cost-model fit (Spearman, abstract cost against
   native ns/op per benchmark), and seconds and ns/instruction per
   generation. `make e0` runs E0 into `experiments/e0/<timestamp>/` (#19, #20).
+- `kernels/headroom_test.go`: hand-written popcount genomes inside the v0
+  grammar, unrolled by 2 and by 4, are correct and cost 5,860 and 5,375
+  against the reference's 8,237. The GA has not found them (#77).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).
