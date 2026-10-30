@@ -155,6 +155,7 @@ func baselineCmd(args []string, out io.Writer) error {
 	kernel := fs.String("kernel", "popcount", "kernel")
 	outDir := fs.String("out", "", "record directory (required)")
 	root := fs.String("root", ".", "the tumble module root")
+	cpus := fs.String("cpus", "", "pin the benchmark to these CPUs with taskset, as a run's native.cpus (Linux)")
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
@@ -176,6 +177,7 @@ func baselineCmd(args []string, out io.Writer) error {
 	nk.Dir = filepath.Join(rootAbs, nk.Dir)
 	cfg := native.Defaults()
 	cfg.BenchstatDir = rootAbs
+	cfg.CPUs = *cpus
 	b := Baseline{Kernel: k.Name, Started: time.Now().UTC().Format(time.RFC3339), Hardware: report.DetectHardware(),
 		Versions: report.DetectVersions(""), Config: cfg, Load: report.LoadAverage()}
 	scratch, err := os.MkdirTemp("", "tumble-baseline-")
