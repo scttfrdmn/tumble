@@ -73,7 +73,8 @@ func TestRunRefusesStubUnderExperiments(t *testing.T) {
 }
 
 func TestConfigsParse(t *testing.T) {
-	for _, p := range []string{"testdata/smoke.json", "../../experiments/e0/config.json"} {
+	cfgs, _ := filepath.Glob("../../experiments/*/*.json")
+	for _, p := range append([]string{"testdata/smoke.json", "testdata/determinism-giri.json"}, cfgs...) {
 		cfg, err := loadConfig(p)
 		if err != nil {
 			t.Errorf("%s: %v", p, err)

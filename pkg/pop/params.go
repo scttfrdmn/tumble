@@ -25,6 +25,9 @@ type Params struct {
 	// SeedReference puts the parsed reference into each island's first
 	// generation alongside the random genomes.
 	SeedReference bool `json:"seed_reference"`
+	// SeedIslands limits the seeding to the first SeedIslands islands;
+	// 0 seeds every island.
+	SeedIslands int `json:"seed_islands"`
 
 	MaxSteps uint64 `json:"max_steps"` // giri step budget per genome over all vectors
 	Elites   int    `json:"elites"`    // E: per-generation candidates for the native stage
@@ -82,7 +85,7 @@ func (p Params) Check() error {
 		return errors.New("pop: bad migration parameters")
 	case p.Crossover < 0 || p.Crossover > 1 || p.Substitution < 0 || p.Substitution > 1:
 		return errors.New("pop: operator probabilities must be in [0, 1]")
-	case p.Elites < 0 || p.LenBucket < 1 || p.Workers < 1 || p.IndexBudget < 0 || p.ParsimonyAbove < 0:
+	case p.Elites < 0 || p.LenBucket < 1 || p.Workers < 1 || p.IndexBudget < 0 || p.ParsimonyAbove < 0 || p.SeedIslands < 0:
 		return errors.New("pop: bad elites, bucket, or worker count")
 	}
 	return nil

@@ -388,3 +388,26 @@ func TestNearMissReadings(t *testing.T) {
 		t.Error("no near misses recorded; the fake evaluator makes genomes wrong on single vectors")
 	}
 }
+
+func TestSeedIslands(t *testing.T) {
+	prob := problem(t)
+	p := smallParams()
+	p.Islands, p.SeedIslands, p.Generations = 4, 1, 1
+	seeded := map[int]bool{}
+	_, err := Run(fakeEval{want: prob.Want}, prob, p, t.TempDir(), func(rd *Readings, a *Archive) error {
+		for _, e := range a.Elites() {
+			if e.Ind.Origin == Seed {
+				seeded[e.Ind.Island] = true
+			}
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	for is := range seeded {
+		if is != 0 {
+			t.Errorf("island %d was seeded with seed_islands 1", is)
+		}
+	}
+}

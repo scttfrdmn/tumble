@@ -153,7 +153,7 @@ func Run(ev eval.Evaluator, prob Problem, p Params, work string, obs Observer) (
 		is := &island{n: i, r: rand.New(rand.NewPCG(p.Seed, uint64(i)))}
 		gen := grammar.Gen{G: prob.Grammar, R: is.r}
 		n := p.Population
-		if p.SeedReference {
+		if p.SeedReference && (p.SeedIslands == 0 || i < p.SeedIslands) {
 			is.pop = append(is.pop, &Individual{F: prob.Reference.Clone(), Origin: Seed})
 			n--
 		}
