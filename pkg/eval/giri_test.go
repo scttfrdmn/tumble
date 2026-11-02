@@ -215,3 +215,55 @@ func TestArgsAfterBothEvaluators(t *testing.T) {
 	check("giri", runGiri(t, g, buildGen(t, g), RunOptions{MaxSteps: 100000}))
 	check("stub", runAll(t, newTestStub(t)))
 }
+
+// A swap or rotation through a temporary inside a loop becomes loop-header
+// phis that read each other; they must take effect together
+// (scttfrdmn/giri#268). Genomes produce this shape.
+const swapSrc = `package g
+
+func g_0001(xs []uint64) int {
+	v0 := 1
+	v1 := 2
+	for i0 := 0; i0 < len(xs); i0++ {
+		v2 := v0
+		v0 = v1
+		v1 = v2
+	}
+	return v0*10 + v1
+}
+
+func g_0002(xs []uint64) int {
+	v0 := 1
+	v1 := 2
+	v2 := 3
+	for i0 := 0; i0 < len(xs); i0++ {
+		v3 := v0
+		v0 = v1
+		v1 = v2
+		v2 = v3
+	}
+	return v0*100 + v1*10 + v2
+}
+`
+
+func TestGiriLoopSwap(t *testing.T) {
+	g := NewGiri(Config{})
+	dir := filepath.Join(t.TempDir(), "gen")
+	if err := WriteGeneration(dir, []byte(swapSrc)); err != nil {
+		t.Fatal(err)
+	}
+	p, err := g.Build(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rs := runGiri(t, g, p, RunOptions{MaxSteps: 100000})
+	// testInputs have 0, 3 and 4 words.
+	want := map[string][]int{"g_0001": {12, 21, 12}, "g_0002": {123, 123, 231}}
+	for name, w := range want {
+		for i := range w {
+			if got := rs[name].Outputs[i]; len(got) != 1 || got[0] != w[i] {
+				t.Errorf("%s on %d words = %v, want %d", name, len(testInputs[i].Args[0].([]uint64)), got, w[i])
+			}
+		}
+	}
+}

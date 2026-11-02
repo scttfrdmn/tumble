@@ -123,6 +123,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- giri pinned at the v0.99.1 release (4957c54), in `go.mod` and CI. It fixes
+  phis evaluated one at a time (scttfrdmn/giri#268): a swap or rotation
+  through a temporary inside a loop, which tumble's printer emits, scored
+  wrong under v0.99.0 and earlier. `TestGiriLoopSwap` covers it (#91).
 - `PROJECT.md` §8: E1 runs arms A, B and C as specified, plus arm D (A with
   gene duplication, frozen on `argmax` first), labelled separately (#81).
 - `PROJECT.md` §1: the design claim restated as hypotheses H1–H4 with what
