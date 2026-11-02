@@ -90,7 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   fuzz targets check against an untouched copy and that the input is left
   unchanged (#85).
 - `native.cpus` pins the native stage to a CPU list with `taskset` (Linux);
-  Linux run records name CPU models from `lscpu`. E1's host is castor (#86).
+  Linux run records name CPU models from `lscpu`. E1's host is castor (#86), then pollux (#89).
   `tumble baseline --cpus` pins the same way, so a baseline is measured on
   the CPUs a run's elites are.
 - `tumble score` and `experiments/e1/openevolve/evaluator.py`: E1 arm C's
