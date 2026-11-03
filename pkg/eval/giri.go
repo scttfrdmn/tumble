@@ -6,6 +6,8 @@ package eval
 import (
 	"cmp"
 	"fmt"
+	"os"
+	"path/filepath"
 	"slices"
 
 	gexec "github.com/scttfrdmn/giri/pkg/exec"
@@ -22,15 +24,16 @@ func init() {
 // Every genome runs with giri's detectors on and one goroutine. The value
 // cache (requirement 3) is on unless Config.NoCache is set.
 type Giri struct {
-	seed  int64
-	cache *ValueCache // nil when off
+	seed   int64
+	cache  *ValueCache // nil when off
+	loader *gexec.Loader
 
 	concrete map[string]bool
 }
 
 // NewGiri returns the giri evaluator for cfg.
 func NewGiri(cfg Config) *Giri {
-	g := &Giri{seed: cfg.Seed, concrete: map[string]bool{}}
+	g := &Giri{seed: cfg.Seed, concrete: map[string]bool{}, loader: gexec.NewLoader()}
 	if !cfg.NoCache {
 		g.cache = NewValueCache(cfg.CacheEntries)
 	}
@@ -63,9 +66,14 @@ type giriProgram struct {
 
 func (p *giriProgram) Funcs() map[string]*ssa.Function { return p.funcs }
 
-// Build loads the generation package with giri's batch loader (requirement 7).
+// Build loads the generation package's source with giri's Loader, which
+// type-checks the standard-library dependencies once per evaluator (#92).
 func (g *Giri) Build(pkgDir string) (Program, error) {
-	pkg, err := gexec.LoadDir(pkgDir)
+	src, err := os.ReadFile(filepath.Join(pkgDir, GenFile))
+	if err != nil {
+		return nil, err
+	}
+	pkg, err := g.loader.Load(GenModule, src)
 	if err != nil {
 		return nil, err
 	}
