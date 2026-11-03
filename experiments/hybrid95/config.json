@@ -1,0 +1,11 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "giri"},
+  "wall_clock": "4h",
+  "params": {
+    "seed": 1,
+    "generations": 100000
+  },
+  "native": {"enabled": true, "cpus": "5-9,15-19"},
+  "seed_program": {"file": "kernels/popcount/testdata/candidates/candidates.go", "func": "Unroll4"}
+}

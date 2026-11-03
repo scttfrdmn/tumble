@@ -95,6 +95,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the CPUs a run's elites are.
 - `tumble score` and `experiments/e1/openevolve/evaluator.py`: E1 arm C's
   scoring, using tumble's own evaluator, vectors, correctness and cost (#87).
+- `seed_program` in a run config seeds from a named function in a Go file
+  instead of the kernel's reference; the record holds it as `seed_program`
+  with the file's hash. `experiments/hybrid95/` seeds arm A with the
+  hand-written unroll-by-4 (#95).
 - `tumble verify --program` and `tumble baseline --program`: verify and
   benchmark a source file as written (E1 arm C's best program), not a genome
   parsed from it. Their records hold the source's SHA-256.

@@ -53,6 +53,9 @@ type Record struct {
 	Grammar *grammar.Grammar `json:"grammar"`
 	Native  NativeSettings   `json:"native"`
 	Vectors VectorCounts     `json:"vectors"`
+	// SeedProgram is the seed genome's file, function and file hash when a
+	// run is seeded from a seed_program instead of the kernel's reference.
+	SeedProgram string `json:"seed_program,omitempty"`
 }
 
 // NativeSettings record whether and how the native stage ran.

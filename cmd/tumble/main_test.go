@@ -275,3 +275,40 @@ func Popcount(xs []uint64) int {
 		t.Error("baseline accepted a program that fails the kernel's tests")
 	}
 }
+
+// seed_program replaces the reference as the seed, and the record says so.
+func TestRunSeedProgram(t *testing.T) {
+	cfg := filepath.Join(t.TempDir(), "cfg.json")
+	if err := os.WriteFile(cfg, []byte(`{"evaluator": {"name": "giri"}, "params": {"generations": 1, "islands": 1, "population": 8, "migrants": 0},
+		"seed_program": {"file": "kernels/popcount/testdata/candidates/candidates.go", "func": "Unroll4"}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	rec := filepath.Join(t.TempDir(), "rec")
+	if err := runCmd([]string{"--config", cfg, "--out", rec, "--root", "../..", "--no-native", "--work", t.TempDir()}, &bytes.Buffer{}); err != nil {
+		t.Fatal(err)
+	}
+	l, err := report.Load(rec)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.HasPrefix(l.Record.SeedProgram, "kernels/popcount/testdata/candidates/candidates.go:Unroll4 sha256 ") {
+		t.Errorf("record seed_program %q", l.Record.SeedProgram)
+	}
+	var g0 struct {
+		BestCost uint64 `json:"best_cost"`
+	}
+	if err := json.Unmarshal(l.Generations[0], &g0); err != nil {
+		t.Fatal(err)
+	}
+	if g0.BestCost != 5375 {
+		t.Errorf("generation 0 best cost %d, want Unroll4's 5375", g0.BestCost)
+	}
+
+	bad := filepath.Join(t.TempDir(), "bad.json")
+	if err := os.WriteFile(bad, []byte(`{"evaluator": {"name": "giri"}, "seed_program": {"file": "kernels/popcount/testdata/candidates/candidates.go", "func": "Nope"}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := runCmd([]string{"--config", bad, "--out", filepath.Join(t.TempDir(), "r2"), "--root", "../..", "--no-native", "--work", t.TempDir()}, &bytes.Buffer{}); err == nil {
+		t.Error("a missing seed function was accepted")
+	}
+}

@@ -5,6 +5,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/json"
 	"errors"
 	"flag"
@@ -95,6 +96,16 @@ type Config struct {
 	Native    NativeConfig  `json:"native"`
 	WallClock time.Duration `json:"-"`
 	Wall      string        `json:"wall_clock"` // a time.Duration, e.g. "4h"; "" for none
+	// SeedProgram, if File is set, is the seed in place of the kernel's
+	// reference (with params.seed_reference): function Func of File, a Go
+	// file relative to the module root, parsed as a seed (#95).
+	SeedProgram SeedProgram `json:"seed_program"`
+}
+
+// SeedProgram names a seed genome in a Go source file.
+type SeedProgram struct {
+	File string `json:"file"`
+	Func string `json:"func"`
 }
 
 // NativeConfig switches the native stage and configures it.
@@ -182,6 +193,22 @@ func runCmd(args []string, out io.Writer) error {
 	if err != nil {
 		return err
 	}
+	seedNote := ""
+	if sp := cfg.SeedProgram; sp.File != "" {
+		src, err := os.ReadFile(filepath.Join(*root, sp.File))
+		if err != nil {
+			return err
+		}
+		f, err := tir.Parse(src, sp.Func)
+		if err != nil {
+			return fmt.Errorf("seed_program: %w", err)
+		}
+		if err := f.Validate(); err != nil {
+			return fmt.Errorf("seed_program: %w", err)
+		}
+		prob.Reference = f
+		seedNote = fmt.Sprintf("%s:%s sha256 %x", sp.File, sp.Func, sha256.Sum256(src))
+	}
 	_, hold, err := k.Vectors()
 	if err != nil {
 		return err
@@ -234,8 +261,9 @@ func runCmd(args []string, out io.Writer) error {
 		Seed: cfg.Params.Seed, WallClock: cfg.Wall,
 		Hardware: report.DetectHardware(), Versions: report.DetectVersions(giriPath),
 		Params: cfg.Params, Grammar: prob.Grammar,
-		Native:  report.NativeSettings{Enabled: cfg.Native.Enabled, Config: cfg.Native.Config},
-		Vectors: report.VectorCounts{Selection: len(prob.Selection), Holdout: len(hold)},
+		Native:      report.NativeSettings{Enabled: cfg.Native.Enabled, Config: cfg.Native.Config},
+		Vectors:     report.VectorCounts{Selection: len(prob.Selection), Holdout: len(hold)},
+		SeedProgram: seedNote,
 	}
 	if !ev.IsInstrument() {
 		rec.Notes = append(rec.Notes,
