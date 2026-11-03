@@ -1,0 +1,23 @@
+	Command being timed: "./bin/tumble run --kernel popcount --config /tmp/tumble-perf92/config.json --out /tmp/tumble-perf92/out/v0100-1"
+	User time (seconds): 5464.91
+	System time (seconds): 143.02
+	Percent of CPU this job got: 455%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 20:31.55
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4157388
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 6407
+	Minor (reclaiming a frame) page faults: 27784662
+	Voluntary context switches: 13979747
+	Involuntary context switches: 396863
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 3397680
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

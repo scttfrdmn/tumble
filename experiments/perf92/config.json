@@ -1,0 +1,9 @@
+{
+  "arm": "A",
+  "evaluator": {"name": "giri"},
+  "params": {
+    "seed": 1,
+    "generations": 30
+  },
+  "native": {"enabled": true, "cpus": "5-9,15-19"}
+}
