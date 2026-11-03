@@ -1,0 +1,6 @@
+# On-demand Bedrock prices, USD per 1,000 tokens, us-west-2, "standard"
+# (geographic cross-region, us.) rates, from the AWS Price List API
+# (AmazonBedrockFoundationModels), 2026-11-03.
+models:
+  us.anthropic.claude-haiku-5-5:  {input: 0.00011, output: 0.00055, cache_read: 0.000011, cache_write: 0.0001375}
+  us.anthropic.claude-sonnet-5-5: {input: 0.0022,  output: 0.011,   cache_read: 0.00011,  cache_write: 0.00275}

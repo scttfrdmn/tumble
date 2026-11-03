@@ -1,0 +1,40 @@
+# E1 arm C (#24, #26): OpenEvolve on popcount through tumble's evaluator.
+# Models and spend cap chosen by Scott, 2026-11-03: openevolve-bedrock's
+# default ensemble, $50 cap. Wall clock 4 h, enforced by run.sh. Settings not
+# listed are OpenEvolve 0.4.1's defaults.
+max_iterations: 100000
+checkpoint_interval: 10
+random_seed: 1
+language: go
+file_suffix: ".go"
+
+llm:
+  provider: bedrock
+  api_base: aws://us-west-2
+  models:
+    - name: us.anthropic.claude-haiku-5-5
+      weight: 0.8
+    - name: us.anthropic.claude-sonnet-5-5
+      weight: 0.2
+  temperature: 0.7
+  max_tokens: 16000
+  timeout: 120
+
+prompt:
+  system_message: >-
+    You are optimizing a Go function. Popcount(xs []uint64) int must return the
+    total number of set bits across all words of xs. Each candidate is scored by
+    running it in giri, a Go SSA interpreter, on 50 test vectors. It must return
+    the reference result on every vector, and leave xs unchanged. Among correct
+    candidates, a lower abstract cost (the number of SSA instructions executed
+    over all vectors) scores higher, and any correct candidate scores above any
+    incorrect one. The only import allowed is math/bits. Keep the function's name
+    and signature.
+
+evaluator:
+  timeout: 300
+  parallel_evaluations: 4
+  cascade_evaluation: false
+
+diff_based_evolution: true
+max_code_length: 20000
