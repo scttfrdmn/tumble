@@ -29,8 +29,14 @@ var fuzzExecs = regexp.MustCompile(`execs: (\d+)`)
 // Fuzz runs the kernel's fuzz target for d against f printed as the
 // reference function, in a copy of the kernel, under cfg's memory limit.
 // The subprocess timeout is d plus cfg.Timeout.
-func Fuzz(k Kernel, cfg Config, f *tir.Func, work string, d time.Duration) (res *FuzzResult, err error) {
-	src := tir.PrintFile(k.Package, []tir.Named{{Name: k.Func, F: f}})
+func Fuzz(k Kernel, cfg Config, f *tir.Func, work string, d time.Duration) (*FuzzResult, error) {
+	return FuzzSource(k, cfg, tir.PrintFile(k.Package, []tir.Named{{Name: k.Func, F: f}}), work, d)
+}
+
+// FuzzSource is Fuzz for a source file in place of the reference, as
+// RunSource is for Run: src must be a file of the kernel's package defining
+// the kernel function.
+func FuzzSource(k Kernel, cfg Config, src []byte, work string, d time.Duration) (res *FuzzResult, err error) {
 	dir, err := os.MkdirTemp(work, "fuzz-"+k.Name+"-")
 	if err != nil {
 		return nil, err

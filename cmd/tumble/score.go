@@ -127,15 +127,11 @@ func score(k *kernels.Kernel, src []byte, maxSteps uint64) Score {
 // evalSource runs the kernel function defined in src (package name aside)
 // through the giri evaluator, as a one-function generation package.
 func evalSource(k *kernels.Kernel, src []byte, in []eval.Input, maxSteps uint64) (eval.Result, error) {
-	fset := token.NewFileSet()
-	f, err := parser.ParseFile(fset, "candidate.go", src, parser.PackageClauseOnly)
+	// The generation package is named g.
+	gen, err := withPackage(src, "g")
 	if err != nil {
 		return eval.Result{}, err
 	}
-	// The generation package is named g: replace the candidate's package
-	// clause, keeping everything around it (comments above it included).
-	start, end := fset.Position(f.Package).Offset, fset.Position(f.Name.End()).Offset
-	gen := append(append(append([]byte(nil), src[:start]...), "package g"...), src[end:]...)
 	if err := tir.CheckSource(gen); err != nil {
 		return eval.Result{}, fmt.Errorf("type check: %w", err)
 	}
@@ -167,4 +163,16 @@ func keys(m map[string]bool) []string {
 	}
 	slices.Sort(out)
 	return out
+}
+
+// withPackage returns src with its package clause replaced by package name,
+// keeping everything around it (comments above it included).
+func withPackage(src []byte, name string) ([]byte, error) {
+	fset := token.NewFileSet()
+	f, err := parser.ParseFile(fset, "candidate.go", src, parser.PackageClauseOnly)
+	if err != nil {
+		return nil, err
+	}
+	start, end := fset.Position(f.Package).Offset, fset.Position(f.Name.End()).Offset
+	return append(append(append([]byte(nil), src[:start]...), "package "+name...), src[end:]...), nil
 }

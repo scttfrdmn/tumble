@@ -95,6 +95,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the CPUs a run's elites are.
 - `tumble score` and `experiments/e1/openevolve/evaluator.py`: E1 arm C's
   scoring, using tumble's own evaluator, vectors, correctness and cost (#87).
+- `tumble verify --program` and `tumble baseline --program`: verify and
+  benchmark a source file as written (E1 arm C's best program), not a genome
+  parsed from it. Their records hold the source's SHA-256.
+  `native.FuzzSource` runs the fuzz target against a source file (#26).
 - `make determinism` and a CI `determinism` job: 5 generations of `popcount`
   twice with seed 1, diffing the archives, readings, and best genome; CI
   installs giri v0.97.0 so the stub and CLI tests run (#58).

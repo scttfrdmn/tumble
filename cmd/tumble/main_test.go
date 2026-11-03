@@ -211,3 +211,67 @@ func TestScore(t *testing.T) {
 		t.Errorf("program that does not type-check scored %+v", broken)
 	}
 }
+
+// An arm C program is verified and benchmarked as written, whatever its
+// package name: here a 4-way unrolled popcount, and a wrong one.
+func TestVerifyAndBaselineProgram(t *testing.T) {
+	const unrolled = `package candidate
+
+import "math/bits"
+
+func Popcount(xs []uint64) int {
+	n, i := 0, 0
+	for ; i+4 <= len(xs); i += 4 {
+		n += bits.OnesCount64(xs[i]) + bits.OnesCount64(xs[i+1]) + bits.OnesCount64(xs[i+2]) + bits.OnesCount64(xs[i+3])
+	}
+	for _, x := range xs[i:] {
+		n += bits.OnesCount64(x)
+	}
+	return n
+}
+`
+	wrong := strings.Replace(unrolled, "OnesCount64(xs[i+3])", "OnesCount64(xs[i+2])", 1)
+	dir := t.TempDir()
+	check := func(name, src string, want bool) {
+		t.Helper()
+		prog := filepath.Join(dir, name+".go")
+		if err := os.WriteFile(prog, []byte(src), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		out := filepath.Join(dir, name)
+		var buf bytes.Buffer
+		if err := verifyCmd([]string{"--root", "../..", "--fuzztime", "2s", "--program", prog, "--kernel", "popcount", out}, &buf); err != nil {
+			t.Fatalf("%s: verify: %v\n%s", name, err, buf.String())
+		}
+		var v Verification
+		b, _ := os.ReadFile(filepath.Join(out, VerifyFile))
+		if err := json.Unmarshal(b, &v); err != nil {
+			t.Fatal(err)
+		}
+		if v.Verified != want || v.Program == "" || v.Genome != "" {
+			t.Errorf("%s: verification %+v, want verified %v", name, v, want)
+		}
+		if want && (v.SelCorrect != v.SelTotal || v.HoldCorrect != v.HoldTotal) {
+			t.Errorf("%s: %d/%d selection, %d/%d holdout", name, v.SelCorrect, v.SelTotal, v.HoldCorrect, v.HoldTotal)
+		}
+	}
+	check("unrolled", unrolled, true)
+	check("wrong", wrong, false)
+
+	out := filepath.Join(dir, "base")
+	var buf bytes.Buffer
+	if err := baselineCmd([]string{"--root", "../..", "--program", filepath.Join(dir, "unrolled.go"), "--out", out}, &buf); err != nil {
+		t.Fatal(err)
+	}
+	var bl Baseline
+	b, _ := os.ReadFile(filepath.Join(out, "baseline.json"))
+	if err := json.Unmarshal(b, &bl); err != nil {
+		t.Fatal(err)
+	}
+	if bl.Program == "" || bl.Result == nil || len(bl.Result.Rows) != 3 {
+		t.Errorf("program baseline: %+v", bl)
+	}
+	if err := baselineCmd([]string{"--root", "../..", "--program", filepath.Join(dir, "wrong.go"), "--out", filepath.Join(dir, "base2")}, &buf); err == nil {
+		t.Error("baseline accepted a program that fails the kernel's tests")
+	}
+}
