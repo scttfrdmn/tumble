@@ -1,0 +1,28 @@
+{
+  "genome": "00131e0b42f2d3b18a0809ba80353396484d781d141b6aef0a01125910634fdd",
+  "selection_correct": 50,
+  "selection_total": 50,
+  "holdout_correct": 15,
+  "holdout_total": 15,
+  "fuzz": {
+    "passed": true,
+    "duration": "1m0s",
+    "execs": 70632732,
+    "output": "fuzz: elapsed: 0s, gathering baseline coverage: 0/17 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 17/17 completed, now fuzzing with 20 workers\nfuzz: elapsed: 3s, execs: 3409618 (1136291/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 6s, execs: 6934935 (1175172/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 9s, execs: 10483459 (1182668/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 12s, execs: 14001693 (1172720/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 15s, execs: 17540308 (1179246/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 18s, execs: 21062939 (1174544/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 21s, execs: 24634786 (1190955/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 24s, execs: 28190683 (1185070/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 27s, execs: 31742664 (1183849/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 30s, execs: 35300741 (1186041/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 33s, execs: 38832801 (1177498/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 36s, execs: 42334435 (1167407/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 39s, execs: 45854638 (1173410/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 42s, execs: 49404270 (1182963/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 45s, execs: 52967033 (1187665/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 48s, execs: 56507010 (1179871/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 51s, execs: 60070129 (1187860/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 54s, execs: 63611371 (1180530/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 57s, execs: 67124685 (1170655/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 1m0s, execs: 70632732 (1169812/sec), new interesting: 0 (total: 17)\nfuzz: elapsed: 1m0s, execs: 70632732 (0/sec), new interesting: 0 (total: 17)\nPASS\nok  \ttumble.native/popcount\t60.132s\n",
+    "seconds": 60.36851081
+  },
+  "verified": true,
+  "versions": {
+    "go": "go1.27.3",
+    "tumble_build": "go1.27.3-X:arenas",
+    "tumble": "64f009b45a88a20a28d75c16b17647ed268f32fa",
+    "giri": "",
+    "giri_module": "v0.99.1"
+  },
+  "hardware": {
+    "uname_m": "aarch64",
+    "cpu_model": "Cortex-X925, Cortex-A725",
+    "goarm64": "v8.0",
+    "num_cpu": 20
+  }
+}
