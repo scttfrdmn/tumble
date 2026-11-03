@@ -1,0 +1,4070 @@
+[
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 0,
+      "depth": 0
+    },
+    "id": 92156,
+    "island": 7,
+    "gen": 44,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 3,
+    "identity": "0b66282191e694b30627445ea426b78b39ec1bb0060e7cc992b81f4470234a9a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\t_ = v0\n\tv1 := 0\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 129831,
+    "island": 3,
+    "gen": 63,
+    "origin": "crossover",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 3,
+    "identity": "340b6316f639427dfa53eb43db860ce24c40ddee175f5b4d27b42935a2c454ef",
+    "source": "func f(xs []uint64) int {\n\treturn 64\n\tfor i0 := 9; i0 \u003c len(xs); i0 += 2 {\n\t}\n\treturn 64\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 1,
+      "depth": 0
+    },
+    "id": 67611,
+    "island": 0,
+    "gen": 33,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 1,
+    "len": 5,
+    "identity": "0709cdfa7a676f01f9f4231d4761ed3fa1fed8fca41574683d43c40058e1f8da",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 ^ 41\n\tv2 := v1 \u003c= v0\n\t_ = v2\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 21010,
+    "island": 2,
+    "gen": 10,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 2,
+    "len": 7,
+    "identity": "24cfa55206b784794572186a1df21def83c7df9031e6aecedc0bfa3c58270fb7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 31; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 = i0 + i0\n\t\tv0 = -v0\n\t}\n\tv1 := uint64(v0)\n\t_ = v1\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 14444,
+    "island": 0,
+    "gen": 7,
+    "origin": "crossover",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 4,
+    "identity": "0dc7647f8731719b5459ea2bed471716642b391764cbc6845f1005b7f3cda845",
+    "source": "func f(xs []uint64) int {\n\treturn -3\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn -3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 2,
+      "depth": 0
+    },
+    "id": 148713,
+    "island": 4,
+    "gen": 72,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 8,
+    "identity": "0066961d2ec680fbc2d32c5d74b7146e0853eacc0976e2f9231ab012aa9ff85a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 ^ v0\n\tv2 := uint64(v1)\n\t_ = v2\n\tv3 := v1 \u0026^ 14\n\treturn v3\n\tv4 := v3 + v3\n\treturn v4\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 107476,
+    "island": 3,
+    "gen": 52,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 6,
+    "len": 11,
+    "identity": "4a507ce242a3cc507cd859e2d09cc552125a3e3a1b4c7a4e97921b497576bf6d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 14; i0 \u003c len(xs); i0++ {\n\t\tv0 = 17 ^ i0\n\t}\n\tv1 := uint64(v0)\n\tv2 := bits.OnesCount64(v1)\n\tv3 := -v2\n\t_ = v3\n\treturn v2\n\tv4 := v1 + v1\n\t_ = v4\n\tv5 := ^v0\n\t_ = v5\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 94926,
+    "island": 2,
+    "gen": 46,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 2,
+    "len": 11,
+    "identity": "1a0f7f726b63cf414f67b4cdab8346da4fa335ce03211867a1a2018da4fe3e2b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := uint64(v0)\n\tfor i0 := 3; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 7; i1 \u003c len(xs); i1++ {\n\t\t\tv1 = v1 - 5\n\t\t\tv1 = min(v1, 52)\n\t\t}\n\t}\n\treturn v0\n\tfor i2 := 27; i2 \u003c len(xs); i2 += 2 {\n\t\tv0 = int(v1)\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 3,
+      "depth": 0
+    },
+    "id": 50280,
+    "island": 4,
+    "gen": 24,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 12,
+    "identity": "09db00984874a27af02382036506d29f0accbcf8bb05e91892c25adc6094c76a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\tv3 := v1 != v1\n\t_ = v3\n\tv4 := 17 \u0026^ v2\n\t_ = v4\n\treturn v1\n\tv5 := v1 + v1\n\tv6 := uint64(v5)\n\tv7 := v0 != v5\n\t_ = v7\n\tv8 := 17 \u0026^ v6\n\t_ = v8\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 156593,
+    "island": 3,
+    "gen": 76,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 8,
+    "len": 13,
+    "identity": "46523d49546b702d0ba1af664b96c290f444d3b44a54b0ba794afd6791147c7b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 9; i0 \u003c len(xs); i0 += 3 {\n\t\tv0 = i0 * 29\n\t}\n\tv1 := uint64(v0)\n\t_ = v1\n\tv2 := -v0\n\tv3 := uint64(v2)\n\tv4 := ^v3\n\tv5 := bits.OnesCount64(v4)\n\tv6 := v5 | v5\n\t_ = v6\n\tv7 := ^v0\n\t_ = v7\n\tv8 := v4 - v3\n\t_ = v8\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 137337,
+    "island": 0,
+    "gen": 67,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 7,
+    "len": 15,
+    "identity": "c59d5939243ad3e548379c8078922838c3f9b796c5f82b7e2fa3666c3c9b174c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 - 20\n\tfor i0 := 1; i0 \u003c len(xs); i0 += 4 {\n\t\tfor i1 := -2; i1 \u003c len(xs); i1++ {\n\t\t\tv0 = max(v1, i1)\n\t\t\tv1 = ^v1\n\t\t}\n\t}\n\tv2 := 32 | v1\n\tv3 := bits.OnesCount64(47)\n\tv4 := v0 \u003c= v2\n\t_ = v4\n\tv5 := max(v3, v0)\n\tv6 := uint64(v0)\n\treturn v5\n\tv7 := v6 + 13\n\t_ = v7\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 4,
+      "depth": 0
+    },
+    "id": 128054,
+    "island": 4,
+    "gen": 62,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 3,
+    "len": 18,
+    "identity": "891e6a4c6e9b4172c347d2fa7c103f6e54edf4bb354e7fee1b463c6abff68c44",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := 48 ^ v0\n\tv2 := v0 \u0026^ 14\n\tv3 := v1 + v1\n\treturn v3\n\tv4 := v2 ^ v3\n\tv5 := v3 + v3\n\tv6 := 35 ^ v5\n\tv7 := uint64(v6)\n\tv8 := v6 \u0026^ 14\n\t_ = v8\n\tv9 := v6 ^ v1\n\tv10 := min(v7, 49)\n\t_ = v10\n\tv11 := max(v4, v0)\n\t_ = v11\n\treturn v9\n\tv12 := v9 + v9\n\tv13 := uint64(v12)\n\t_ = v13\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 121835,
+    "island": 3,
+    "gen": 59,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 13,
+    "len": 19,
+    "identity": "1c1c547ed72dfb2220aac5ea171ffb41ee3d7838adc335d4ecea3ce9d070daab",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 7; i0 \u003c len(xs); i0++ {\n\t\tv0 = i0 * 62\n\t}\n\tv1 := uint64(v0)\n\tv2 := bits.OnesCount64(v1)\n\tv3 := -v2\n\tv4 := v1 + v1\n\t_ = v4\n\tv5 := uint64(v3)\n\tv6 := bits.OnesCount64(v5)\n\t_ = v6\n\tv7 := bits.OnesCount64(v5)\n\treturn 64\n\tv8 := -v0\n\t_ = v8\n\tv9 := uint64(v7)\n\tv10 := ^v9\n\tv11 := bits.OnesCount64(v10)\n\t_ = v11\n\tv12 := ^v0\n\t_ = v12\n\tv13 := v1 - v9\n\t_ = v13\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 153612,
+    "island": 0,
+    "gen": 75,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 8,
+    "len": 19,
+    "identity": "2cfb963fbcd961248ffd40186ba61b90c6140c4dc2447a300ba0b4967f77a65c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 \u003e\u003e 24\n\tfor i0 := v1; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 = v1 + i0\n\t\tv1 = max(v0, v1)\n\t\tfor i1 := 12; i1 \u003c len(xs); i1++ {\n\t\t\tv1 = v1 * i1\n\t\t}\n\t\tfor i2 := 4; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv0 = max(v1, i2)\n\t\t\tv1 = ^v1\n\t\t}\n\t}\n\tv2 := 32 | v1\n\tv3 := v2 \u003e\u003e 56\n\tv4 := v0 \u003c= v2\n\t_ = v4\n\tv5 := max(v3, v0)\n\tv6 := uint64(v0)\n\treturn v5\n\tv7 := v6 + 13\n\t_ = v7\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 5,
+      "depth": 0
+    },
+    "id": 105540,
+    "island": 4,
+    "gen": 51,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 20,
+    "identity": "0310f5f477cc5e063ffb14b9f626faf55734cd7541fec8063326246c1f04d597",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\tv3 := 23 \u003c v2\n\t_ = v3\n\tv4 := 17 \u0026^ v2\n\treturn v1\n\tv5 := v1 \u0026 v1\n\tv6 := min(v4, v4)\n\t_ = v6\n\treturn v5\n\tv7 := v5 + v5\n\tv8 := uint64(v7)\n\tv9 := 23 \u003c v8\n\t_ = v9\n\tv10 := 17 \u0026^ v8\n\treturn v7\n\tv11 := v7 \u0026 v7\n\tv12 := min(v10, v10)\n\tv13 := v0 != v11\n\t_ = v13\n\tv14 := 17 ^ v12\n\t_ = v14\n\treturn v11\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 144292,
+    "island": 3,
+    "gen": 70,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 16,
+    "len": 22,
+    "identity": "1ce37f5d7a238806235a2294d99a87d5fd2df862bd9e55e1a4faad2793d03e66",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 23; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 = i0 - -3\n\t}\n\tv1 := uint64(v0)\n\tv2 := bits.OnesCount64(v1)\n\tv3 := -v2\n\treturn v2\n\tv4 := v1 + v1\n\t_ = v4\n\tv5 := uint64(v3)\n\tv6 := bits.OnesCount64(v5)\n\tv7 := uint64(v6)\n\tv8 := bits.OnesCount64(v7)\n\treturn 64\n\tv9 := -v0\n\t_ = v9\n\tv10 := uint64(v8)\n\tv11 := ^v10\n\tv12 := bits.OnesCount64(v11)\n\tv13 := v12 | v8\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\tv15 := v11 - v10\n\t_ = v15\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 158368,
+    "island": 2,
+    "gen": 77,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 9,
+    "len": 20,
+    "identity": "4f0d6381096e053e65285911e8712e145c135e749d4c5c61366cf8bbdd9f67f0",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\treturn v1\n\tv2 := uint64(v1)\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\t\tv2 = 27 + v2\n\t\t}\n\t}\n\treturn v1\n\tfor i2 := -4; i2 \u003c len(xs); i2++ {\n\t\tv1 = bits.OnesCount64(v2)\n\t}\n\tv3 := min(51, v2)\n\tv4 := v1 + v1\n\tv5 := ^v3\n\tv6 := v0 \u0026^ v4\n\tfor i3 := v0; i3 \u003c len(xs); i3 += 2 {\n\t\tv0 = i3 - v1\n\t}\n\tv7 := min(v5, v5)\n\t_ = v7\n\tv8 := v1 * v6\n\t_ = v8\n\tv9 := v1 \u0026 v4\n\treturn v9\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 6,
+      "depth": 0
+    },
+    "id": 68614,
+    "island": 4,
+    "gen": 33,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 0,
+    "len": 24,
+    "identity": "3a26f0af747742157d4c5f201ce867d7dfddc25914b93b20fd5bee411d4945f2",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\tv3 := 23 \u003c v2\n\t_ = v3\n\tv4 := 17 \u0026^ v2\n\t_ = v4\n\treturn v1\n\tv5 := v1 + v1\n\tv6 := uint64(v5)\n\tv7 := v5 != v5\n\t_ = v7\n\tv8 := 17 \u0026^ v6\n\tv9 := v5 + v5\n\tv10 := min(v8, 51)\n\t_ = v10\n\treturn v9\n\tv11 := v9 + v9\n\tv12 := uint64(v11)\n\tv13 := 23 \u003c v12\n\t_ = v13\n\tv14 := 17 \u0026^ v12\n\t_ = v14\n\treturn v11\n\tv15 := v11 + v11\n\tv16 := uint64(v15)\n\tv17 := v0 != v15\n\t_ = v17\n\tv18 := 17 \u0026^ v16\n\t_ = v18\n\treturn v15\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 152035,
+    "island": 1,
+    "gen": 74,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 13,
+    "len": 24,
+    "identity": "dbbd31af2b367ba6f3e098184ece24f668c69bc84ada9ae23eb1fbdf46aa8ad6",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 5; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 = 26 \u0026^ i0\n\t}\n\tv1 := xs[2]\n\t_ = v1\n\tv2 := uint64(v0)\n\tv3 := v2 \u003c\u003c v0\n\tv4 := min(v3, v2)\n\t_ = v4\n\tfor i1 := 19; i1 \u003c len(xs); i1++ {\n\t\tv0 = 35 \u0026^ i1\n\t}\n\tv5 := uint64(v0)\n\tv6 := v5 \u003c\u003c v0\n\t_ = v6\n\tfor i2 := 19; i2 \u003c len(xs); i2++ {\n\t\tv0 = 35 \u0026^ v0\n\t}\n\tv7 := uint64(v0)\n\tv8 := v7 \u003c\u003c v0\n\tv9 := 29 | v7\n\tv10 := uint64(15)\n\t_ = v10\n\tv11 := 12 * v0\n\tv12 := -v9\n\tv13 := 29 | v12\n\t_ = v13\n\tv14 := max(34, v11)\n\tv15 := v8 \u003c\u003c 33\n\t_ = v15\n\treturn v14\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 103007,
+    "island": 2,
+    "gen": 50,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 7,
+    "len": 24,
+    "identity": "736382004bcacdd63f87f5bc547524deb2b4d7c4c63adc786846da54d644d5e5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 27; i0 \u003c len(xs); i0 += 2 {\n\t}\n\tv1 := v0 + v0\n\tv2 := v1 | v1\n\tfor i1 := v2; i1 \u003c len(xs); i1 += 2 {\n\t}\n\treturn v2\n\tv3 := uint64(v2)\n\tfor i2 := 15; i2 \u003c len(xs); i2 += 3 {\n\t\tfor i3 := 9; i3 \u003c len(xs); i3++ {\n\t\t\tv3 = min(v3, 63)\n\t\t\tv3 = v3 - 5\n\t\t}\n\t}\n\treturn v2\n\tfor i4 := 27; i4 \u003c len(xs); i4 += 2 {\n\t\tv2 = int(v3)\n\t}\n\tv4 := min(51, v3)\n\tv5 := v2 + v2\n\tv6 := ^v4\n\tv7 := v0 | v5\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t\tv0 = bits.OnesCount64(v6)\n\t}\n\tv8 := min(v6, v6)\n\t_ = v8\n\tv9 := v7 * v0\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 72830,
+    "island": 4,
+    "gen": 35,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 13,
+    "len": 28,
+    "identity": "1b3d5653d522d2aa586f7f6e2435fc2fb61b9e30a77bc8dd7a9eaea00ee28dec",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := 12; i0 \u003c len(xs); i0++ {\n\t\tv0 = i0 \u0026^ i0\n\t\tv0 = i0 * i0\n\t}\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\tv3 := v1 + v1\n\tv4 := min(v2, 51)\n\t_ = v4\n\treturn v3\n\tv5 := v3 + v3\n\tv6 := uint64(v5)\n\tv7 := 23 \u003c v6\n\t_ = v7\n\tv8 := 17 \u0026^ v6\n\t_ = v8\n\treturn v5\n\tv9 := v5 + v5\n\tv10 := uint64(v9)\n\t_ = v10\n\tv11 := v9 != v9\n\t_ = v11\n\tv12 := v9 + v9\n\tv13 := uint64(v12)\n\tv14 := 23 \u003c v13\n\t_ = v14\n\tv15 := 17 \u0026^ v13\n\t_ = v15\n\treturn v12\n\tv16 := v12 + v12\n\tv17 := uint64(v16)\n\tv18 := v0 != v16\n\t_ = v18\n\tv19 := 17 \u0026^ v17\n\t_ = v19\n\treturn v16\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 154203,
+    "island": 2,
+    "gen": 75,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 6,
+    "len": 28,
+    "identity": "398a3085aec0d3a084b59888908734b2ce953ba583ab2f4d27a74beb12133287",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := -4; i0 \u003c len(xs); i0++ {\n\t}\n\tv1 := v0 + v0\n\tv2 := v1 \u0026^ v1\n\tfor i1 := v2; i1 \u003c len(xs); i1 += 2 {\n\t\tv2 = i1 - i1\n\t}\n\tv3 := v2 * v2\n\tv4 := v3 \u0026 v3\n\t_ = v4\n\treturn v0\n\tv5 := uint64(v0)\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := i2; i3 \u003c len(xs); i3 += 4 {\n\t\t\tv5 = v5 - 14\n\t\t}\n\t}\n\treturn v0\n\tfor i4 := -4; i4 \u003c len(xs); i4++ {\n\t\tv0 = bits.OnesCount64(v5)\n\t}\n\tv6 := min(51, v5)\n\tv7 := v0 + v0\n\tv8 := ^v6\n\tv9 := v7 \u0026^ v7\n\tfor i5 := v9; i5 \u003c len(xs); i5 += 2 {\n\t\tv9 = i5 - v0\n\t}\n\tv10 := v9 \u003c v0\n\t_ = v10\n\tv11 := min(v8, v8)\n\t_ = v11\n\tv12 := v0 * v9\n\t_ = v12\n\tv13 := v0 + v7\n\treturn v13\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 6,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 113820,
+    "island": 4,
+    "gen": 55,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 50,
+    "novelty": 11,
+    "len": 32,
+    "identity": "bcce3d826b2520aa891c429422b1a2f337e6593e2ec9f6fa4b3d465e79240134",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\treturn v0\n\tfor i0 := v0; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 = -i0\n\t}\n\tv1 := 48 ^ v0\n\tv2 := uint64(v1)\n\tv3 := v1 \u0026^ 14\n\t_ = v3\n\tv4 := v1 + v1\n\tv5 := min(v2, 49)\n\t_ = v5\n\treturn v4\n\tv6 := v4 + v4\n\tv7 := 35 ^ v6\n\tv8 := uint64(v7)\n\tv9 := v7 \u0026^ 14\n\t_ = v9\n\tv10 := v7 + v7\n\tv11 := min(v8, 49)\n\t_ = v11\n\treturn v10\n\tv12 := v10 + v10\n\tv13 := uint64(v12)\n\tv14 := v12 + v12\n\tv15 := min(v13, 49)\n\t_ = v15\n\treturn v14\n\tv16 := v14 + v14\n\tv17 := 35 ^ v16\n\tv18 := uint64(v17)\n\tv19 := v17 \u0026^ 14\n\t_ = v19\n\tv20 := v17 + v17\n\tv21 := min(v18, 49)\n\t_ = v21\n\treturn v20\n\tv22 := v20 + v20\n\tv23 := uint64(v22)\n\t_ = v23\n\treturn v22\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 0,
+      "depth": 0
+    },
+    "id": 1297,
+    "island": 5,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 2,
+    "len": 3,
+    "identity": "997b8dbbcb2cae31f1576ab6071b74bc300e8f64ee2f49027abd613def848eb9",
+    "source": "func f(xs []uint64) int {\n\tv0 := false\n\t_ = v0\n\tv1 := bits.OnesCount64(0)\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 1,
+      "depth": 0
+    },
+    "id": 1066,
+    "island": 4,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 1,
+    "len": 5,
+    "identity": "a7e0ddc05bcb855f6f11b284627c92696e274cd6085f9befd7f43ab6fd568435",
+    "source": "func f(xs []uint64) int {\n\tv0 := false\n\tif v0 {\n\t\tv1 := xs[2]\n\t\tv2 := v1 * v1\n\t\t_ = v2\n\t}\n\treturn 32\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 140899,
+    "island": 6,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 7,
+    "identity": "3d14702a308953ae8d0f23fe162787c2b6610b67a6fbd01fde46b3a113114f1c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 * 39\n\treturn v1\n\tv2 := 0\n\tfor i0 := 13; i0 \u003c len(xs); i0 += 2 {\n\t\tv3 := xs[i0]\n\t\t_ = v3\n\t}\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 2,
+      "depth": 0
+    },
+    "id": 119877,
+    "island": 4,
+    "gen": 58,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 10,
+    "identity": "1d067a53b50e177c879177a17757ac396bd0c6e2e5d04c6a13d47d816a45678e",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\treturn v1\n\tv2 := v1 ^ v1\n\t_ = v2\n\tv3 := v1 + v1\n\tv4 := max(v3, v0)\n\treturn v4\n\tv5 := v4 + v4\n\tv6 := uint64(v5)\n\t_ = v6\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 15887,
+    "island": 6,
+    "gen": 7,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 2,
+    "len": 11,
+    "identity": "d00ce15dd30d088ecebbf07ad2d1c106e1e5ae3c4e702eac5c55863fe1cab245",
+    "source": "func f(xs []uint64) int {\n\tv0 := 30\n\tv1 := 0\n\tv2 := uint64(v1)\n\t_ = v2\n\treturn v1\n\treturn v1\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv3 := xs[i0]\n\t\t_ = v3\n\t\tv4 := min(11, v1)\n\t\t_ = v4\n\t\tv0 = max(v1, i0)\n\t}\n\tv5 := uint64(v0)\n\t_ = v5\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 80035,
+    "island": 0,
+    "gen": 39,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 11,
+    "identity": "c866d534238f5db803c82f62212f0aceaec12244d62a433978c41d5d9dc745e7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 \u003c= v0\n\t_ = v1\n\treturn v0\n\tv2 := bits.OnesCount64(49)\n\tv3 := max(v2, v0)\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t}\n\t\tv0 = i0 - v3\n\t\tv2 = v3 \u0026^ v3\n\t}\n\tv4 := v3 \u003c= v0\n\t_ = v4\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 3,
+      "depth": 0
+    },
+    "id": 89103,
+    "island": 4,
+    "gen": 43,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 14,
+    "identity": "173cfa0baf4ab2552adbb0d6ab66e4043ae5cac07bba4860de175f3cb645c1ff",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\treturn v1\n\treturn v1\n\tv2 := v1 + v1\n\tv3 := uint64(v2)\n\tv4 := 23 \u003c v3\n\t_ = v4\n\tv5 := 17 \u0026^ v3\n\t_ = v5\n\treturn v2\n\tv6 := v2 \u0026 v2\n\tv7 := uint64(v6)\n\tv8 := v0 != v6\n\t_ = v8\n\tv9 := 17 \u0026^ v7\n\t_ = v9\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 27523,
+    "island": 3,
+    "gen": 13,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 4,
+    "len": 15,
+    "identity": "1d93554b3c17d21e84e47edcd10dd789e7007468bf34323db11385d45e5d7a67",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := ^v0\n\t_ = v1\n\treturn v0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := max(v0, i0)\n\t\tv0 = 56 + v2\n\t}\n\tfor i1 := 8; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tv4 := max(v0, i1)\n\t\t_ = v4\n\t\tv0 = v0 | 41\n\t}\n\treturn v0\n\tv5 := uint64(v0)\n\tv6 := bits.OnesCount64(v5)\n\t_ = v6\n\tv7 := ^v0\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 4,
+      "depth": 0
+    },
+    "id": 105703,
+    "island": 4,
+    "gen": 51,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 19,
+    "identity": "02cc26d54c19f892995603fe25f7dc10c15c45ccee4b052bae5d1c5ef144dec7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\treturn v1\n\tv2 := v1 + v1\n\tv3 := uint64(v2)\n\tv4 := 23 \u003c v3\n\t_ = v4\n\tv5 := v2 + v2\n\tv6 := min(v3, 49)\n\t_ = v6\n\treturn v5\n\tv7 := v5 + v5\n\tv8 := uint64(v7)\n\tv9 := 23 \u003c v8\n\t_ = v9\n\tv10 := 17 \u0026^ v8\n\treturn v7\n\tv11 := v7 \u0026 v7\n\tv12 := min(v10, v10)\n\tv13 := v0 != v11\n\t_ = v13\n\tv14 := 17 ^ v12\n\t_ = v14\n\treturn v11\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 49573,
+    "island": 1,
+    "gen": 24,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 8,
+    "len": 17,
+    "identity": "a64530aa8899ec86c090acef992d87ac3293c69d81cdabaceeab204fe4b77c71",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 12 * v0\n\t_ = v1\n\treturn v0\n\tfor i0 := 13; i0 \u003c len(xs); i0++ {\n\t\tv0 = 36 \u0026^ i0\n\t\tv2 := xs[i0]\n\t\t_ = v2\n\t}\n\tfor i1 := 3; i1 \u003c len(xs); i1++ {\n\t\tv0 = 35 \u0026^ i1\n\t\tv0 = i1 + i1\n\t}\n\tv3 := uint64(v0)\n\tv4 := ^v3\n\t_ = v4\n\tv5 := 29 | v3\n\tv6 := 12 * v0\n\t_ = v6\n\tv7 := -v5\n\tv8 := 29 | v7\n\t_ = v8\n\tv9 := max(34, v0)\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 82594,
+    "island": 2,
+    "gen": 40,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 5,
+    "len": 19,
+    "identity": "3380dc7ee087fc1821044f887c47c026e56c8e53f69df982b301d71fd11326a0",
+    "source": "func f(xs []uint64) int {\n\tv0 := bits.OnesCount64(16)\n\tv1 := 0\n\treturn v1\n\tv2 := uint64(v1)\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := -2; i1 \u003c len(xs); i1++ {\n\t\t\tv2 = v2 - 6\n\t\t\tv2 = v2 - 5\n\t\t}\n\t}\n\treturn v1\n\tfor i2 := 27; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = int(v2)\n\t}\n\tv3 := min(51, v2)\n\tv4 := v1 + v1\n\tv5 := ^v3\n\tv6 := v0 | v4\n\t_ = v6\n\tfor i3 := v0; i3 \u003c len(xs); i3 += 2 {\n\t\tv0 = bits.OnesCount64(12)\n\t}\n\tv7 := min(v5, v5)\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 5,
+      "depth": 0
+    },
+    "id": 101623,
+    "island": 4,
+    "gen": 49,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 3,
+    "len": 22,
+    "identity": "933d2466cad15830d9862e57529eb244e2afb4094bdc28f9bd500113db5e5337",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\treturn v1\n\tv2 := v1 + v1\n\tv3 := uint64(v2)\n\tv4 := 23 \u003c v3\n\t_ = v4\n\tv5 := 37 - v0\n\tv6 := uint64(v5)\n\tv7 := v0 \u0026^ 14\n\t_ = v7\n\tv8 := v5 + v5\n\tv9 := min(v6, 49)\n\t_ = v9\n\treturn v8\n\tv10 := v8 + v8\n\tv11 := uint64(v10)\n\tv12 := 23 \u003c v11\n\t_ = v12\n\tv13 := 17 \u0026^ v11\n\treturn v10\n\tv14 := v10 \u0026 v10\n\tv15 := min(v13, v6)\n\tv16 := v0 != v14\n\t_ = v16\n\tv17 := 17 \u0026^ v15\n\t_ = v17\n\treturn v14\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 76755,
+    "island": 3,
+    "gen": 37,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 11,
+    "len": 20,
+    "identity": "c3a95e758d418296535a1569a763b8a11e5ff2e12cfd5adbd116e7e602318c26",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := ^v0\n\t_ = v1\n\treturn v0\n\tfor i0 := 8; i0 \u003c len(xs); i0++ {\n\t\tv0 = i0 - 15\n\t\tv0 = min(v0, 46)\n\t}\n\tv2 := uint64(v0)\n\tv3 := bits.OnesCount64(v2)\n\tv4 := ^v3\n\treturn v3\n\tv5 := v2 + v2\n\t_ = v5\n\tv6 := uint64(v4)\n\tv7 := bits.OnesCount64(v2)\n\t_ = v7\n\tv8 := bits.OnesCount64(v6)\n\treturn 64\n\tv9 := uint64(v8)\n\tv10 := ^v9\n\t_ = v10\n\tv11 := bits.OnesCount64(v9)\n\t_ = v11\n\tv12 := ^v0\n\t_ = v12\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 155242,
+    "island": 6,
+    "gen": 75,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 22,
+    "identity": "629eec6de746b601dd2ed67ad4ba3b5dd6e877f00f5682b2a3e76e726549bb01",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := min(v0, v0)\n\treturn v1\n\treturn v1\n\tv2 := v1 \u003c= v1\n\t_ = v2\n\treturn v1\n\tfor i0 := 13; i0 \u003c len(xs); i0++ {\n\t}\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := xs[i1]\n\t\t_ = v4\n\t\tv5 := bits.OnesCount64(v3)\n\t\tv0 = v5 + v0\n\t}\n\treturn v0\n\tfor i2 := 1; i2 \u003c len(xs); i2 += 4 {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\treturn i3\n\t\t}\n\t}\n\tv6 := 0\n\t_ = v6\n\tv7 := 0\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\tv0 = v7\n\t}\n\tfor i5 := v7; i5 \u003c len(xs); i5 += 2 {\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 144732,
+    "island": 5,
+    "gen": 70,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 25,
+    "identity": "15f6393e64c6a1535fc643c04e8ee64ddaafea5301f39e3b00654b83463f5a35",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tv2 := v1 + v1\n\treturn v2\n\tv3 := v2 ^ v2\n\tv4 := v3\n\tv5 := 35 ^ v4\n\treturn v5\n\tv6 := v0 \u003c v0\n\t_ = v6\n\tfor i0 := 0; i0 \u003c v0; i0 += 3 {\n\t\tv7 := v0 | i0\n\t\t_ = v7\n\t}\n\txs[v0] = 0xfffffffffffffffe\n\tv8 := v0\n\t_ = v8\n\tv9 := 0\n\tfor i1 := v9; i1 \u003c len(xs); i1++ {\n\t\tv10 := xs[i1]\n\t\tv11 := bits.OnesCount64(v10)\n\t\tv9 = v9 + v11\n\t}\n\treturn v9\n\treturn v9\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv12 := xs[i2]\n\t\t_ = v12\n\t\tv13 := bits.OnesCount64(6)\n\t\t_ = v13\n\t\tv14 := xs[i2]\n\t\t_ = v14\n\t}\n\treturn v9\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 46989,
+    "island": 7,
+    "gen": 22,
+    "origin": "crossover",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 26,
+    "identity": "e0a310d793998adae8a9e921913408bdeb94ce00bc0df759fb6ada368842535f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := uint64(v0)\n\t_ = v1\n\treturn v0\n\tv2 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv3 := xs[i0]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv2 = v2 + v4\n\t}\n\treturn v2\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv2 = v6 + v6\n\t}\n\treturn v2\n\tfor i2 := 19; i2 \u003c len(xs); i2 += 2 {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv7 := true\n\t\t\t_ = v7\n\t\t}\n\t\tv8 := xs[i2]\n\t\t_ = v8\n\t\tv9 := xs[i2]\n\t\t_ = v9\n\t\tv2 = i2 \u003c\u003c 17\n\t\tv10 := max(v0, i2)\n\t\tv2 = v10 + v10\n\t\tv11 := max(i2, 7)\n\t\tv2 = max(v11, v11)\n\t}\n\tv12 := uint64(v2)\n\t_ = v12\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 7,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 131976,
+    "island": 3,
+    "gen": 64,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 100,
+    "novelty": 0,
+    "len": 30,
+    "identity": "f9c49ef412db538c8a4d3b8423be5aad782ecc8b18e0f753c6ff40c0a5f446bd",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := -v0\n\treturn v1\n\tv2 := uint64(v1)\n\tv3 := bits.OnesCount64(v2)\n\t_ = v3\n\tv4 := bits.OnesCount64(v2)\n\t_ = v4\n\treturn 64\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv5 := xs[i0]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv0 = v0 + v6\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\tv0 = i1 * i1\n\t}\n\tv7 := uint64(v0)\n\tv8 := bits.OnesCount64(v7)\n\tv9 := -v8\n\treturn v8\n\tv10 := v7 + v7\n\t_ = v10\n\tv11 := uint64(v9)\n\tv12 := bits.OnesCount64(v11)\n\t_ = v12\n\tv13 := bits.OnesCount64(v11)\n\treturn 64\n\tv14 := -v0\n\t_ = v14\n\tv15 := uint64(v13)\n\tv16 := ^v15\n\tv17 := bits.OnesCount64(v16)\n\t_ = v17\n\tv18 := ^v0\n\t_ = v18\n\tv19 := v7 - v15\n\t_ = v19\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 0,
+      "depth": 0
+    },
+    "id": 1542,
+    "island": 6,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 2,
+    "len": 3,
+    "identity": "850a35235026610f2e25bba2b488e50410bb7404241ac0f6e83e3811e750253c",
+    "source": "func f(xs []uint64) int {\n\tv0 := len(xs)\n\tv1 := v0 \u0026^ 47\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 157243,
+    "island": 6,
+    "gen": 76,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 250,
+    "novelty": 0,
+    "len": 3,
+    "identity": "ae72366c296df6b4a4ae5fe1f21f317cf6e198f49f721e84354fc79de1a90d31",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 13; i0 \u003c v0; i0 += 2 {\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 1,
+      "depth": 0
+    },
+    "id": 1564,
+    "island": 6,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 3,
+    "len": 4,
+    "identity": "1ae2a1880776a194f37cf3f27e2e8bcdd81065911d907ae658523d13d12ef3f6",
+    "source": "func f(xs []uint64) int {\n\tv0 := true\n\t_ = v0\n\tv1 := len(xs)\n\tv2 := v1 + v1\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 536,
+    "island": 2,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 4,
+    "identity": "0205dc35dd3aceaf176bc250ca512b8c554c66130c36aea39f21ffc8fe80b887",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c 21; i0++ {\n\t\treturn i0\n\t\txs[0] = 29\n\t}\n\treturn 56\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 1631,
+    "island": 6,
+    "gen": 0,
+    "origin": "random",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 250,
+    "novelty": 0,
+    "len": 7,
+    "identity": "e8ee1c549263a16068826bd024285330a1badc2566c0d879b4844ee5e5949333",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 42; i0 \u003c 38; i0 += 2 {\n\t\tv0 := 38 \u003e i0\n\t\tif v0 {\n\t\t\tv1 := xs[i0]\n\t\t\t_ = v1\n\t\t}\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv0 = i0 \u003e= 49\n\t\t}\n\t}\n\treturn -2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 2,
+      "depth": 0
+    },
+    "id": 1957,
+    "island": 7,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 2,
+    "len": 11,
+    "identity": "f6c3eb01dabc4b74d8d1888edf364d81970451fd951eaed40be40c71cd17afa8",
+    "source": "func f(xs []uint64) int {\n\tv0 := false\n\tif v0 {\n\t\tv1 := bits.OnesCount64(40)\n\t\tv2 := true\n\t\t_ = v2\n\t\tv3 := xs[v1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\t_ = v4\n\t\tv5 := v3 \u003c\u003c 33\n\t\tv6 := v3 \u0026 v5\n\t\t_ = v6\n\t\tv7 := 21 + v5\n\t\t_ = v7\n\t}\n\tv8 := bits.OnesCount64(0)\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 106186,
+    "island": 6,
+    "gen": 51,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 11,
+    "identity": "0f17ea3a9d6f93bfefdca6efe14306fa99bf4328c8b1c9cdc6012c18be6100de",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\t_ = v0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c 47; i0++ {\n\t\treturn v1\n\t}\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv2 := xs[i1]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\txs[3] = 30\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 931,
+    "island": 3,
+    "gen": 0,
+    "origin": "random",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 11,
+    "identity": "83e861719aa419448a4e5179d864f405b29cd668c209f0155b8590da4f18b3a0",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 54; i0 \u003c 14; i0++ {\n\t\txs[i0] = 54\n\t\tv0 := i0 \u003e i0\n\t\t_ = v0\n\t\tv1 := uint64(i0)\n\t\treturn i0\n\t\tv2 := v1 \u003c\u003c 9\n\t\tv3 := v1 - v2\n\t\t_ = v3\n\t\tv4 := ^i0\n\t\t_ = v4\n\t\tfor i1 := 0; i1 \u003c 46; i1++ {\n\t\t\treturn i1\n\t\t}\n\t}\n\treturn 53\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 3,
+      "depth": 0
+    },
+    "id": 39375,
+    "island": 1,
+    "gen": 19,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 12,
+    "identity": "01f3683dc5e80fb9c8f000910e258b8274e46aff4a072ec87e8f928869a4ab65",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 12 * v0\n\tv2 := 12 * v1\n\treturn v2\n\tv3 := uint64(v0)\n\tv4 := -v3\n\t_ = v4\n\tv5 := 29 | v3\n\tv6 := 12 * v0\n\t_ = v6\n\tv7 := -v5\n\tv8 := 29 | v7\n\t_ = v8\n\tv9 := 12 * v0\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 161389,
+    "island": 6,
+    "gen": 78,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 14,
+    "identity": "1d1e420f002cdbb2f9ede01050b4434b458185ab4f713e705fc22a899db42dcd",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 \u003c 19\n\tif v1 {\n\t} else {\n\t\tv2 := xs[v0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv4 := v3 \u003e= v3\n\t\t_ = v4\n\t}\n\treturn v0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv5 := xs[i0]\n\t\t_ = v5\n\t\tv0 = -v0\n\t}\n\tv6 := uint64(v0)\n\t_ = v6\n\treturn v0\n\tv7 := 2\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 1214,
+    "island": 4,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 250,
+    "novelty": 0,
+    "len": 12,
+    "identity": "986d50ed9c92c6353fec94598ae50ac8fb48b25d6502f5cdd66da4c6d947655c",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 46; i0 \u003c 28; i0++ {\n\t\tv0 := i0 == i0\n\t\tif v0 {\n\t\t\tv1 := xs[i0]\n\t\t\t_ = v1\n\t\t} else {\n\t\t\txs[i0] = 53\n\t\t\tif v0 {\n\t\t\t\tv2 := v0 == v0\n\t\t\t\t_ = v2\n\t\t\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\t\t\tv3 := uint64(i1)\n\t\t\t\t\t_ = v3\n\t\t\t\t}\n\t\t\t}\n\t\t\tv4 := uint64(i0)\n\t\t\t_ = v4\n\t\t}\n\t}\n\tv5 := true\n\t_ = v5\n\treturn 32\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 4,
+      "depth": 0
+    },
+    "id": 134345,
+    "island": 4,
+    "gen": 65,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 17,
+    "identity": "9e6199cdb4c898dd0993ddd95dad1965d5633890cbbf1b3be11fe56de44649c2",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 ^ v0\n\tv2 := max(v1, v1)\n\t_ = v2\n\treturn v1\n\tv3 := v1 + v1\n\tv4 := v3 ^ v3\n\tv5 := v4 + v4\n\tv6 := 35 ^ v5\n\tv7 := uint64(v6)\n\tv8 := v6 \u0026^ 14\n\t_ = v8\n\tv9 := v6 ^ v6\n\tv10 := min(v7, 49)\n\t_ = v10\n\tv11 := max(v4, v0)\n\t_ = v11\n\treturn v9\n\tv12 := v9 + v9\n\tv13 := uint64(v12)\n\t_ = v13\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 57852,
+    "island": 1,
+    "gen": 28,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 8,
+    "len": 18,
+    "identity": "2ec3c6e83a0f8936992b5cf3ae14d7cc5a7264b6937b224d1dd09751d4814732",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 12 * v0\n\tv2 := max(34, v1)\n\t_ = v2\n\treturn v0\n\tfor i0 := 13; i0 \u003c len(xs); i0++ {\n\t\tv0 = 36 \u0026^ i0\n\t\tv0 = i0 + v0\n\t}\n\tfor i1 := v0; i1 \u003c len(xs); i1++ {\n\t\tv0 = 35 \u0026^ i1\n\t\tv0 = i1 + i1\n\t}\n\tv3 := uint64(v0)\n\tv4 := ^v3\n\t_ = v4\n\tv5 := 29 | v3\n\tv6 := 12 * v0\n\t_ = v6\n\tv7 := -v5\n\tv8 := 29 | v7\n\t_ = v8\n\tv9 := max(34, v0)\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 117311,
+    "island": 2,
+    "gen": 57,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 16,
+    "identity": "5758ceed09b7160b62353c299e7cf1cc155fa6ac7c37fa722b16d72397b8d920",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tv2 := v1 * v1\n\tv3 := v2 \u0026 v2\n\treturn v3\n\tfor i0 := v0; i0 \u003c len(xs); i0 += 2 {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn v1\n\tfor i2 := 27; i2 \u003c len(xs); i2++ {\n\t}\n\tv4 := v1 + v1\n\tv5 := v0 | v4\n\tfor i3 := v0; i3 \u003c len(xs); i3 += 2 {\n\t\tv0 = i3 - v1\n\t}\n\tv6 := v1 * v5\n\t_ = v6\n\tv7 := v1 \u0026 v4\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 5,
+      "depth": 0
+    },
+    "id": 58549,
+    "island": 4,
+    "gen": 28,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 21,
+    "identity": "38d9af93bfde717ab9d529dbaf9c8f42bcb9fc29fdd4431de2fad10f40e8f672",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\t_ = v2\n\treturn v1\n\tv3 := v1 + v1\n\tv4 := uint64(v3)\n\tv5 := 23 \u003c v4\n\t_ = v5\n\tv6 := 17 \u0026^ v4\n\t_ = v6\n\tv7 := v3 + v3\n\tv8 := uint64(v7)\n\t_ = v8\n\treturn v7\n\tv9 := v7 + v7\n\tv10 := uint64(v9)\n\tv11 := 23 \u003c v10\n\t_ = v11\n\tv12 := 17 \u0026^ v10\n\t_ = v12\n\treturn v9\n\tv13 := v9 + v9\n\tv14 := uint64(v13)\n\tv15 := v0 != v13\n\t_ = v15\n\tv16 := 17 \u0026^ v14\n\t_ = v16\n\treturn v13\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 135458,
+    "island": 1,
+    "gen": 66,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 2,
+    "len": 22,
+    "identity": "90208aacc8492042b9e0288b87ebf92833f8d56a0c80c1c1ce2ffc78747513c0",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 12 * v0\n\tv2 := max(34, v1)\n\t_ = v2\n\treturn v0\n\tfor i0 := 25; i0 \u003c len(xs); i0 += 4 {\n\t\tv0 = 37 - i0\n\t\tv0 = min(i0, v0)\n\t}\n\tv3 := xs[2]\n\t_ = v3\n\tv4 := uint64(v0)\n\tv5 := v4 \u003c\u003c v0\n\tv6 := min(v5, v4)\n\t_ = v6\n\tfor i1 := 19; i1 \u003c len(xs); i1++ {\n\t\tv0 = 35 \u0026^ v0\n\t}\n\tv7 := uint64(v0)\n\tv8 := v7 \u003c\u003c v0\n\t_ = v8\n\tv9 := 29 | v7\n\tv10 := uint64(15)\n\t_ = v10\n\tv11 := 12 * v0\n\tv12 := -v9\n\tv13 := 29 | v12\n\t_ = v13\n\tv14 := max(34, v11)\n\treturn v14\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 145441,
+    "island": 0,
+    "gen": 71,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 4,
+    "len": 22,
+    "identity": "b542b974e953d995efa6b13e95f30964e556ed034b68f866ffcc81c6f742a90f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := max(v0, v0)\n\tv2 := uint64(v1)\n\t_ = v2\n\treturn v0\n\tv3 := v0 \u003e\u003e 24\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv4 := xs[i0]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = max(v0, i0)\n\t\tfor i1 := 12; i1 \u003c len(xs); i1++ {\n\t\t\tv3 = v3 * i1\n\t\t}\n\t\tfor i2 := -2; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv0 = max(i0, v5)\n\t\t}\n\t}\n\tv6 := 32 | v3\n\tv7 := bits.OnesCount64(47)\n\tv8 := v0 \u003c= v6\n\t_ = v8\n\tv9 := max(v7, v0)\n\tv10 := uint64(v0)\n\treturn v9\n\tv11 := v3 + -2\n\t_ = v11\n\tv12 := v10 + 13\n\t_ = v12\n\treturn v9\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 6,
+      "depth": 0
+    },
+    "id": 136291,
+    "island": 4,
+    "gen": 66,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 25,
+    "identity": "298ee4dae8c8df6b270374e68bed731ac61adc2aca4ce143779b9bc3e96e7fc8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 \u0026^ 14\n\tv2 := v1 + v1\n\treturn v2\n\tv3 := v1 ^ v2\n\t_ = v3\n\tv4 := v2 + v2\n\tv5 := 35 ^ v4\n\tv6 := uint64(v5)\n\t_ = v6\n\tv7 := v5 \u0026^ 14\n\t_ = v7\n\tv8 := 48 ^ v0\n\tv9 := v0 \u0026^ 14\n\tv10 := v8 + v8\n\treturn v10\n\tv11 := v9 ^ v10\n\tv12 := v10 + v10\n\tv13 := 35 ^ v12\n\tv14 := uint64(v13)\n\tv15 := v13 \u0026^ 14\n\t_ = v15\n\tv16 := v13 ^ v13\n\tv17 := min(v14, 50)\n\t_ = v17\n\tv18 := max(v11, v0)\n\t_ = v18\n\treturn v16\n\tv19 := v16 + v16\n\tv20 := uint64(v19)\n\t_ = v20\n\treturn v19\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 58494,
+    "island": 4,
+    "gen": 28,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 9,
+    "len": 26,
+    "identity": "456185290c7683695ffa5116ef1242094cf3f444be2225439a10483ddef3dcb6",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\t_ = v2\n\treturn v1\n\tv3 := v1 + v1\n\tv4 := uint64(v3)\n\tv5 := 23 \u003c v4\n\t_ = v5\n\tv6 := 17 \u0026^ v4\n\t_ = v6\n\tfor i0 := 21; i0 \u003c len(xs); i0 += 2 {\n\t\tv7 := max(v0, 13)\n\t\tv0 = v7 \u0026^ v0\n\t}\n\tv8 := v0 + v0\n\tv9 := uint64(v8)\n\t_ = v9\n\tv10 := v8 + v8\n\tv11 := uint64(v10)\n\t_ = v11\n\treturn v10\n\tv12 := v10 + v10\n\tv13 := uint64(v12)\n\tv14 := 23 \u003c v13\n\t_ = v14\n\tv15 := 17 \u0026^ v13\n\t_ = v15\n\treturn v12\n\tv16 := v12 + v12\n\tv17 := uint64(v16)\n\tv18 := v0 != v16\n\t_ = v18\n\tv19 := 17 \u0026^ v17\n\t_ = v19\n\treturn v16\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 135806,
+    "island": 2,
+    "gen": 66,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 0,
+    "len": 24,
+    "identity": "da849e9f9407d31d230d44f571bcbd7c69a3fd9c78cbc729ab1d016d95745f2c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tfor i0 := 0; i0 \u003c 39; i0 += 4 {\n\t\treturn i0\n\t}\n\tv1 := 0\n\tfor i1 := v1; i1 \u003c len(xs); i1++ {\n\t\tv2 := xs[i1]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i2 := 8; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := 1; i3 \u003c len(xs); i3 += 2 {\n\t\t\tv4 = v4 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i4 := -4; i4 \u003c len(xs); i4++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + 8\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 50279,
+    "island": 4,
+    "gen": 24,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 150,
+    "novelty": 11,
+    "len": 30,
+    "identity": "47b211a5082e4994c3009c434985e7007d5936ccca9f6611453c6148c2206f7a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\tv2 := uint64(v1)\n\t_ = v2\n\treturn v1\n\tv3 := v1 + v1\n\tv4 := uint64(v3)\n\tv5 := v3 != v3\n\t_ = v5\n\tv6 := 17 \u0026^ v4\n\t_ = v6\n\treturn v3\n\tv7 := v3 + v3\n\tv8 := uint64(v7)\n\tv9 := v7 != v7\n\t_ = v9\n\tv10 := 17 \u0026^ v8\n\t_ = v10\n\tfor i0 := 2; i0 \u003c len(xs); i0++ {\n\t\tv0 = i0 - v0\n\t}\n\tv11 := v0 + v0\n\tv12 := uint64(v11)\n\t_ = v12\n\tv13 := v11 + v11\n\tv14 := uint64(v13)\n\t_ = v14\n\treturn v13\n\tv15 := v13 + v13\n\tv16 := uint64(v15)\n\tv17 := v15 != v15\n\t_ = v17\n\tv18 := 17 \u0026^ v16\n\t_ = v18\n\treturn v15\n\tv19 := v15 + v15\n\tv20 := uint64(v19)\n\tv21 := v0 != v19\n\t_ = v21\n\tv22 := 17 \u0026^ v20\n\t_ = v22\n\treturn 21\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 8,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 148467,
+    "island": 3,
+    "gen": 72,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 200,
+    "novelty": 0,
+    "len": 32,
+    "identity": "7b1adf58cb4f5fc70ea026950982d50b217f3c7beb0d6edf7bbf0339cd8f79d8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := uint64(v0)\n\tv2 := bits.OnesCount64(v1)\n\tv3 := -v2\n\treturn v2\n\tv4 := v1 + v1\n\t_ = v4\n\tv5 := uint64(v3)\n\tv6 := bits.OnesCount64(v5)\n\tv7 := -v6\n\t_ = v7\n\tv8 := uint64(v6)\n\tv9 := ^v8\n\tv10 := bits.OnesCount64(v9)\n\tv11 := v10 | v6\n\tv12 := ^v11\n\t_ = v12\n\tv13 := v1 - v8\n\t_ = v13\n\tfor i0 := 8; i0 \u003c len(xs); i0 += 3 {\n\t\tv0 = v0 \u0026^ 29\n\t}\n\tv14 := uint64(v0)\n\tv15 := bits.OnesCount64(v14)\n\tv16 := -v15\n\treturn v15\n\tv17 := v14 + v14\n\t_ = v17\n\tv18 := uint64(v16)\n\tv19 := bits.OnesCount64(v18)\n\tv20 := -v0\n\t_ = v20\n\tv21 := uint64(v19)\n\tv22 := ^v21\n\tv23 := bits.OnesCount64(v22)\n\tv24 := v23 | v19\n\t_ = v24\n\tv25 := ^v0\n\t_ = v25\n\tv26 := v14 - v21\n\t_ = v26\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 140581,
+    "island": 5,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 0,
+    "len": 3,
+    "identity": "0a51255b375e9d7468d6d4849860f3a3c6dc310d04b631629380e37fc462c720",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 59; i0 \u003c len(xs); i0 += 3 {\n\t}\n\tv0 := 0\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 1,
+      "depth": 0
+    },
+    "id": 1097,
+    "island": 4,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 3,
+    "len": 6,
+    "identity": "dacc82fa5d8e46d8ed7741ea13628cfb078704ccf425ff21a543f77db8cf7834",
+    "source": "func f(xs []uint64) int {\n\tv0 := bits.OnesCount64(28)\n\tv1 := min(v0, v0)\n\tv2 := v0 \u003e\u003e 55\n\tv3 := v1 \u003c 42\n\t_ = v3\n\tv4 := v0 \u0026 v1\n\t_ = v4\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 2355,
+    "island": 1,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 7,
+    "identity": "61a03bc8fe6586d534f345740a8f5afc1c048a9db4dfff107493cecf475ad7a7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\treturn v2\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 155345,
+    "island": 6,
+    "gen": 75,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 452,
+    "novelty": 0,
+    "len": 6,
+    "identity": "1860e9b11836d150f5f45abacb165ea159486a18e397fe483ab008936c766809",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\treturn i1\n\t\t}\n\t}\n\tv0 := 0\n\tfor i2 := v0; i2 \u003c len(xs); i2 += 2 {\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 2,
+      "depth": 0
+    },
+    "id": 1684,
+    "island": 6,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 4,
+    "len": 10,
+    "identity": "76b56be26c5f2b1c48d49e0587658f3c1e8bf398319d425d062b01f35df000b0",
+    "source": "func f(xs []uint64) int {\n\tv0 := len(xs)\n\tv1 := uint64(v0)\n\tv2 := v0 ^ v0\n\tv3 := v1 \u003e v1\n\tif v3 {\n\t\tv4 := v1 \u003e= v1\n\t\tif v4 {\n\t\t\tv5 := v1 == v1\n\t\t\t_ = v5\n\t\t} else {\n\t\t\txs[v2] = v1\n\t\t}\n\t}\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 155621,
+    "island": 7,
+    "gen": 75,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 298,
+    "novelty": 0,
+    "len": 10,
+    "identity": "481c70b651ec374f69d3059fa7d7dc69ae9142527109d78c0a916a5259ddd83b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\treturn i0\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\treturn v0\n\treturn v0\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 359,
+    "island": 1,
+    "gen": 0,
+    "origin": "random",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 450,
+    "novelty": 1,
+    "len": 8,
+    "identity": "e5d8228ad6c43aba5e84192002a692ccceee21b6dfe450dc38d8fb763349595b",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 45; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c 38; i1++ {\n\t\t\tv0 := i1 \u003e\u003e 62\n\t\t\t_ = v0\n\t\t}\n\t}\n\tv1 := false\n\tif v1 {\n\t\tv2 := len(xs)\n\t\t_ = v2\n\t} else {\n\t\tv3 := v1 == true\n\t\t_ = v3\n\t}\n\treturn 35\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 3,
+      "depth": 0
+    },
+    "id": 74971,
+    "island": 4,
+    "gen": 36,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 0,
+    "len": 12,
+    "identity": "870c62e9229a85d91bd31711525c11f65136da76d7fc6ec2a41c6a89d1313724",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 + v0\n\tv2 := v1 + v1\n\tv3 := uint64(v2)\n\tv4 := 23 \u003c v3\n\t_ = v4\n\tv5 := 17 \u0026^ v3\n\t_ = v5\n\treturn v2\n\tv6 := v2 + v2\n\tv7 := uint64(v6)\n\tv8 := v0 != v6\n\t_ = v8\n\tv9 := 17 \u0026^ v7\n\t_ = v9\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 50727,
+    "island": 6,
+    "gen": 24,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 14,
+    "identity": "ac630cc2f98b523e97d82fc3b6b52bf65e6aefc29224aca0e0a8789d44576192",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\treturn v3\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tfor i1 := 5; i1 \u003c len(xs); i1 += 2 {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\t_ = v5\n\t\tv6 := bits.OnesCount64(v4)\n\t\t_ = v6\n\t}\n\tv7 := uint64(v0)\n\t_ = v7\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 474,
+    "island": 1,
+    "gen": 0,
+    "origin": "random",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 350,
+    "novelty": 3,
+    "len": 14,
+    "identity": "cde360467c8ed01633bfcbf8fd9f3c896f10fb93db1b2add9e83d1f228882a4c",
+    "source": "func f(xs []uint64) int {\n\tv0 := len(xs)\n\tv1 := v0 \u003e v0\n\tif v1 {\n\t\tif v1 {\n\t\t\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\t\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\t\t\tv2 := -3 != i1\n\t\t\t\t\t_ = v2\n\t\t\t\t}\n\t\t\t\tv1 = v0 \u003c v0\n\t\t\t\tv1 = v0 \u003e v0\n\t\t\t}\n\t\t\tv3 := v0 \u003c v0\n\t\t\t_ = v3\n\t\t}\n\t\tv4 := !v1\n\t\t_ = v4\n\t} else {\n\t\tv5 := v0 | v0\n\t\t_ = v5\n\t}\n\tv6 := -v0\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 4,
+      "depth": 0
+    },
+    "id": 125967,
+    "island": 4,
+    "gen": 61,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 0,
+    "len": 17,
+    "identity": "418963ba65fd527805da8c4e36916c5b39a793b9acbec46754716ca886d5542e",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := uint64(v0)\n\tv2 := v0 \u0026^ 14\n\tv3 := v2 ^ v2\n\tv4 := min(v1, 49)\n\t_ = v4\n\tv5 := max(v3, v3)\n\t_ = v5\n\treturn v3\n\tv6 := v3 + v3\n\tv7 := uint64(v6)\n\tv8 := v6 \u0026^ 14\n\tv9 := v8 ^ v8\n\tv10 := min(v7, 49)\n\t_ = v10\n\tv11 := max(v9, v0)\n\t_ = v11\n\treturn v9\n\tv12 := v9 + v9\n\tv13 := uint64(v12)\n\t_ = v13\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 151141,
+    "island": 6,
+    "gen": 73,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 18,
+    "identity": "1cd329e3fba146f366da2325d1e7caae9fe9b94e18fffdcd271f86b59e875d26",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\treturn v2\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\treturn v0\n\treturn v0\n\tv3 := uint64(v0)\n\t_ = v3\n\tv4 := min(v0, v0)\n\tv5 := 0\n\tv6 := 2\n\tfor i1 := v6; i1 \u003c len(xs); i1 += 2 {\n\t}\n\treturn v6\n\tv7 := max(v4, v5)\n\tv8 := v7 * 39\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 137382,
+    "island": 0,
+    "gen": 67,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 350,
+    "novelty": 4,
+    "len": 19,
+    "identity": "253cdb9cc948bb1a51161e8ce5277d661f9a49effcb314ea1f8efb85ba9097dc",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 47; i0 \u003c len(xs); i0++ {\n\t\tv0 = v0 + i0\n\t}\n\treturn v0\n\tv1 := bits.OnesCount64(38)\n\tfor i1 := 1; i1 \u003c len(xs); i1 += 4 {\n\t\tfor i2 := 12; i2 \u003c len(xs); i2++ {\n\t\t\tv1 = v1 * i2\n\t\t}\n\t\tfor i3 := -2; i3 \u003c len(xs); i3 += 2 {\n\t\t\tv0 = max(v1, i3)\n\t\t\tv1 = -v1\n\t\t}\n\t}\n\tv2 := 32 | v1\n\tv3 := bits.OnesCount64(47)\n\tv4 := v0 \u003c= v2\n\t_ = v4\n\tv5 := max(v3, v0)\n\tv6 := uint64(v0)\n\treturn v5\n\tv7 := v6 + 13\n\t_ = v7\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 5,
+      "depth": 0
+    },
+    "id": 132102,
+    "island": 4,
+    "gen": 64,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 0,
+    "len": 21,
+    "identity": "1d6faeb96dae531d563433a2820a25ff5d5504ee4ff92bc17cc56ddce23d9a15",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := uint64(v0)\n\tv2 := v0 \u0026^ 14\n\tv3 := v2 ^ v2\n\tv4 := min(v1, 49)\n\t_ = v4\n\tv5 := max(v3, v3)\n\treturn v3\n\tv6 := v5 + v5\n\treturn v6\n\tv7 := v6 ^ v6\n\tv8 := v6 + v6\n\tv9 := 35 ^ v8\n\tv10 := uint64(v9)\n\tv11 := v9 \u0026^ 14\n\t_ = v11\n\tv12 := v9 ^ v9\n\tv13 := min(v10, 49)\n\t_ = v13\n\tv14 := max(v7, v0)\n\t_ = v14\n\treturn v12\n\tv15 := v12 + v12\n\tv16 := uint64(v15)\n\t_ = v16\n\treturn v15\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 87546,
+    "island": 5,
+    "gen": 42,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 23,
+    "identity": "5eb71d2ebf21dbe91925e4647d877a2ab84ca3a50c5632a89817ee496e9853d8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\treturn v2\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\tv3 := 51\n\t\tv0 = max(v3, 55)\n\t\tv0 = bits.OnesCount64(5)\n\t}\n\tv4 := v0 \u003c 57\n\tv5 := uint64(2)\n\t_ = v5\n\tif v4 {\n\t\tv6 := v0 \u003c= v0\n\t\t_ = v6\n\t}\n\treturn v0\n\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\tv7 := 51\n\t\tv0 = v7 ^ v7\n\t\tv0 = 35 + v7\n\t}\n\tv8 := 17 | v0\n\tv9 := 14 | v8\n\t_ = v9\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 51420,
+    "island": 0,
+    "gen": 25,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 396,
+    "novelty": 0,
+    "len": 22,
+    "identity": "65361a3943cf92e83bfa3f06cc19b576aca0d62f24067283bc1b6777c246cff5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t\treturn v2\n\t}\n\treturn v0\n\tv3 := v0 ^ 23\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = i1 * i1\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv0 = ^v0\n\t\t\tv0 = max(v3, 29)\n\t\t\tv3 = v0 \u003c\u003c 17\n\t\t}\n\t}\n\tv4 := v3 \u0026 v3\n\t_ = v4\n\tv5 := v0 | v0\n\tfor i3 := v0; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i4 | v5\n\t\t}\n\t\tv0 = i3 - v5\n\t}\n\tv6 := v5 \u003c= v0\n\t_ = v6\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 6,
+      "depth": 0
+    },
+    "id": 93316,
+    "island": 4,
+    "gen": 45,
+    "origin": "crossover",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 300,
+    "novelty": 0,
+    "len": 27,
+    "identity": "0cb162803a150d8f3e956eb134f772f0dcf3076b2ff2cc1eb3dc0581ef1701ad",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 35 - v0\n\tv2 := uint64(v1)\n\tv3 := v1 \u0026^ 14\n\t_ = v3\n\tv4 := v1 + v1\n\tv5 := min(v2, 49)\n\t_ = v5\n\treturn v4\n\tv6 := v4 + v4\n\tv7 := uint64(v6)\n\tv8 := 23 \u003c v7\n\t_ = v8\n\tv9 := 17 \u0026^ v7\n\treturn v6\n\tv10 := v6 \u0026 v6\n\tv11 := min(v9, v2)\n\tv12 := v10 != v10\n\t_ = v12\n\tv13 := 17 \u0026^ v11\n\t_ = v13\n\treturn v10\n\tv14 := v10 + v10\n\tv15 := uint64(v14)\n\tv16 := 23 \u003c v15\n\t_ = v16\n\tv17 := 17 \u0026^ v15\n\treturn v14\n\tv18 := v14 \u0026 v14\n\tv19 := min(v17, v17)\n\tv20 := v0 != v18\n\t_ = v20\n\tv21 := 17 \u0026^ v19\n\t_ = v21\n\treturn v18\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 126138,
+    "island": 4,
+    "gen": 61,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 26,
+    "identity": "0641d885d6018a5964f1da37994279336d4d6070eb83187a052109a8f7776070",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\treturn v2\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 23; i1 \u003c len(xs); i1 += 2 {\n\t\tv0 = 12 \u0026^ i1\n\t}\n\tv3 := 48 ^ v0\n\tv4 := v0 \u0026^ 14\n\tv5 := v3 + v3\n\treturn v5\n\tv6 := v4 ^ v5\n\tv7 := v5 + v5\n\tv8 := 35 ^ v7\n\tv9 := uint64(v8)\n\tv10 := v8 \u0026^ 14\n\t_ = v10\n\tv11 := v8 ^ v8\n\tv12 := min(v9, 49)\n\tv13 := max(v6, v0)\n\t_ = v13\n\treturn v11\n\tv14 := v11 + v11\n\tv15 := uint64(v14)\n\t_ = v15\n\tv16 := v9 \u0026^ v12\n\t_ = v16\n\treturn v14\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 144049,
+    "island": 2,
+    "gen": 70,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 347,
+    "novelty": 0,
+    "len": 25,
+    "identity": "b0cc7ecf18fd02acd57a7357cd0031d23f3c1c67e91fbe27877c5eec8634df96",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\treturn v3\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := -2; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 - 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 142436,
+    "island": 4,
+    "gen": 69,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 298,
+    "novelty": 0,
+    "len": 28,
+    "identity": "729e77ef2f12eea407df88dba4ad29b06db5ce62a8c12637d734c865510b964d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\treturn i0\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 27; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = i1 + i1\n\t}\n\tv3 := 35 ^ v0\n\tv4 := v0 \u0026^ 14\n\tv5 := v3 + v3\n\treturn v5\n\tv6 := v4 ^ v5\n\tv7 := v5 + v5\n\tv8 := 35 ^ v7\n\tv9 := uint64(v8)\n\tv10 := v9 \u003c v9\n\tif v10 {\n\t\txs[v8] = v9\n\t}\n\tv11 := v8 \u0026^ 14\n\t_ = v11\n\tv12 := v8 ^ v8\n\tv13 := min(v9, 50)\n\tv14 := max(v6, v0)\n\t_ = v14\n\treturn v12\n\tv15 := v12 + v12\n\tv16 := min(v13, v9)\n\t_ = v16\n\treturn v15\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 9,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 63670,
+    "island": 0,
+    "gen": 31,
+    "origin": "crossover",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 500,
+    "novelty": 2,
+    "len": 28,
+    "identity": "ab1a35cd66f80d46436b571971a8657fad6a69b77ec5c26795c975c522b6d354",
+    "source": "func f(xs []uint64) int {\n\tv0 := len(xs)\n\tv1 := max(v0, v0)\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t}\n\t\tv1 = i0 - v1\n\t}\n\tv2 := v1 \u003c= v1\n\t_ = v2\n\treturn v1\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[i2]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv1 = v4 + v4\n\t}\n\treturn v1\n\tv5 := v1 ^ 23\n\tfor i3 := 7; i3 \u003c len(xs); i3++ {\n\t\tv5 = bits.OnesCount64(32)\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i3 | v5\n\t\t\tv5 = max(i4, 9)\n\t\t\tv5 = bits.OnesCount64(31)\n\t\t\tv5 = max(v5, i3)\n\t\t\tv5 = i4 \u003c\u003c 63\n\t\t}\n\t}\n\tv6 := len(xs)\n\tv7 := max(v6, v5)\n\tfor i5 := v7; i5 \u003c len(xs); i5++ {\n\t\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\t}\n\t\tv7 = i5 - v7\n\t}\n\tv8 := v7 \u003c= v7\n\t_ = v8\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 29339,
+    "island": 2,
+    "gen": 14,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 580,
+    "novelty": 0,
+    "len": 3,
+    "identity": "2186d026f1f3d2c31710df4197f7105291edcd7de8af923a1442bf062d513c22",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 32; i0 \u003c len(xs); i0 += 2 {\n\t}\n\tfor i1 := 31; i1 \u003c len(xs); i1 += 2 {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 68146,
+    "island": 2,
+    "gen": 33,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 528,
+    "novelty": 0,
+    "len": 6,
+    "identity": "ec4c6787072c1ba30d63769adcebeda617ddddd33eeb442119823cb7babbcd31",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 27; i0 \u003c len(xs); i0 += 2 {\n\t}\n\tv1 := v0 | v0\n\tv2 := uint64(v1)\n\tv3 := min(v2, v2)\n\t_ = v3\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 2,
+      "depth": 0
+    },
+    "id": 1675,
+    "island": 6,
+    "gen": 0,
+    "origin": "random",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 600,
+    "novelty": 1,
+    "len": 10,
+    "identity": "110769ab2855af8383904f6c8b48cef1aee529a6b18d1ba78bd56a0bf6772315",
+    "source": "func f(xs []uint64) int {\n\tv0 := true\n\tif v0 {\n\t\tv1 := v0 || v0\n\t\tif v1 {\n\t\t\tif v1 {\n\t\t\t\tv2 := v1 \u0026\u0026 v0\n\t\t\t\t_ = v2\n\t\t\t} else {\n\t\t\t\tv3 := len(xs)\n\t\t\t\t_ = v3\n\t\t\t}\n\t\t} else {\n\t\t\tv4 := bits.OnesCount64(2)\n\t\t\t_ = v4\n\t\t}\n\t\tv5 := !v1\n\t\t_ = v5\n\t}\n\treturn 6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 395,
+    "island": 1,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 550,
+    "novelty": 2,
+    "len": 10,
+    "identity": "5c1611e4c1f01bdc3770a9dc198895aa1bec6aa9cfed55f2c052cac57cf489fb",
+    "source": "func f(xs []uint64) int {\n\tv0 := false\n\tv1 := v0 \u0026\u0026 v0\n\tif v1 {\n\t\tv2 := xs[0]\n\t\t_ = v2\n\t}\n\tv3 := len(xs)\n\tfor i0 := 34; i0 \u003c v3; i0 += 2 {\n\t\txs[i0] = 60\n\t}\n\tv4 := uint64(v3)\n\t_ = v4\n\tv5 := v3 \u003e\u003e 63\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 660,
+    "island": 2,
+    "gen": 0,
+    "origin": "random",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 891,
+    "novelty": 1,
+    "len": 10,
+    "identity": "3f4e13b500bb850a7be12f626b058817de117fb2d0bfbd7f9000b6e20864e3a9",
+    "source": "func f(xs []uint64) int {\n\tv0 := bits.OnesCount64(61)\n\tv1 := v0 != v0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := v1 \u0026\u0026 v1\n\t\t_ = v2\n\t\tv1 = v0 \u003c v0\n\t\tv3 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv4 := v3 \u0026^ v3\n\t\t\t_ = v4\n\t\t\treturn i1\n\t\t}\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 3,
+      "depth": 0
+    },
+    "id": 1491,
+    "island": 5,
+    "gen": 0,
+    "origin": "random",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 600,
+    "novelty": 5,
+    "len": 13,
+    "identity": "54793aaded1b284d42d62ef344609eb7d94a604b575e50afe78bc9cc3148e9c8",
+    "source": "func f(xs []uint64) int {\n\tv0 := bits.OnesCount64(53)\n\tv1 := v0 \u0026^ v0\n\tv2 := v0 \u0026^ v0\n\tv3 := uint64(v0)\n\tv4 := v3 \u003e\u003e v1\n\tv5 := len(xs)\n\t_ = v5\n\tv6 := v4 \u003e= v4\n\tif v6 {\n\t\tif v6 {\n\t\t\tv7 := v1 - 61\n\t\t\t_ = v7\n\t\t}\n\t} else {\n\t\tv8 := v6 == true\n\t\t_ = v8\n\t\tv9 := 4\n\t\t_ = v9\n\t}\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 13648,
+    "island": 5,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 537,
+    "novelty": 1,
+    "len": 13,
+    "identity": "d8f0fabb642fb8e0d7e55e556bc7dbf756a0ec3bfa3f0946dc5106e577d951df",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := 28; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\treturn v0\n\tfor i1 := 23; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv1 = v5 + v1\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 5293,
+    "island": 4,
+    "gen": 2,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 595,
+    "novelty": 0,
+    "len": 13,
+    "identity": "31dbd399a073fbd8b2e07a5eb65f63bf04cb324e6483ecd690cd52ba1fbe99fe",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\t\treturn i1\n\t\t}\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[i2]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 4,
+      "depth": 0
+    },
+    "id": 126035,
+    "island": 4,
+    "gen": 61,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 650,
+    "novelty": 0,
+    "len": 17,
+    "identity": "80428c57ad3cec0cea0411caad927d24a73c7b2912859cd3a3aaf53285dd8308",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := v0 ^ v0\n\tv2 := v1 + v1\n\tv3 := 35 ^ v2\n\tv4 := uint64(v3)\n\tv5 := v3 \u0026^ 14\n\t_ = v5\n\tv6 := v3 ^ v3\n\tv7 := min(v4, 49)\n\t_ = v7\n\tv8 := uint64(v6)\n\tv9 := v6 \u0026^ 14\n\tv10 := v9 ^ v9\n\tv11 := min(v8, 49)\n\t_ = v11\n\tv12 := max(v10, v0)\n\t_ = v12\n\treturn v10\n\tv13 := v10 + v10\n\tv14 := uint64(v13)\n\t_ = v14\n\treturn v13\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 31444,
+    "island": 2,
+    "gen": 15,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 537,
+    "novelty": 4,
+    "len": 18,
+    "identity": "35e7167fc16f49c2b41c0021628a00f0700351c09bc79b61cee87645f52702f7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 28\n\tv1 := 0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\t_ = v2\n\t\tv3 := v1 - i0\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tfor i1 := v0; i1 \u003c len(xs); i1 += 2 {\n\t\tv1 = 4 - i1\n\t}\n\tv4 := uint64(v1)\n\treturn v0\n\tfor i2 := 31; i2 \u003c len(xs); i2 += 2 {\n\t\tv0 = int(v4)\n\t}\n\tv5 := uint64(v0)\n\tfor i3 := v0; i3 \u003c len(xs); i3 += 3 {\n\t\tv0 = bits.OnesCount64(v5)\n\t}\n\tv6 := min(v5, v5)\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 12289,
+    "island": 0,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 823,
+    "novelty": 1,
+    "len": 16,
+    "identity": "9f4784de91964edba3e8076e22bb7bd74d67fac2a2dd064f38b9aa595defdcfc",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 25; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 | v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 = i1 + i1\n\t\tv3 = v3 + i1\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv3 = i2 | v3\n\t\t\tv3 = 29 - v3\n\t\t}\n\t}\n\treturn v3\n\tv4 := v3 \u003c= v0\n\t_ = v4\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 80155,
+    "island": 1,
+    "gen": 39,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 537,
+    "novelty": 0,
+    "len": 23,
+    "identity": "aee72ee69b84dcd50d28bb5f9d87dc81c4f6fe52099085de8effe8836d4cad4e",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 28; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 59; i1 \u003c len(xs); i1++ {\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2 += 3 {\n\t\tv3 := xs[i2]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t}\n\tv5 := uint64(v0)\n\tv6 := v5 \u003c\u003c v0\n\t_ = v6\n\tfor i3 := 8; i3 \u003c len(xs); i3++ {\n\t\tv0 = 35 \u0026^ i3\n\t}\n\tv7 := uint64(v0)\n\tv8 := v7 \u003c\u003c v0\n\t_ = v8\n\tv9 := 29 | v7\n\tv10 := 12 * v0\n\tv11 := -v9\n\tv12 := 29 | v11\n\t_ = v12\n\tv13 := max(34, v10)\n\treturn v13\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 64042,
+    "island": 2,
+    "gen": 31,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 713,
+    "novelty": 5,
+    "len": 23,
+    "identity": "be5888d24f3c578f9dfc68b50f78e3c8a867282d9eccf74070a192e029e31e7a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := 26; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := max(10, v0)\n\tfor i1 := v1; i1 \u003c v4; i1 += 2 {\n\t\tv1 = bits.OnesCount64(37)\n\t}\n\tv5 := uint64(v1)\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv5 = 23 - v5\n\t\t}\n\t}\n\treturn 4\n\tfor i4 := 27; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = int(v5)\n\t}\n\tv6 := min(51, v5)\n\tv7 := v0 | v4\n\t_ = v7\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t\tv0 = bits.OnesCount64(v6)\n\t}\n\tv8 := min(v6, v6)\n\t_ = v8\n\treturn v4\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 105722,
+    "island": 4,
+    "gen": 51,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 537,
+    "novelty": 11,
+    "len": 24,
+    "identity": "4a81ef56cb0f51b70eedf8959dba85a04ddf438204faee3e86eb24f44aa0d69a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 28; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := v0; i1 \u003c len(xs); i1 += 2 {\n\t\tv0 = i1 + i1\n\t}\n\tv3 := 37 ^ v0\n\tv4 := uint64(v3)\n\tv5 := v0 \u0026^ 14\n\t_ = v5\n\tv6 := v3 + v3\n\tv7 := min(v4, 49)\n\t_ = v7\n\treturn v6\n\tv8 := v6 + v6\n\tv9 := uint64(v8)\n\tv10 := 23 \u003c v9\n\t_ = v10\n\tv11 := 17 \u0026^ v9\n\treturn v8\n\tv12 := v8 \u0026 v8\n\tv13 := min(v11, v4)\n\tv14 := v0 != v12\n\t_ = v14\n\tv15 := 17 ^ v13\n\t_ = v15\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 137907,
+    "island": 2,
+    "gen": 67,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 537,
+    "novelty": 7,
+    "len": 24,
+    "identity": "b1bd083061b566874978e337fbc8a9f6515808997e03a9a0f524538b34a38026",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := 28; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 4 {\n\t\tfor i2 := -1; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv4 = v4 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 \u0026^ v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 117815,
+    "island": 4,
+    "gen": 57,
+    "origin": "crossover",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 580,
+    "novelty": 11,
+    "len": 28,
+    "identity": "68ab4c42adb6da2bb0fd5d89e04426c126719f8c2f863d381e6b7400250ef2b9",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 28; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 = ^i0\n\t}\n\tv1 := 48 ^ v0\n\tv2 := v1 \u0026^ 14\n\tv3 := v1 + v1\n\treturn v3\n\tv4 := v2 ^ v3\n\tv5 := v3 + v3\n\tv6 := 35 ^ v5\n\tv7 := uint64(v6)\n\tv8 := v6 \u0026^ 14\n\t_ = v8\n\tv9 := v6 + v6\n\tv10 := min(v7, 49)\n\t_ = v10\n\tv11 := max(v4, v9)\n\treturn v9\n\tv12 := v11 ^ v11\n\tv13 := v12 + v12\n\tv14 := 35 ^ v13\n\tv15 := uint64(v14)\n\tv16 := v14 \u0026^ 14\n\t_ = v16\n\tv17 := v14 + v14\n\tv18 := min(v15, 49)\n\t_ = v18\n\tv19 := max(v12, v0)\n\t_ = v19\n\treturn v17\n\tv20 := v17 + v17\n\tv21 := uint64(v20)\n\t_ = v21\n\treturn v20\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 10,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 156793,
+    "island": 4,
+    "gen": 76,
+    "origin": "crossover",
+    "correct": 1,
+    "vectors": 50,
+    "cost": 530,
+    "novelty": 0,
+    "len": 32,
+    "identity": "90a5f2c256592ad2496b70bce3ce0fc0de680ae34e5b07ea23b42c5f0ddafde4",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := max(v0, v0)\n\tv2 := v1\n\tfor i0 := 27; i0 \u003c len(xs); i0 += 3 {\n\t\tv2 = i0 + i0\n\t}\n\tv3 := 35 ^ v2\n\treturn v3\n\tv4 := v3 + v3\n\treturn v4\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v6 + v6\n\t}\n\treturn v4\n\tfor i2 := 27; i2 \u003c len(xs); i2 += 3 {\n\t\tv4 = 24\n\t}\n\tv7 := 35 ^ v4\n\tv8 := max(v7, 45)\n\tv9 := v7 + v7\n\treturn v9\n\tv10 := uint64(v9)\n\tv11 := v9 \u0026^ 14\n\t_ = v11\n\tv12 := 0\n\t_ = v12\n\tv13 := max(v8, v9)\n\tv14 := v13 * v13\n\tfor i3 := 27; i3 \u003c len(xs); i3 += 3 {\n\t\tv14 = i3 + i3\n\t}\n\tv15 := 35 ^ v14\n\treturn v15\n\tv16 := 50 \u0026^ v10\n\t_ = v16\n\tv17 := v15 + v15\n\treturn v17\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 143697,
+    "island": 1,
+    "gen": 70,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1050,
+    "novelty": 0,
+    "len": 2,
+    "identity": "be38c677727fbfb71165d0818dd91090d824fc948ab4626159c1efa64fa06c8b",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 19; i0 \u003c len(xs); i0++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 2893,
+    "island": 3,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1065,
+    "novelty": 1,
+    "len": 6,
+    "identity": "51674df2c5bbcb33be2d756eea61cb6637d856734c9afb1d4ba069d662606e12",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 23; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 124599,
+    "island": 6,
+    "gen": 60,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1056,
+    "novelty": 0,
+    "len": 8,
+    "identity": "12f932e35012c34b2f834721b8217d3c81270d568bf30c138d756e7a8dab2321",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 13; i0 \u003c len(xs); i0 += 2 {\n\t}\n\treturn v0\n\tv1 := 0\n\tfor i1 := 13; i1 \u003c len(xs); i1 += 2 {\n\t\tv2 := xs[i1]\n\t\t_ = v2\n\t\tv3 := -2 \u003e i1\n\t\t_ = v3\n\t}\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 73660,
+    "island": 7,
+    "gen": 35,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1115,
+    "novelty": 0,
+    "len": 15,
+    "identity": "be0d35db471ba5b8bedbeb2ce6357849d755a7b38ae339a2f9477c375f90e6c5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 19; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[1]\n\t\tv2 := v1 + v1\n\t\t_ = v2\n\t\tv0 = max(i0, i0)\n\t}\n\tv3 := uint64(v0)\n\t_ = v3\n\treturn v0\n\treturn v0\n\tfor i1 := 19; i1 \u003c len(xs); i1 += 2 {\n\t\tv4 := xs[1]\n\t\t_ = v4\n\t\tv5 := xs[i1]\n\t\t_ = v5\n\t\tv6 := max(i1, i1)\n\t\tv0 = max(v6, i1)\n\t}\n\treturn v0\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 7150,
+    "island": 3,
+    "gen": 3,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 1212,
+    "novelty": 0,
+    "len": 14,
+    "identity": "99495cd6889bd7ce8b547e4ec514259dbe26e01dc35d9981d89ee5b25974028f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c i0; i1++ {\n\t\t\tv0 = v0 \u003c\u003c 63\n\t\t\treturn v0\n\t\t}\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[i2]\n\t\tv4 := int(v3)\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 11054,
+    "island": 3,
+    "gen": 5,
+    "origin": "mutation",
+    "correct": 5,
+    "vectors": 50,
+    "cost": 1167,
+    "novelty": 0,
+    "len": 18,
+    "identity": "111d9d3110ad625956bcb51df27f8f02ca4f3b3e699c84f9e8334357223c7948",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := i0 != v0\n\t\tif v2 {\n\t\t\treturn i0\n\t\t}\n\t\tv3 := bits.OnesCount64(v1)\n\t\tv0 = v0 ^ v3\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = v0 - i1\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv4 := xs[i2]\n\t\t_ = v4\n\t\tv5 := max(v0, i2)\n\t\tv0 = v5 + v5\n\t}\n\treturn v0\n\tv6 := uint64(v0)\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 37090,
+    "island": 0,
+    "gen": 18,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1549,
+    "novelty": 0,
+    "len": 19,
+    "identity": "efa03a0d8ddf0321ef515c6af41d40ebe9d6d2a36c8abe00477bd5aca6ae025c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 20; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tv4 := v0 * i1\n\t\tv0 = v4 + i1\n\t\tfor i2 := 5; i2 \u003c len(xs); i2 += 2 {\n\t\t}\n\t}\n\treturn v0\n\tv5 := v0 | v0\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i4 | v5\n\t\t\tv5 = 3 - v5\n\t\t}\n\t}\n\tv6 := v5 \u003c= v0\n\t_ = v6\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 87787,
+    "island": 6,
+    "gen": 42,
+    "origin": "mutation",
+    "correct": 18,
+    "vectors": 50,
+    "cost": 1142,
+    "novelty": 0,
+    "len": 22,
+    "identity": "b8af3d8a79db7915882a6ad0cf9a14109330b7965e835b4679b6b245922ce702",
+    "source": "func f(xs []uint64) int {\n\tv0 := -1\n\tfor i0 := 9; i0 \u003c len(xs); i0 += 3 {\n\t\tv1 := xs[3]\n\t\t_ = v1\n\t\treturn i0\n\t}\n\tv2 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv2 = v2 + v4\n\t}\n\treturn v2\n\tfor i2 := 5; i2 \u003c len(xs); i2 += 2 {\n\t\tv5 := max(v2, v2)\n\t\tv6 := xs[v5]\n\t\t_ = v6\n\t}\n\txs[v2] = 32\n\treturn v2\n\treturn v2\n\treturn v2\n\tfor i3 := 5; i3 \u003c len(xs); i3 += 2 {\n\t\tv2 = i3 + i3\n\t}\n\treturn v0\n\tv7 := bits.OnesCount64(44)\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 104120,
+    "island": 6,
+    "gen": 50,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1417,
+    "novelty": 0,
+    "len": 22,
+    "identity": "c7b3b54b69057e4f8d5c26f33b065091d9c375c8c85402cc4a8c2691abe0707c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 10; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\t_ = v1\n\t\tv0 = -i0\n\t\tv0 = i0 * i0\n\t}\n\treturn v0\n\tfor i1 := v0; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2 += 2 {\n\t\t}\n\t\tv2 := xs[i1]\n\t\t_ = v2\n\t}\n\tfor i3 := v0; i3 \u003c len(xs); i3++ {\n\t\tv3 := xs[i3]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv5 := 31 \u003c v3\n\t\t_ = v5\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n\tfor i4 := 2; i4 \u003c v0; i4 += 2 {\n\t\tv6 := xs[i4]\n\t\tv7 := bits.OnesCount64(v6)\n\t\t_ = v7\n\t}\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 4 {\n\t\tv8 := xs[i5]\n\t\tv9 := bits.OnesCount64(v8)\n\t\t_ = v9\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 71954,
+    "island": 1,
+    "gen": 35,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1065,
+    "novelty": 10,
+    "len": 24,
+    "identity": "9b76dfdfdc14ef0c148aafbc6b1f1db313b741ab9341ef7b4fb2acd82e429d28",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 23; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 59; i1 \u003c len(xs); i1++ {\n\t}\n\tfor i2 := 1; i2 \u003c len(xs); i2 += 3 {\n\t\tv0 = 36 * i2\n\t\tv0 = 35 \u0026^ i2\n\t\tv0 = i2 + v0\n\t}\n\tv3 := uint64(v0)\n\tv4 := v3 \u003c\u003c v0\n\t_ = v4\n\tv5 := uint64(v0)\n\t_ = v5\n\tfor i3 := 8; i3 \u003c len(xs); i3++ {\n\t\tv0 = 35 \u0026^ i3\n\t}\n\tv6 := uint64(v0)\n\tv7 := v6 \u003c\u003c v0\n\t_ = v7\n\tv8 := 29 | v6\n\tv9 := 12 * v0\n\tv10 := -v8\n\tv11 := 29 | v10\n\t_ = v11\n\tv12 := max(34, v9)\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 125529,
+    "island": 2,
+    "gen": 61,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 1342,
+    "novelty": 0,
+    "len": 27,
+    "identity": "df07f0533ccc5cd812111304e3c7e326cc26e3b9fa46af5843c05b32b198ce82",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t\tv4 := v3 \u003c v1\n\t\tif v4 {\n\t\t\treturn v3\n\t\t}\n\t}\n\treturn v1\n\tv5 := uint64(v1)\n\tfor i1 := v0; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := i1; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv5 = v5 - 12\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := 27; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v5)\n\t}\n\tv6 := min(51, v5)\n\tv7 := v1 + v1\n\tv8 := ^v6\n\tv9 := v0 | v7\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv10 := min(v8, v8)\n\t_ = v10\n\tv11 := v1 * v9\n\t_ = v11\n\tv12 := v1 \u0026 v7\n\t_ = v12\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 11,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 53080,
+    "island": 7,
+    "gen": 25,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 1505,
+    "novelty": 0,
+    "len": 30,
+    "identity": "918dff0269fd484959a79bf3f4b8b94b7446cce089b573d79a46903e6653f723",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := 19; i0 \u003c len(xs); i0 += 2 {\n\t\tv2 := xs[i0]\n\t\t_ = v2\n\t\tv3 := i0 != i0\n\t\t_ = v3\n\t\tv4 := xs[i0]\n\t\t_ = v4\n\t\tv1 = i0 \u003c\u003c 19\n\t\tv5 := max(i0, i0)\n\t\tv1 = v5 + v5\n\t\tv6 := max(i0, 7)\n\t\t_ = v6\n\t\tv1 = v5 \u0026 i0\n\t}\n\tv7 := uint64(v1)\n\t_ = v7\n\treturn v1\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv8 := xs[i1]\n\t\tv9 := bits.OnesCount64(v8)\n\t\tv1 = v9 + v9\n\t\tv1 = v9 + v9\n\t}\n\treturn v1\n\tfor i2 := 19; i2 \u003c len(xs); i2 += 2 {\n\t\tv10 := xs[i2]\n\t\t_ = v10\n\t\tv11 := i2 != i2\n\t\t_ = v11\n\t\tv12 := xs[i2]\n\t\t_ = v12\n\t\tv1 = i2 \u003c\u003c 19\n\t\tv13 := max(v0, i2)\n\t\tv1 = v13 + v13\n\t\tv14 := max(i2, 7)\n\t\t_ = v14\n\t\tv1 = v13 \u0026 i2\n\t}\n\tv15 := uint64(v1)\n\t_ = v15\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 61070,
+    "island": 6,
+    "gen": 29,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 2082,
+    "novelty": 0,
+    "len": 3,
+    "identity": "b8a21cc6a14072f00957f672bd8482970856a7f4c73e8eeeb153ea61ccaaf791",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 11; i0 \u003c len(xs); i0++ {\n\t\tv0 := 51\n\t\t_ = v0\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 95663,
+    "island": 5,
+    "gen": 46,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 2082,
+    "novelty": 0,
+    "len": 6,
+    "identity": "67d226ed9d212e284c94428e6f7ff532851e2b1be6958ce21d8881f723e24cd7",
+    "source": "func f(xs []uint64) int {\n\tv0 := true\n\tv1 := v0\n\tv2 := v1\n\tif v2 {\n\t}\n\tfor i0 := 11; i0 \u003c len(xs); i0++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 6040,
+    "island": 7,
+    "gen": 2,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 0,
+    "len": 11,
+    "identity": "952b7a80df5efa04d7edac3ad3ba89ff93b300aeafd6a516c474608b8a5c2f52",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 24227,
+    "island": 6,
+    "gen": 11,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 2,
+    "len": 14,
+    "identity": "9d80c89dadfe54bed90d112049367954628fef1ac5c27bd9563e2e1dfd83d972",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tv0 = v0 ^ i1\n\t\tv4 := uint64(8)\n\t\t_ = v4\n\t\tv5 := 50 * i1\n\t\tv0 = v5 + v5\n\t}\n\tv6 := uint64(v0)\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 80505,
+    "island": 2,
+    "gen": 39,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 2960,
+    "novelty": 0,
+    "len": 14,
+    "identity": "91a1a643b657dbe1fc62d5fc8ba436a9ab635b955b6a6f9fe725105ea5839e57",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 27; i0 \u003c len(xs); i0 += 2 {\n\t}\n\tv1 := v0 + v0\n\tv2 := v1 | v1\n\tfor i1 := v2; i1 \u003c len(xs); i1 += 2 {\n\t}\n\treturn v2\n\tfor i2 := 0; i2 \u003c len(xs); i2 += 2 {\n\t\tfor i3 := -2; i3 \u003c len(xs); i3++ {\n\t\t}\n\t}\n\treturn v2\n\tfor i4 := 27; i4 \u003c len(xs); i4 += 2 {\n\t}\n\tv3 := v2 + v2\n\tv4 := v0 | v3\n\t_ = v4\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 17779,
+    "island": 5,
+    "gen": 8,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 0,
+    "len": 18,
+    "identity": "725dc7f81f3796e4b4816104a56ed5cc5e0679e429d8e9b0cf5b40d9ed97c4b5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\tv5 := xs[i2]\n\t\t_ = v5\n\t\tv6 := 51\n\t\t_ = v6\n\t\tv0 = max(i2, 54)\n\t}\n\tv7 := 14 | v0\n\t_ = v7\n\tv8 := 14 | v0\n\t_ = v8\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 18590,
+    "island": 0,
+    "gen": 9,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 3144,
+    "novelty": 0,
+    "len": 19,
+    "identity": "5182bd5c1c5fea99e4e97da918fd774df6bf7e04dcac08743fd654c89b3fe7d8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 3 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv0 = i2 | i2\n\t\t\tv0 = 32 - i2\n\t\t}\n\t}\n\treturn v0\n\tv4 := v0 | v0\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv4 = i4 | v4\n\t\t\tv4 = 29 - v4\n\t\t}\n\t}\n\tv5 := v4 \u003c= v0\n\t_ = v5\n\treturn v4\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 84972,
+    "island": 3,
+    "gen": 41,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 9,
+    "len": 23,
+    "identity": "5a379eb884d8784d88df646132c3cbe92cf450b1be100ff01c285a74f276370e",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 8; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = ^i1\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t}\n\tv4 := uint64(v0)\n\tv5 := bits.OnesCount64(v4)\n\tv6 := ^v5\n\treturn v5\n\tv7 := v4 + v4\n\t_ = v7\n\tv8 := uint64(v6)\n\t_ = v8\n\tv9 := bits.OnesCount64(v4)\n\t_ = v9\n\tv10 := bits.OnesCount64(v4)\n\treturn 64\n\tv11 := uint64(v10)\n\tv12 := ^v11\n\t_ = v12\n\tv13 := bits.OnesCount64(v11)\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 107112,
+    "island": 2,
+    "gen": 52,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 7,
+    "len": 23,
+    "identity": "2d4777d67856f1a94319e33554213a4c80fd809a5c8dc6d8180a2f6127135da1",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0 += 4 {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := v0; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := -2; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 - 4\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := 27; i3 \u003c len(xs); i3 += 2 {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 117752,
+    "island": 3,
+    "gen": 57,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 12,
+    "len": 24,
+    "identity": "39fd647220a0070e33bb7a1346a8478380a01e4552cc7c11ab8e6bfce420186c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 7; i1 \u003c len(xs); i1++ {\n\t\tv0 = 17 \u0026^ i1\n\t\tv0 = i1 + i1\n\t}\n\tv3 := uint64(v0)\n\tv4 := bits.OnesCount64(v3)\n\tv5 := -v4\n\treturn v4\n\tv6 := v3 + v3\n\t_ = v6\n\tv7 := uint64(v5)\n\tv8 := bits.OnesCount64(v7)\n\t_ = v8\n\tv9 := bits.OnesCount64(v7)\n\treturn 64\n\tv10 := -v0\n\t_ = v10\n\tv11 := uint64(v9)\n\tv12 := ^v11\n\tv13 := bits.OnesCount64(v12)\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 158413,
+    "island": 2,
+    "gen": 77,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 2506,
+    "novelty": 9,
+    "len": 24,
+    "identity": "4e78358221ba8a7f2f57e1eef987407d8ac5a9816e8d9eb7e7b2846d603f3326",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0 += 4 {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2 += 4 {\n\t\t\tv4 = 27 + v4\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 \u0026^ v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 12,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 106271,
+    "island": 7,
+    "gen": 51,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 2275,
+    "novelty": 0,
+    "len": 29,
+    "identity": "ef173d22211cd089206516c975a6b0497a4d39960bd26b820ff3eb034dc591ed",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\tv2 := 0\n\tfor i0 := 19; i0 \u003c len(xs); i0 += 2 {\n\t\tv3 := xs[1]\n\t\t_ = v3\n\t\tv4 := xs[i0]\n\t\tv5 := bits.OnesCount64(v4)\n\t\t_ = v5\n\t\tv2 = max(i0, i0)\n\t}\n\tfor i1 := 19; i1 \u003c len(xs); i1 += 2 {\n\t\tv6 := xs[1]\n\t\t_ = v6\n\t\tv2 = i1 + i1\n\t\tv7 := xs[i1]\n\t\t_ = v7\n\t}\n\treturn v2\n\tfor i2 := 0; i2 \u003c v0; i2++ {\n\t\tv8 := uint64(v1)\n\t\t_ = v8\n\t\tv9 := -i2\n\t\t_ = v9\n\t}\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv2 = max(v1, i3)\n\t}\n\treturn v2\n\tfor i4 := 19; i4 \u003c len(xs); i4 += 2 {\n\t\tv10 := xs[1]\n\t\tv11 := bits.OnesCount64(v10)\n\t\tv2 = v11 + v11\n\t\tv1 = max(i4, 4)\n\t}\n\treturn v1\n\treturn v1\n\treturn v1\n\tv12 := -v1\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 87449,
+    "island": 5,
+    "gen": 42,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 4114,
+    "novelty": 0,
+    "len": 3,
+    "identity": "6ccd064df338a1326c5a090effa31cdcd10f1bdc242cf8b9852e386c7af34d3a",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 11; i0 \u003c len(xs); i0++ {\n\t}\n\tfor i1 := 11; i1 \u003c len(xs); i1++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 0,
+      "depth": 2
+    },
+    "id": 146036,
+    "island": 2,
+    "gen": 71,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 8050,
+    "novelty": 0,
+    "len": 3,
+    "identity": "de9f27e1418864be3901f26e919ce919beb486585a96f19dd2f145551efb0b80",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := i0; i1 \u003c len(xs); i1 += 4 {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 2127,
+    "island": 0,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 1,
+    "len": 6,
+    "identity": "5aae615d96004d15f797e44d9f076ec4d4d27113b3ec27c9edbad53d9aab5f9d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 38700,
+    "island": 7,
+    "gen": 18,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 5890,
+    "novelty": 0,
+    "len": 6,
+    "identity": "0eea94a2fb804c436fa25fb97a0886af94b0bc817446c9003e36f5513b5cf747",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 19; i0 \u003c len(xs); i0 += 2 {\n\t\tv0 := xs[i0]\n\t\t_ = v0\n\t\tv1 := xs[i0]\n\t\t_ = v1\n\t\tfor i1 := 0; i1 \u003c i0; i1 += 2 {\n\t\t\tv2 := len(xs)\n\t\t\t_ = v2\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 22300,
+    "island": 7,
+    "gen": 10,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 2,
+    "len": 11,
+    "identity": "27d95338aa8bc28da884c3d69a80b0f6e07576ef3565ea495f685decfd62f5d8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 12; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tv0 = i1 + i1\n\t}\n\tv4 := uint64(v0)\n\t_ = v4\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 12290,
+    "island": 0,
+    "gen": 6,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 6036,
+    "novelty": 1,
+    "len": 11,
+    "identity": "d3c99492e242042d5aaa55a723f5779a424611c092303ee4aa5dc6db8057b987",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\t_ = v1\n\t}\n\treturn v0\n\tv2 := len(xs)\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv2 = i2 | i2\n\t\t\tv2 = 29 - i2\n\t\t}\n\t}\n\tv3 := v2 \u003c= v0\n\t_ = v3\n\treturn v2\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 9286,
+    "island": 4,
+    "gen": 4,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 3,
+    "len": 14,
+    "identity": "bf7c308a109f6e2529c3f28b29e008d0719d24d37737cf55bffd45295903404b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t\tv4 := v0 + i1\n\t\tv0 = v4 + v4\n\t}\n\treturn v0\n\tv5 := v0 + v0\n\tv6 := uint64(v5)\n\t_ = v6\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 12384,
+    "island": 0,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 2,
+    "len": 14,
+    "identity": "379be7ca5cf8c03ce52abe9138fdb9a9ebfb344f9c6b1f606e97ae6486b42cb8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 | v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv3 = i2 | v3\n\t\t\tv3 = 29 - v3\n\t\t}\n\t}\n\treturn -3\n\tv4 := v3 \u003c= v0\n\t_ = v4\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 55625,
+    "island": 1,
+    "gen": 27,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 7,
+    "len": 18,
+    "identity": "856656e5fb718753f418251ce4ff717fa5b4692a31692383ddd3a1e2bc0a2271",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 59; i1 \u003c len(xs); i1++ {\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t}\n\tfor i3 := 15; i3 \u003c len(xs); i3++ {\n\t\tv0 = 35 \u0026^ i3\n\t}\n\tv3 := uint64(v0)\n\tv4 := min(v3, v3)\n\t_ = v4\n\tv5 := 29 | v3\n\tv6 := 12 * v0\n\t_ = v6\n\tv7 := -v5\n\tv8 := 29 | v7\n\t_ = v8\n\tv9 := max(34, v0)\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 35049,
+    "island": 0,
+    "gen": 17,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 3,
+    "len": 19,
+    "identity": "f40aa6a767dc076548a462d64cb5f71931304fdf4fbf046f3a5e17492d43eddf",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tfor i2 := v4; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv0 = ^v0\n\t\t}\n\t}\n\treturn v0\n\tv5 := v0 | v0\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := i3; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i4 | v5\n\t\t\tv5 = 29 - v5\n\t\t}\n\t}\n\tv6 := v5 \u003c= v0\n\t_ = v6\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 103435,
+    "island": 4,
+    "gen": 50,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 12,
+    "len": 23,
+    "identity": "487f874d0e8640743ad4224b72a98735a439f82dabd1805adebc619bb973ae8d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := v0; i1 \u003c len(xs); i1 += 2 {\n\t\tv0 = max(i1, 34)\n\t}\n\tv3 := 37 ^ v0\n\tv4 := uint64(v3)\n\tv5 := v0 \u0026^ 14\n\t_ = v5\n\tv6 := v3 + v3\n\tv7 := min(v4, 49)\n\treturn v6\n\tv8 := v6 + v6\n\tv9 := uint64(v8)\n\tv10 := 23 \u003c v9\n\t_ = v10\n\tv11 := 17 \u0026^ v9\n\tv12 := v8 \u0026 v8\n\tv13 := max(v7, v11)\n\tv14 := v0 != v12\n\t_ = v14\n\tv15 := 17 \u0026^ v13\n\t_ = v15\n\treturn v12\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 157841,
+    "island": 0,
+    "gen": 77,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 8,
+    "len": 23,
+    "identity": "ffe80fe4882579c2f841c1f5dcca025a719cd2e2ec07ca3e50cfaa142802cafe",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 \u003e\u003e 24\n\tfor i1 := v3; i1 \u003c len(xs); i1 += 4 {\n\t\tv3 = i1 + i1\n\t\tv3 = max(v0, i1)\n\t\tfor i2 := 12; i2 \u003c len(xs); i2++ {\n\t\t\tv3 = v3 * i2\n\t\t}\n\t\tfor i3 := i1; i3 \u003c len(xs); i3++ {\n\t\t\tv0 = max(v3, i3)\n\t\t\tv3 = ^v3\n\t\t}\n\t}\n\tv4 := 32 | v3\n\tv5 := v4 \u003e\u003e 56\n\tv6 := v0 \u003c= v4\n\t_ = v6\n\tv7 := max(v5, v0)\n\tv8 := uint64(v0)\n\treturn v7\n\tv9 := v8 + 13\n\t_ = v9\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 154538,
+    "island": 3,
+    "gen": 75,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 14,
+    "len": 24,
+    "identity": "8244f78ec942a31313173e6b80fead0c4e5474cd75a56d01b6e6e9289fc7aca2",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 7; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = i1 * 29\n\t}\n\tv3 := uint64(v0)\n\tv4 := bits.OnesCount64(v3)\n\tv5 := max(v0, 55)\n\treturn v4\n\tv6 := v3 + v3\n\t_ = v6\n\tv7 := uint64(v5)\n\tv8 := bits.OnesCount64(v7)\n\treturn 64\n\tv9 := -v0\n\t_ = v9\n\tv10 := uint64(v8)\n\tv11 := ^v3\n\tv12 := bits.OnesCount64(v11)\n\tv13 := v12 | v8\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\tv15 := v3 - v10\n\t_ = v15\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 123619,
+    "island": 2,
+    "gen": 60,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 9,
+    "len": 24,
+    "identity": "0a74912f3c0936dd9d6fddb6487ba4cf0a446cd5f4bc42870da8c011b90b3eec",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0 += 2 {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := i1; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 - 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 81424,
+    "island": 6,
+    "gen": 39,
+    "origin": "mutation",
+    "correct": 6,
+    "vectors": 50,
+    "cost": 4442,
+    "novelty": 0,
+    "len": 28,
+    "identity": "adedb476fe89ea6df1ecc33d59a58053a63e0f7079967da0aa26267dcfdb47b6",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 2 {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tfor i1 := 5; i1 \u003c len(xs); i1 += 2 {\n\t\tv4 := max(v1, i1)\n\t\t_ = v4\n\t}\n\txs[v1] = 32\n\tv5 := min(57, v1)\n\treturn v1\n\treturn 45\n\treturn v1\n\tfor i2 := 5; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = i2 ^ i2\n\t\tv1 = -i2\n\t\tv6 := min(i2, i2)\n\t\tv1 = -v6\n\t}\n\tv7 := uint64(v0)\n\treturn v0\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv8 := xs[i3]\n\t\t_ = v8\n\t}\n\tv9 := v5 \u003e= v0\n\tif v9 {\n\t\tv10 := 60 \u0026 v7\n\t\t_ = v10\n\t}\n\tv11 := bits.OnesCount64(44)\n\treturn v11\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 89992,
+    "island": 7,
+    "gen": 43,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 4602,
+    "novelty": 0,
+    "len": 28,
+    "identity": "1948b44df6608509390b53b0b1fd2963b4f81eaef6e1e05e72b346c7b040c6a1",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\t_ = v0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t}\n\treturn v1\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv2 := xs[i1]\n\t\t_ = v2\n\t\tfor i2 := 0; i2 \u003c 48; i2 += 4 {\n\t\t\tv3 := max(29, i2)\n\t\t\t_ = v3\n\t\t}\n\t}\n\tfor i3 := 19; i3 \u003c len(xs); i3 += 2 {\n\t\tv4 := xs[1]\n\t\t_ = v4\n\t\tv1 = i3 + i3\n\t\tv5 := xs[i3]\n\t\t_ = v5\n\t\tv1 = max(i3, i3)\n\t}\n\treturn v1\n\treturn v1\n\treturn v1\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t}\n\treturn v1\n\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t}\n\tfor i6 := 19; i6 \u003c len(xs); i6 += 2 {\n\t\tv1 = i6 + i6\n\t\tv6 := xs[i6]\n\t\t_ = v6\n\t\tv1 = max(i6, i6)\n\t}\n\treturn v1\n\treturn v1\n\treturn v1\n\tv7 := -v1\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 145135,
+    "island": 6,
+    "gen": 70,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 6803,
+    "novelty": 0,
+    "len": 32,
+    "identity": "8362fafe7a3c7bc9c520f7077f2dc79128f2ca1747f05ec59157101145f5aba2",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv0 := xs[i0]\n\t\tv1 := bits.OnesCount64(v0)\n\t\t_ = v1\n\t}\n\tv2 := 0\n\tv3 := 6 \u003c= v2\n\t_ = v3\n\treturn v2\n\tfor i1 := v2; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\t_ = v4\n\t\tv5 := xs[i1]\n\t\t_ = v5\n\t}\n\tfor i2 := v2; i2 \u003c len(xs); i2 += 2 {\n\t\tv2 = i2 + i2\n\t}\n\tv6 := min(v2, v2)\n\treturn v6\n\treturn v6\n\tv7 := len(xs)\n\tfor i3 := 38; i3 \u003c len(xs); i3 += 2 {\n\t\tv8 := -2 \u003e i3\n\t\t_ = v8\n\t}\n\tfor i4 := v7; i4 \u003c len(xs); i4++ {\n\t\tv7 = 35 \u0026^ i4\n\t\tv7 = i4 + i4\n\t}\n\treturn v7\n\tfor i5 := v7; i5 \u003c len(xs); i5++ {\n\t\tv7 = bits.OnesCount64(26)\n\t\tv9 := i5 != i5\n\t\tif v9 {\n\t\t\tv7 = min(i5, i5)\n\t\t}\n\t\tv7 = i5 \u0026^ i5\n\t}\n\tfor i6 := v7; i6 \u003c len(xs); i6++ {\n\t\tv7 = i6 \u0026^ 30\n\t\tv7 = min(i6, i6)\n\t}\n\tv10 := v7 \u003c\u003c v7\n\treturn v10\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 13,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 147973,
+    "island": 2,
+    "gen": 72,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 7203,
+    "novelty": 7,
+    "len": 32,
+    "identity": "5381d7b35a5cb9be8753aed2173b4f2641e26875c86a79f8f6c4b6dd6a8b394a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v2 + v2\n\t}\n\treturn v0\n\tv3 := uint64(v0)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\tfor i2 := -1; i2 \u003c i1; i2 += 3 {\n\t\t\tv3 = v3 - 13\n\t\t}\n\t}\n\treturn v0\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv0 = bits.OnesCount64(v3)\n\t}\n\tv4 := min(51, v3)\n\tv5 := v0 + v0\n\tv6 := ^v4\n\tv7 := v5 \u0026^ v5\n\tfor i4 := v7; i4 \u003c len(xs); i4 += 2 {\n\t\tv7 = i4 - i4\n\t}\n\tv8 := min(v6, v6)\n\tv9 := v7 * v7\n\tv10 := v9 \u0026 v5\n\tv11 := min(51, v8)\n\tv12 := v10 + v10\n\tv13 := ^v11\n\tv14 := v0 \u0026^ v12\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t\tv0 = i5 - i5\n\t}\n\tv15 := min(v13, v13)\n\t_ = v15\n\tv16 := v14 * v14\n\tv17 := v16 \u0026 v12\n\t_ = v17\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 11757,
+    "island": 5,
+    "gen": 5,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 8590,
+    "novelty": 0,
+    "len": 3,
+    "identity": "70abf0365d291407ea0646d9771e8fcf3ebc7e42b09be55f52aae6b9e522e87b",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 2; i0 \u003c len(xs); i0++ {\n\t}\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 0,
+      "depth": 2
+    },
+    "id": 102930,
+    "island": 2,
+    "gen": 50,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 8857,
+    "novelty": 0,
+    "len": 3,
+    "identity": "733afd8cc5433168b8e6264e6635811372adef02769d6c459c2217e30524d3bb",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 15; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := 9; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 0,
+    "island": 0,
+    "gen": 0,
+    "origin": "seed",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 1,
+    "len": 6,
+    "identity": "8e02c97cce39dd0b700afef8b06e777d717a68e2685e9cd5f432ad88224cbeb5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 145615,
+    "island": 0,
+    "gen": 71,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 8806,
+    "novelty": 0,
+    "len": 4,
+    "identity": "6943d9343c092811fe6273cfb0a8e08b59f71baba97fee6b8fa429e96486d4eb",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 14; i0 \u003c len(xs); i0 += 4 {\n\t\tfor i1 := 12; i1 \u003c len(xs); i1++ {\n\t\t}\n\t\tfor i2 := i0; i2 \u003c len(xs); i2 += 2 {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 12764,
+    "island": 1,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 3,
+    "len": 11,
+    "identity": "46b08e82c442c3ef3be8bb92a3535d0ac2ffc7f81760774f78f794f48cd3324c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = v0 \u003c\u003c v0\n\t}\n\tv3 := uint64(v0)\n\tv4 := 29 | v3\n\t_ = v4\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 8172,
+    "island": 7,
+    "gen": 3,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 0,
+    "len": 11,
+    "identity": "6103a89ad5de0723641a749dc9cc7eebb23906eea35ffebe158c5f15a78a8be8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = i1 + i1\n\t\tfor i2 := 16; i2 \u003c len(xs); i2++ {\n\t\t}\n\t\tv0 = i1 + i1\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 28996,
+    "island": 1,
+    "gen": 14,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 5,
+    "len": 14,
+    "identity": "04598e9bc14c204a35a64fe419ecfa5874ad33aae07609b0542250d817a488d7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = 35 \u0026^ v0\n\t\tv3 := xs[i1]\n\t\t_ = v3\n\t}\n\tv4 := uint64(v0)\n\tv5 := -v4\n\t_ = v5\n\tv6 := 29 | v4\n\t_ = v6\n\tv7 := 12 * v0\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 27002,
+    "island": 1,
+    "gen": 13,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 4,
+    "len": 15,
+    "identity": "a23a3051d8c4afd911f4d6f6af95d18beb9003136664a497d6f48ef75ebd35e0",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv0 = i1 \u003c\u003c 11\n\t\tfor i2 := i1; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv0 = i1 \u003c\u003c 24\n\t\t}\n\t\tv0 = ^v0\n\t}\n\tv3 := uint64(v0)\n\tv4 := -v3\n\t_ = v4\n\tv5 := 29 | v3\n\t_ = v5\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 55620,
+    "island": 1,
+    "gen": 27,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 8,
+    "len": 19,
+    "identity": "032e298f07d87f7793fe9845673f7166071f810c842d437254dcef94d2fd350d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 59; i1 \u003c len(xs); i1++ {\n\t}\n\tfor i2 := 1; i2 \u003c len(xs); i2 += 3 {\n\t\tv0 = 36 * i2\n\t\tv3 := xs[i2]\n\t\t_ = v3\n\t}\n\tfor i3 := 3; i3 \u003c len(xs); i3++ {\n\t}\n\tv4 := uint64(v0)\n\tv5 := -v4\n\t_ = v5\n\tv6 := 29 | v4\n\tv7 := 12 * v0\n\t_ = v7\n\tv8 := -v6\n\tv9 := 29 | v8\n\t_ = v9\n\tv10 := max(34, v0)\n\t_ = v10\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 139346,
+    "island": 0,
+    "gen": 68,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 7,
+    "len": 19,
+    "identity": "226c212283b9e286f806a8b458469bf30de1bf7f2699ac3ebb6ed70af2d5a2bc",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 - 20\n\tfor i1 := 1; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := i1; i2 \u003c len(xs); i2++ {\n\t\t\tv0 = max(v3, i2)\n\t\t\tv3 = ^v3\n\t\t}\n\t}\n\tv4 := 32 | v3\n\tv5 := bits.OnesCount64(47)\n\tv6 := v0 \u003c= v4\n\t_ = v6\n\tv7 := max(v5, v0)\n\tv8 := uint64(v0)\n\treturn v7\n\tv9 := v8 + 13\n\t_ = v9\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 146294,
+    "island": 3,
+    "gen": 71,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 14,
+    "len": 23,
+    "identity": "8f26b4ea95653d5617362663086be6e798cb920b32b4fd32377bb76dc9f81b37",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 8; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = v0 \u0026^ 61\n\t}\n\tv3 := uint64(v0)\n\tv4 := bits.OnesCount64(v3)\n\tv5 := -v4\n\treturn v4\n\tv6 := v3 + v3\n\t_ = v6\n\tv7 := uint64(v5)\n\tv8 := bits.OnesCount64(v7)\n\tv9 := -v0\n\t_ = v9\n\tv10 := uint64(v8)\n\tv11 := ^v10\n\tv12 := bits.OnesCount64(v11)\n\tv13 := v12 | v8\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\tv15 := v3 - v10\n\t_ = v15\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 159784,
+    "island": 0,
+    "gen": 78,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 8,
+    "len": 22,
+    "identity": "015c64c1a374a1514d56457ae6c85f4287a24e774443269c9da436f896925cf4",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 \u003e\u003e 24\n\tfor i1 := v3; i1 \u003c len(xs); i1 += 4 {\n\t\tv3 = i1 + v0\n\t\tv3 = max(v0, v3)\n\t\tv3 = v0 | v0\n\t\tfor i2 := 4; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv0 = min(v3, i1)\n\t\t\tv3 = ^v3\n\t\t}\n\t}\n\tv4 := v3 ^ 42\n\tv5 := v4 \u003e\u003e 56\n\tv6 := v0 \u003c= v4\n\t_ = v6\n\tv7 := max(v5, v0)\n\tv8 := uint64(v0)\n\treturn v7\n\tv9 := v8 + 13\n\t_ = v9\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 146264,
+    "island": 3,
+    "gen": 71,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 14,
+    "len": 24,
+    "identity": "07609580b11ef5bff6b80b0d8cb32805fda7a7012da14ce7ccd2cb579772cf00",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 8; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = i1 \u0026^ -3\n\t}\n\tv3 := uint64(v0)\n\tv4 := bits.OnesCount64(v3)\n\tv5 := -v4\n\treturn v4\n\tv6 := v3 + v3\n\t_ = v6\n\tv7 := uint64(v5)\n\tv8 := bits.OnesCount64(v7)\n\treturn 64\n\tv9 := -v0\n\t_ = v9\n\tv10 := uint64(v8)\n\tv11 := ^v10\n\tv12 := bits.OnesCount64(v11)\n\tv13 := v12 | v8\n\t_ = v13\n\tv14 := ^v0\n\t_ = v14\n\tv15 := v3 - v10\n\t_ = v15\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 125654,
+    "island": 2,
+    "gen": 61,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 9,
+    "len": 24,
+    "identity": "00d801ccacc7cf51f1eb36f04fc4dce51af28f8ea35dd27d929a2ef551c325c3",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := 1; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 - 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 140096,
+    "island": 3,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 13,
+    "len": 28,
+    "identity": "ba59b54ac3d0d4acbbc9e4d0a0425f9c4be8bffeec997a507960a48d7c2393d0",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 23; i1 \u003c len(xs); i1 += 4 {\n\t\tv0 = i1 \u0026 i1\n\t}\n\tv3 := uint64(v0)\n\tv4 := bits.OnesCount64(v3)\n\treturn v4\n\tfor i2 := 23; i2 \u003c len(xs); i2 += 3 {\n\t\tv4 = i2 - -3\n\t}\n\tv5 := uint64(v4)\n\tv6 := bits.OnesCount64(v5)\n\tv7 := -v6\n\treturn v6\n\tv8 := v5 + v5\n\t_ = v8\n\tv9 := uint64(v7)\n\tv10 := bits.OnesCount64(v9)\n\treturn 64\n\tv11 := -v10\n\t_ = v11\n\tv12 := uint64(v10)\n\tv13 := ^v12\n\tv14 := bits.OnesCount64(v13)\n\tv15 := v14 | v10\n\t_ = v15\n\tv16 := v3 - v13\n\t_ = v16\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 141353,
+    "island": 0,
+    "gen": 69,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 8,
+    "len": 28,
+    "identity": "c127b1d00d8887b741e0956d0983f9fdf26c7bf960736c475bda08ee70796c16",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv3 := v0 \u003e\u003e 24\n\tfor i1 := v3; i1 \u003c len(xs); i1 += 4 {\n\t\tv4 := xs[i1]\n\t\t_ = v4\n\t\tfor i2 := 12; i2 \u003c len(xs); i2++ {\n\t\t\tv3 = i2 * i2\n\t\t}\n\t\tfor i3 := i1; i3 \u003c len(xs); i3 += 2 {\n\t\t\tv3 = max(i3, i3)\n\t\t\tv3 = ^i3\n\t\t}\n\t\tv3 = v3 + i1\n\t\tfor i4 := 12; i4 \u003c len(xs); i4++ {\n\t\t\tv3 = v3 * i4\n\t\t}\n\t\tfor i5 := i1; i5 \u003c len(xs); i5 += 2 {\n\t\t\tv0 = max(v3, i5)\n\t\t\tv3 = ^v3\n\t\t}\n\t}\n\tv5 := 32 | v3\n\tv6 := v5 \u003e\u003e 56\n\tv7 := v0 \u003c= v5\n\t_ = v7\n\tv8 := max(v6, v0)\n\tv9 := uint64(v0)\n\treturn v8\n\tv10 := v9 + 13\n\t_ = v10\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 141695,
+    "island": 1,
+    "gen": 69,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 16,
+    "len": 32,
+    "identity": "91bb5df06664a73987e5b1eba2fe40c0d9fbd16c4fa3a21688df1ccc8e8eb85b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tfor i1 := 6; i1 \u003c len(xs); i1 += 3 {\n\t\tv0 = min(i1, i1)\n\t}\n\tv3 := xs[2]\n\t_ = v3\n\tfor i2 := 19; i2 \u003c len(xs); i2++ {\n\t\tv0 = 35 \u0026^ i2\n\t}\n\tv4 := uint64(v0)\n\tv5 := v4 \u003c\u003c v0\n\t_ = v5\n\tv6 := 29 | v4\n\tv7 := uint64(15)\n\t_ = v7\n\tv8 := 12 * v0\n\tv9 := -v6\n\tv10 := 29 | v9\n\tv11 := max(34, v8)\n\t_ = v11\n\tv12 := min(v10, v10)\n\t_ = v12\n\tfor i3 := 19; i3 \u003c len(xs); i3++ {\n\t\tv0 = 35 \u0026^ v0\n\t}\n\tv13 := uint64(v0)\n\tv14 := v13 \u003c\u003c v0\n\tv15 := 29 | v13\n\tv16 := uint64(15)\n\t_ = v16\n\tv17 := 12 * v0\n\tv18 := -v15\n\tv19 := 29 | v18\n\t_ = v19\n\tv20 := max(34, v17)\n\tv21 := v14 \u003c\u003c 33\n\t_ = v21\n\treturn v20\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 14,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 125537,
+    "island": 2,
+    "gen": 61,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 8237,
+    "novelty": 8,
+    "len": 32,
+    "identity": "f46e01ff990b123a44da8dbab5dca3ed41dc098dad2694168d0366805a68b0d5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 | 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\t_ = v5\n\tv6 := uint64(v1)\n\tfor i4 := v1; i4 \u003c len(xs); i4 += 2 {\n\t\tfor i5 := i4; i5 \u003c len(xs); i5 += 2 {\n\t\t\tv6 = v6 - 12\n\t\t}\n\t}\n\treturn v1\n\tfor i6 := 27; i6 \u003c len(xs); i6++ {\n\t\tv1 = bits.OnesCount64(v6)\n\t}\n\tv7 := min(51, v6)\n\tv8 := v1 + v1\n\tv9 := ^v7\n\tv10 := v8 | v8\n\tfor i7 := v10; i7 \u003c len(xs); i7 += 2 {\n\t\tv10 = i7 - i7\n\t}\n\tv11 := min(v9, v9)\n\t_ = v11\n\tv12 := v10 * v10\n\tv13 := v1 \u0026 v12\n\t_ = v13\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 0,
+      "depth": 1
+    },
+    "id": 522,
+    "island": 2,
+    "gen": 0,
+    "origin": "random",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 16750,
+    "novelty": 0,
+    "len": 3,
+    "identity": "ba1c57eb5960156698b5763778afa81f65aafc31f48ab0832f860a26315e23e0",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c 55; i0++ {\n\t\tv0 := i0 \u003c\u003c 33\n\t\t_ = v0\n\t}\n\treturn 30\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 0,
+      "depth": 2
+    },
+    "id": 86029,
+    "island": 0,
+    "gen": 42,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 17198,
+    "novelty": 0,
+    "len": 3,
+    "identity": "d911a65093d7fc1cf0361b968bf2319e30e9f932876b4a7aec73144510f04eab",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 12; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 18; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 1,
+      "depth": 1
+    },
+    "id": 51475,
+    "island": 1,
+    "gen": 25,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 16467,
+    "novelty": 0,
+    "len": 7,
+    "identity": "85ca0066901914ce2ca7a7d43a3abe72ddc1f223c8160285d8cf4e5c5586c824",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t}\n\tfor i1 := 15; i1 \u003c len(xs); i1++ {\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv0 := xs[i2]\n\t\tv1 := v0 \u003e= v0\n\t\t_ = v1\n\t}\n\tfor i3 := 3; i3 \u003c len(xs); i3++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 150208,
+    "island": 2,
+    "gen": 73,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 17180,
+    "novelty": 0,
+    "len": 4,
+    "identity": "a10174e9ac736b7c0dba5cd0151a2ca63fac83dbead19db0216f81f1d32ac28e",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 4 {\n\t\t}\n\t}\n\tfor i2 := -4; i2 \u003c len(xs); i2++ {\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 2514,
+    "island": 1,
+    "gen": 1,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 0,
+    "len": 11,
+    "identity": "309a30d721e63d5348ba2c53d11709fe62283783b9332ecdb4959c4ab3c5224a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 5760,
+    "island": 6,
+    "gen": 2,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 18446,
+    "novelty": 0,
+    "len": 8,
+    "identity": "ebba331f2dc53e4627509f46a1728061e8c9b3c113b2c22ec901e33f1e27d525",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tfor i1 := v0; i1 \u003c len(xs); i1++ {\n\t\t\tv3 := xs[i1]\n\t\t\t_ = v3\n\t\t}\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 141217,
+    "island": 7,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 0,
+    "len": 14,
+    "identity": "09976b7f9f0909ae5dcf056c67e13ca47f2afc7f7b8872b2489f68c43d6e3a0f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\t_ = v0\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 0\n\tfor i1 := v4; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v4 + v6\n\t}\n\treturn v4\n\treturn v4\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 156320,
+    "island": 2,
+    "gen": 76,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 20042,
+    "novelty": 0,
+    "len": 13,
+    "identity": "9f0f24d6a56c26669eb1f30df4022ac71cf9011b342f36b00bae7b55d6ce43cd",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := -2; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := -1; i2 \u003c i1; i2 += 3 {\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t}\n\tv4 := v1 + v1\n\tv5 := v4 \u0026^ v4\n\t_ = v5\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 29837,
+    "island": 4,
+    "gen": 14,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 1,
+    "len": 16,
+    "identity": "284326c0b5b2718e5135fef20fa8b04b244d3aaf8892307e2272a701f80f94aa",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n\tv6 := v3 + v3\n\tv7 := uint64(v6)\n\tv8 := v0 != v6\n\t_ = v8\n\tv9 := 17 \u0026^ v7\n\t_ = v9\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 49282,
+    "island": 0,
+    "gen": 24,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 1,
+    "len": 18,
+    "identity": "301de22145410fa41d387f0c2f8c23daa445f14e12e7d2fbee573d77dc907a14",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n\tv6 := v3 ^ 23\n\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv6 = i3 | i3\n\t\t}\n\t\tv0 = i2 - i2\n\t}\n\tv7 := v6 \u003c= v0\n\t_ = v7\n\treturn v6\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 90554,
+    "island": 1,
+    "gen": 44,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 2,
+    "len": 21,
+    "identity": "404a56bb358a156cfd911e76a22703aade1ada68e7280c6de57656a8cc9a88c5",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n\tfor i2 := 59; i2 \u003c len(xs); i2++ {\n\t}\n\tfor i3 := 3; i3 \u003c len(xs); i3 += 3 {\n\t\tv6 := xs[2]\n\t\tv7 := bits.OnesCount64(v6)\n\t\t_ = v7\n\t\tv3 = bits.OnesCount64(v6)\n\t}\n\tv8 := uint64(v3)\n\tv9 := v8 \u003c\u003c v3\n\t_ = v9\n\tv10 := uint64(v3)\n\t_ = v10\n\tv11 := max(34, v3)\n\treturn v11\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 100432,
+    "island": 0,
+    "gen": 49,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 2,
+    "len": 23,
+    "identity": "cb064123df86f9050cfb35be8dd4b6ceffdb9c7a705e04c5b101caf522280f15",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n\tv6 := v3 ^ 41\n\tfor i2 := 1; i2 \u003c len(xs); i2 += 3 {\n\t\tfor i3 := 2; i3 \u003c len(xs); i3++ {\n\t\t\tv6 = v3 \u003c\u003c 28\n\t\t\tv3 = max(v6, i3)\n\t\t\tv6 = v3 \u003c\u003c 63\n\t\t}\n\t}\n\tv7 := 32 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4++ {\n\t\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\t}\n\t\tv0 = i4 - i4\n\t\tv7 = i4 \u0026^ i4\n\t}\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 28217,
+    "island": 6,
+    "gen": 13,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 3,
+    "len": 24,
+    "identity": "c013af4fdea83698ff9c95cc7b3b6a68ca2374e9879bcc99af406b5f14beea1d",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\t_ = v0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v4 + v6\n\t}\n\treturn v4\n\tfor i2 := 9; i2 \u003c len(xs); i2 += 2 {\n\t\tv7 := xs[i2]\n\t\tv4 = v4 ^ i2\n\t\tv8 := v7\n\t\tv9 := bits.OnesCount64(v8)\n\t\tv4 = -i2\n\t\tv4 = int(v8)\n\t\tv4 = v9 + v9\n\t\tv4 = v9 - i2\n\t}\n\tv10 := v4 * 53\n\tv11 := uint64(v10)\n\t_ = v11\n\treturn v10\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 105034,
+    "island": 2,
+    "gen": 51,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 1,
+    "len": 24,
+    "identity": "c5328fa3c7bd671cee08cfc453421e6f0da49abd9c377df44e28124e9eaea154",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 0\n\tv5 := 0\n\tfor i1 := v5; i1 \u003c len(xs); i1++ {\n\t\tv6 := xs[i1]\n\t\tv7 := bits.OnesCount64(v6)\n\t\tv5 = v5 + v7\n\t}\n\treturn v5\n\tv8 := uint64(v5)\n\tfor i2 := v4; i2 \u003c len(xs); i2 += 2 {\n\t\tfor i3 := i2; i3 \u003c len(xs); i3++ {\n\t\t\tv8 = v8 - 4\n\t\t}\n\t}\n\treturn v5\n\tv9 := v0 | v5\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = bits.OnesCount64(v8)\n\t}\n\tv10 := min(v8, v8)\n\t_ = v10\n\tv11 := v1 * v9\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 34552,
+    "island": 6,
+    "gen": 16,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 2,
+    "len": 28,
+    "identity": "6878688b0120dfc080a43ce5417b420b858b60835d3155cad87adf9f3553f1c1",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v4 + v6\n\t}\n\treturn v4\n\tfor i2 := 5; i2 \u003c len(xs); i2 += 2 {\n\t\tv7 := xs[i2]\n\t\tv4 = v4 ^ i2\n\t\tv8 := v7\n\t\tv9 := bits.OnesCount64(v8)\n\t\tv4 = v9 ^ v9\n\t\tv10 := v8\n\t\tv11 := bits.OnesCount64(v10)\n\t\tv4 = -v11\n\t\tv12 := bits.OnesCount64(v10)\n\t\tv4 = -v12\n\t}\n\tv13 := v4 * 53\n\tv14 := uint64(v13)\n\t_ = v14\n\tv15 := v0 * 53\n\t_ = v15\n\tv16 := uint64(v0)\n\t_ = v16\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 64144,
+    "island": 2,
+    "gen": 31,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 2,
+    "len": 28,
+    "identity": "00db50d919ffb208801c7fc03ecc1009692ea49fb49ebfa7a52bce4d36fd1012",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 0\n\tfor i1 := v4; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v4 + v6\n\t}\n\treturn v4\n\tv7 := max(10, v4)\n\tfor i2 := v4; i2 \u003c v7; i2 += 2 {\n\t\tv4 = bits.OnesCount64(37)\n\t}\n\tv8 := uint64(v4)\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv8 = 23 - v8\n\t\t}\n\t}\n\treturn v7\n\tfor i5 := 27; i5 \u003c len(xs); i5 += 2 {\n\t\tv7 = int(v8)\n\t}\n\tv9 := min(51, v8)\n\tv10 := v7 | v7\n\tfor i6 := v10; i6 \u003c len(xs); i6 += 2 {\n\t\tv10 = bits.OnesCount64(v9)\n\t}\n\tv11 := min(v9, v9)\n\t_ = v11\n\treturn v10\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 8,
+      "depth": 1
+    },
+    "id": 88365,
+    "island": 1,
+    "gen": 43,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 1,
+    "len": 32,
+    "identity": "4eb6a3e6799acdfb6b43c087403772ee42afe3deb414d8c2e2f37f65e50f4351",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 0\n\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\tv4 := xs[i1]\n\t\tv5 := bits.OnesCount64(v4)\n\t\tv3 = v3 + v5\n\t}\n\treturn v3\n\tfor i2 := 59; i2 \u003c len(xs); i2++ {\n\t}\n\tfor i3 := 3; i3 \u003c len(xs); i3 += 3 {\n\t\tv6 := xs[i3]\n\t\tv7 := bits.OnesCount64(v6)\n\t\t_ = v7\n\t\tv3 = bits.OnesCount64(v6)\n\t}\n\tv8 := uint64(v3)\n\tv9 := v8 \u003c\u003c v3\n\t_ = v9\n\tv10 := uint64(v3)\n\t_ = v10\n\tv11 := uint64(v0)\n\tv12 := v11 \u003c\u003c v0\n\t_ = v12\n\tv13 := uint64(v0)\n\t_ = v13\n\tfor i4 := 8; i4 \u003c len(xs); i4++ {\n\t\tv0 = 35 \u0026^ i4\n\t}\n\tv14 := uint64(v0)\n\tv15 := v14 \u003c\u003c v0\n\t_ = v15\n\tv16 := 29 | v14\n\tv17 := 12 * v0\n\tv18 := -v16\n\tv19 := 29 | v18\n\t_ = v19\n\tv20 := max(34, v17)\n\treturn v20\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 15,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 152072,
+    "island": 2,
+    "gen": 74,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 16424,
+    "novelty": 2,
+    "len": 32,
+    "identity": "51485c6bab94cec5735774a7709df16e12018e2df294cbb63fbde0d92a6ab3c8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := 2\n\tv5 := 0\n\tfor i1 := v5; i1 \u003c len(xs); i1++ {\n\t\tv6 := xs[i1]\n\t\tv7 := bits.OnesCount64(v6)\n\t\tv5 = v5 + v7\n\t}\n\treturn v5\n\tv8 := uint64(v5)\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := v4; i3 \u003c len(xs); i3 += 4 {\n\t\t\tv8 = v8 - 11\n\t\t}\n\t}\n\treturn v5\n\tfor i4 := -4; i4 \u003c len(xs); i4++ {\n\t\tv5 = bits.OnesCount64(v8)\n\t}\n\tv9 := min(51, v8)\n\tv10 := v5 + v5\n\tv11 := ^v9\n\tv12 := v4 \u0026^ v10\n\tfor i5 := v4; i5 \u003c len(xs); i5 += 2 {\n\t\tv4 = i5 - v5\n\t}\n\tv13 := min(v11, v11)\n\tv14 := v5 * v12\n\tv15 := min(v13, v13)\n\t_ = v15\n\tv16 := v1 * v14\n\tv17 := v1 \u0026 v16\n\t_ = v17\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 0,
+      "depth": 2
+    },
+    "id": 45180,
+    "island": 0,
+    "gen": 22,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 37755,
+    "novelty": 0,
+    "len": 3,
+    "identity": "65871aaee02fe9a0c7e065f6bc464e41b80f041b3df5325a8871beafeba8e8c6",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 16; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 2607,
+    "island": 2,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 58694,
+    "novelty": 0,
+    "len": 7,
+    "identity": "962ee1ce0f25ed086be81ea1b8073315a40672a6b2a46574075ecb27d62682a7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\t}\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 1387,
+    "island": 5,
+    "gen": 0,
+    "origin": "random",
+    "correct": 0,
+    "vectors": 50,
+    "cost": 34314,
+    "novelty": 1,
+    "len": 8,
+    "identity": "3a5d5cae345e7ed68281ff815e812b59baa562a0bf7614833d8ccb2932ca581e",
+    "source": "func f(xs []uint64) int {\n\tv0 := false\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tv1 := xs[i0]\n\t\tv2 := v1 - v1\n\t\t_ = v2\n\t}\n\tfor i1 := 0; i1 \u003c 64; i1++ {\n\t\tv0 = v0 || false\n\t\tv3 := ^i1\n\t\t_ = v3\n\t}\n\treturn -1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 2438,
+    "island": 1,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 53814,
+    "novelty": 0,
+    "len": 9,
+    "identity": "0e847c3d46f7cb66d274430b89fe916b79f90d9f7af962a3f98243c67b95ffe3",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\t\tv2 = -i0\n\t\t\tv3 := v1 | v1\n\t\t\t_ = v3\n\t\t}\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 17669,
+    "island": 5,
+    "gen": 8,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 50257,
+    "novelty": 0,
+    "len": 14,
+    "identity": "3f1c14ea44c3b94467fba62762bdbe607d1749fcd766a25e6747394ad82d4473",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := 0; i1 \u003c v0; i1 += 3 {\n\t\tv3 := i1 \u003c= i1\n\t\t_ = v3\n\t}\n\treturn v0\n\tfor i2 := 11; i2 \u003c len(xs); i2++ {\n\t\tv4 := xs[i2]\n\t\t_ = v4\n\t\tv5 := 51\n\t\t_ = v5\n\t\tv0 = max(i2, 54)\n\t}\n\tv6 := 14 | v0\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 118421,
+    "island": 6,
+    "gen": 57,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 35924,
+    "novelty": 0,
+    "len": 14,
+    "identity": "54c8f612252bd429e4c84f58f26cdc05555cb4c4bb9ec6ccf01fe0df7150c90b",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 4 {\n\t\t}\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\treturn v0\n\treturn 19\n\treturn v0\n\treturn v0\n\treturn v0\n\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 114569,
+    "island": 7,
+    "gen": 55,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 33512,
+    "novelty": 0,
+    "len": 18,
+    "identity": "692f82c03423b29a376bbd9932ebe11a871d14063a19e37b51d23b9cc0871c29",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t}\n\tfor i1 := 31; i1 \u003c len(xs); i1 += 2 {\n\t\tv0 := xs[1]\n\t\t_ = v0\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv1 := xs[i2]\n\t\t_ = v1\n\t}\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv2 := xs[i3]\n\t\t_ = v2\n\t}\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\tv3 := xs[i4]\n\t\tv4 := bits.OnesCount64(v3)\n\t\t_ = v4\n\t}\n\tfor i5 := 0; i5 \u003c len(xs); i5 += 3 {\n\t}\n\tv5 := 0\n\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\tv6 := xs[i6]\n\t\tv7 := bits.OnesCount64(v6)\n\t\tv5 = v5 + v7\n\t}\n\treturn v5\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 133716,
+    "island": 2,
+    "gen": 65,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 33569,
+    "novelty": 0,
+    "len": 17,
+    "identity": "3f811999a13fd8ba5cd750db1461e1fb138e4520c8ce03ce6df644e2f6168a36",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 4 {\n\t\tfor i2 := 1; i2 \u003c len(xs); i2++ {\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t}\n\tv4 := v1 + v1\n\tv5 := v0 | v4\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv6 := v1 * v5\n\t_ = v6\n\tv7 := v1 \u0026 v4\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 63285,
+    "island": 7,
+    "gen": 30,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 36633,
+    "novelty": 0,
+    "len": 23,
+    "identity": "4cc4933669b287df92c48f7492c0d5bc3d9382ccd327433fa0f4f4db3c6adc38",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 2\n\t_ = v3\n\tv4 := 0\n\tfor i1 := v4; i1 \u003c len(xs); i1++ {\n\t\tv5 := xs[i1]\n\t\tv6 := bits.OnesCount64(v5)\n\t\tv4 = v4 + v6\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv7 := bits.OnesCount64(18)\n\t\t_ = v7\n\t\tv0 = max(v0, v0)\n\t}\n\tv8 := 0\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv8 = v8 + i3\n\t}\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\tv9 := xs[i4]\n\t\tv10 := bits.OnesCount64(v9)\n\t\tv8 = v10 + v10\n\t}\n\tv11 := 2\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 150035,
+    "island": 2,
+    "gen": 73,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 33887,
+    "novelty": 0,
+    "len": 23,
+    "identity": "54bf274cdfefb795e50696081f3a70ea45ac0f645d225430718dc4cc340ba390",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := uint64(v1)\n\tfor i1 := 1; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := i1; i2 \u003c len(xs); i2 += 4 {\n\t\t\tv4 = v4 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 \u0026^ v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 110258,
+    "island": 6,
+    "gen": 53,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 34592,
+    "novelty": 0,
+    "len": 24,
+    "identity": "e8fcd16f2cd0b6168faa18ef398a592feae304d8148c9ad9367217bde4d43dfc",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := 0; i1 \u003c v0; i1 += 4 {\n\t}\n\treturn v0\n\treturn v0\n\treturn v0\n\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[i2]\n\t\t_ = v3\n\t}\n\treturn v0\n\tv4 := 35 ^ v0\n\treturn v4\n\tv5 := min(v4, v4)\n\t_ = v5\n\tv6 := 0\n\t_ = v6\n\tv7 := 0\n\tfor i3 := 13; i3 \u003c len(xs); i3 += 2 {\n\t\tv8 := -2 \u003e i3\n\t\t_ = v8\n\t}\n\tfor i4 := v7; i4 \u003c len(xs); i4++ {\n\t\tv7 = 35 \u0026^ i4\n\t\tv7 = i4 \u0026^ 30\n\t\tv7 = i4 + i4\n\t}\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 139857,
+    "island": 2,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 34337,
+    "novelty": 0,
+    "len": 24,
+    "identity": "7a48d278ded347fb14bc5b2023b79febf9032537042dcaf797f0f3b7c0bc2efa",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\tfor i2 := -1; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv4 = v4 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v6 \u0026^ v6\n\tfor i4 := v8; i4 \u003c len(xs); i4 += 2 {\n\t\tv8 = i4 - i4\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v8 * v8\n\tv11 := v10 \u0026 v6\n\treturn v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 144043,
+    "island": 2,
+    "gen": 70,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 34337,
+    "novelty": 0,
+    "len": 28,
+    "identity": "b61857e726e7edf53363058b3a03802172ceb752c6a8dfdc7af2aefb9417004a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := uint64(v1)\n\tfor i1 := 0; i1 \u003c len(xs); i1 += 3 {\n\t\tfor i2 := -1; i2 \u003c len(xs); i2 += 2 {\n\t\t\tv4 = v4 * 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := -4; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v6 \u0026^ v6\n\tfor i4 := v8; i4 \u003c len(xs); i4 += 2 {\n\t\tv8 = i4 - i4\n\t}\n\tv9 := min(v7, v7)\n\tv10 := v8 * v8\n\tv11 := v10 \u0026 v6\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t\tv0 = i5 - v1\n\t}\n\tv12 := min(v9, v9)\n\t_ = v12\n\tv13 := v1 * v11\n\tv14 := v1 \u0026 v13\n\t_ = v14\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 16,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 135922,
+    "island": 2,
+    "gen": 66,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 36652,
+    "novelty": 9,
+    "len": 32,
+    "identity": "781a0a73b618a9c5fc3568aaa61672f1d4b1f18193b1c0c041a584280ee89482",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tv2 := uint64(v1)\n\tfor i0 := 0; i0 \u003c len(xs); i0 += 4 {\n\t\tfor i1 := -1; i1 \u003c len(xs); i1++ {\n\t\t\tv2 = v2 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i2 := -4; i2 \u003c len(xs); i2++ {\n\t\tv1 = bits.OnesCount64(v2)\n\t}\n\tv3 := min(51, v2)\n\tv4 := v1 + v1\n\tv5 := ^v3\n\tv6 := v4 \u0026^ v4\n\tfor i3 := v6; i3 \u003c len(xs); i3 += 2 {\n\t\tv6 = i3 - i3\n\t}\n\tv7 := min(v5, v5)\n\tfor i4 := 8; i4 \u003c len(xs); i4++ {\n\t\tfor i5 := 1; i5 \u003c len(xs); i5 += 2 {\n\t\t\tv7 = v7 - 13\n\t\t}\n\t}\n\treturn v1\n\tfor i6 := -4; i6 \u003c len(xs); i6++ {\n\t\tv1 = bits.OnesCount64(v7)\n\t}\n\tv8 := min(51, v7)\n\tv9 := v1 + 8\n\tv10 := ^v8\n\tv11 := v0 | v9\n\tfor i7 := v0; i7 \u003c len(xs); i7 += 2 {\n\t\tv0 = i7 - v1\n\t}\n\tv12 := min(v10, v10)\n\t_ = v12\n\tv13 := v1 * v11\n\t_ = v13\n\tv14 := v1 \u0026 v9\n\t_ = v14\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 0,
+      "depth": 2
+    },
+    "id": 43154,
+    "island": 0,
+    "gen": 21,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 70047,
+    "novelty": 0,
+    "len": 3,
+    "identity": "b94f9820adc4568771f847e29867621987b639378ed896127e161d34578471fe",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 7; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 53340,
+    "island": 0,
+    "gen": 26,
+    "origin": "mutation",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 69143,
+    "novelty": 0,
+    "len": 6,
+    "identity": "848358bb3c92a1d6e7afd0f87c5fcf5139003e6e244ab5fbcb483562f0e9cb40",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv0 := xs[i0]\n\t\tv1 := bits.OnesCount64(v0)\n\t\t_ = v1\n\t}\n\tfor i1 := 8; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 65394,
+    "island": 7,
+    "gen": 31,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 67570,
+    "novelty": 0,
+    "len": 11,
+    "identity": "108049c58b7d1ed97ae2bd8d996ff5ac4bfe4f80809b486b7d5bc3fae8e07aec",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\t_ = v0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tfor i1 := i0; i1 \u003c len(xs); i1++ {\n\t\t\tv3 := v2 * v2\n\t\t\t_ = v3\n\t\t}\n\t\tv4 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v4\n\t}\n\treturn v1\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t}\n\treturn 15\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 32577,
+    "island": 7,
+    "gen": 15,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 112762,
+    "novelty": 0,
+    "len": 15,
+    "identity": "23867dfbf82d22347c5493f3990fa185e0b11bf6be6309179642cadc1265cfec",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 0; i1 \u003c v1; i1++ {\n\t}\n\treturn v1\n\treturn v0\n\tfor i2 := 19; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = max(i2, i2)\n\t\tv4 := max(i2, 64)\n\t\tv0 = max(v4, v1)\n\t}\n\tv5 := uint64(v0)\n\t_ = v5\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 12891,
+    "island": 2,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 69798,
+    "novelty": 0,
+    "len": 14,
+    "identity": "5436b198cdd51d4512f38bbdc011122adeb8f1d17808ffeea2dda99f076a4cb4",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c i0; i1++ {\n\t\t\tv1 = v1 | v1\n\t\t\tv2 := v1 != v1\n\t\t\t_ = v2\n\t\t}\n\t\tv3 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v3\n\t}\n\treturn v0\n\tfor i2 := 22; i2 \u003c len(xs); i2++ {\n\t\tv4 := xs[i2]\n\t\t_ = v4\n\t\tv5 := max(29, i2)\n\t\tv0 = v5 + v5\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 25249,
+    "island": 2,
+    "gen": 12,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 112762,
+    "novelty": 0,
+    "len": 19,
+    "identity": "d3fdd052bd5d9e26832b8288bf59b25725bf8796b8f8673f656dcf0098e3678e",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 0; i1 \u003c v1; i1++ {\n\t}\n\treturn v1\n\tfor i2 := 31; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = 3 - i2\n\t}\n\tv4 := uint64(v1)\n\t_ = v4\n\treturn v0\n\tfor i3 := 31; i3 \u003c len(xs); i3 += 2 {\n\t\tv0 = 3 - i3\n\t}\n\tv5 := uint64(v0)\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = bits.OnesCount64(v5)\n\t}\n\tv6 := uint64(v0)\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 106075,
+    "island": 6,
+    "gen": 51,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 67570,
+    "novelty": 0,
+    "len": 17,
+    "identity": "2120181846c9c9705e0598940ee5aafde2ee07c0dd9d9902b43e75f208d4fe37",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tfor i1 := i0; i1 \u003c len(xs); i1++ {\n\t\t\tv2 := v1 \u003e= v1\n\t\t\t_ = v2\n\t\t}\n\t\tv3 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v3\n\t}\n\treturn v0\n\tv4 := min(v0, v0)\n\t_ = v4\n\tv5 := 0\n\tv6 := v5\n\t_ = v6\n\tv7 := 2\n\tv8 := v7\n\tv9 := v8\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t}\n\tv10 := 14 | v9\n\t_ = v10\n\treturn 32\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 122876,
+    "island": 7,
+    "gen": 59,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 112762,
+    "novelty": 0,
+    "len": 21,
+    "identity": "e5514b8b9e4f45d2cb891854693fff1440ced2e21ba4e3076d5800f6029de31c",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := 0; i1 \u003c v0; i1++ {\n\t}\n\treturn v0\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t\tv5 := xs[i2]\n\t\t_ = v5\n\t}\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv6 := xs[v0]\n\t\t_ = v6\n\t\tv7 := v0 * i3\n\t\t_ = v7\n\t\tv8 := xs[i3]\n\t\t_ = v8\n\t}\n\treturn v0\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t}\n\treturn 41\n\tv9 := v0 \u003c= v0\n\t_ = v9\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 119396,
+    "island": 2,
+    "gen": 58,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 66744,
+    "novelty": 0,
+    "len": 23,
+    "identity": "7fa6f2d30b52f4fa39b55f9106e10b074ca248a4bf2a7b75c487005f2989172f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := uint64(v1)\n\tfor i1 := 1; i1 \u003c len(xs); i1 += 2 {\n\t\tfor i2 := v0; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = v4 - 11\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := 27; i3 \u003c len(xs); i3++ {\n\t\tv1 = bits.OnesCount64(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = i4 - v1\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v8\n\t_ = v10\n\tv11 := v1 \u0026 v6\n\t_ = v11\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 6,
+      "depth": 1
+    },
+    "id": 89281,
+    "island": 4,
+    "gen": 43,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 112762,
+    "novelty": 0,
+    "len": 26,
+    "identity": "07040ead3e32ef07cfe84b41d278f148de7d1a9e7a8141fc23d68719cb67e0f8",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := 0; i1 \u003c v0; i1++ {\n\t\tv3 := false\n\t\t_ = v3\n\t}\n\treturn v0\n\tfor i2 := 8; i2 \u003c len(xs); i2 += 2 {\n\t\tv0 = i2 + v0\n\t}\n\tv4 := 38 - v0\n\tv5 := uint64(v4)\n\tv6 := v0 \u0026^ 14\n\t_ = v6\n\tv7 := v4 + v4\n\tv8 := min(v5, 49)\n\t_ = v8\n\treturn v7\n\tv9 := v7 + v7\n\tv10 := uint64(v9)\n\tv11 := 23 \u003c v10\n\t_ = v11\n\tv12 := 17 \u0026^ v10\n\t_ = v12\n\treturn v9\n\tv13 := v9 \u0026 v9\n\tv14 := uint64(v13)\n\tv15 := v0 != v13\n\t_ = v15\n\tv16 := 17 \u0026^ v14\n\t_ = v16\n\treturn v13\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 95623,
+    "island": 5,
+    "gen": 46,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 66506,
+    "novelty": 0,
+    "len": 24,
+    "identity": "aec3b96c7a15738a886236fe5c75bdb0d190b82916bd8e74d98fbdc0e346fe49",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1 += 2 {\n\t\t\tv1 := v0 \u003c= v0\n\t\t\t_ = v1\n\t\t}\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv0 = v0 + v3\n\t}\n\treturn v0\n\tfor i2 := 0; i2 \u003c len(xs); i2 += 2 {\n\t\tv0 = max(i2, 55)\n\t}\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv0 = min(i3, i3)\n\t\tv0 = i3 + i3\n\t}\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\txs[0] = 1\n\t\tv4 := xs[i4]\n\t\t_ = v4\n\t}\n\tv5 := 0\n\tfor i5 := v5; i5 \u003c len(xs); i5++ {\n\t\tv6 := xs[i5]\n\t\tv7 := bits.OnesCount64(v6)\n\t\tv5 = v7 + v7\n\t}\n\treturn v5\n\treturn 31\n\treturn v5\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 79953,
+    "island": 0,
+    "gen": 39,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 95189,
+    "novelty": 0,
+    "len": 30,
+    "identity": "69245c9b6f634ed92b513d9c97efe9625c8593f5ca44d806d44e1c1dc7dad59f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := bits.OnesCount64(49)\n\tv4 := max(v3, v3)\n\tfor i1 := v4; i1 \u003c len(xs); i1++ {\n\t\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\t}\n\t\tv4 = i1 - v4\n\t\tv3 = v4 \u0026^ v4\n\t}\n\treturn v0\n\tv5 := v0 ^ 41\n\tfor i3 := 12; i3 \u003c len(xs); i3++ {\n\t\tv0 = bits.OnesCount64(32)\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i3 | v5\n\t\t\tv5 = v0 \u003c\u003c 4\n\t\t\tv0 = max(v5, i4)\n\t\t\tv0 = v0 \u0026 v0\n\t\t\tv5 = v0 \u003c\u003c 63\n\t\t}\n\t}\n\tv6 := max(v0, v5)\n\t_ = v6\n\tv7 := bits.OnesCount64(49)\n\tv8 := max(v7, v0)\n\tfor i5 := v0; i5 \u003c len(xs); i5++ {\n\t\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\t}\n\t\tv0 = i5 - v8\n\t\tv7 = v8 \u0026^ v8\n\t}\n\tv9 := v8 \u003c= v0\n\t_ = v9\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 17,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 82084,
+    "island": 0,
+    "gen": 40,
+    "origin": "crossover",
+    "correct": 41,
+    "vectors": 50,
+    "cost": 90401,
+    "novelty": 1,
+    "len": 32,
+    "identity": "0b092e5cf86c2006ba48190b0d985a7a700d172195608a6ef5bad6bec478b243",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 12; i0 \u003c len(xs); i0++ {\n\t\tv0 = i0 | i0\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv0 = i0 | i1\n\t\t\tv0 = i1 \u003c\u003c 4\n\t\t\tv0 = max(i1, i1)\n\t\t\tv0 = i1 \u003c\u003c 63\n\t\t}\n\t}\n\tv1 := max(v0, v0)\n\t_ = v1\n\tv2 := bits.OnesCount64(49)\n\t_ = v2\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 := xs[i2]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v0 + v4\n\t}\n\treturn v0\n\tv5 := v0 ^ 41\n\tfor i3 := 12; i3 \u003c len(xs); i3++ {\n\t\tv0 = bits.OnesCount64(32)\n\t\tfor i4 := v0; i4 \u003c len(xs); i4++ {\n\t\t\tv5 = i3 | v5\n\t\t\tv5 = v0 \u003c\u003c 4\n\t\t\tv0 = max(v5, i4)\n\t\t\tv5 = v0 \u003c\u003c 63\n\t\t}\n\t}\n\tv6 := max(v0, v5)\n\t_ = v6\n\tv7 := bits.OnesCount64(49)\n\tv8 := max(v7, v0)\n\tfor i5 := v0; i5 \u003c len(xs); i5++ {\n\t\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\t}\n\t\tv0 = i5 - v8\n\t\tv7 = v8 \u0026^ v8\n\t}\n\tv9 := v8 \u003c= v0\n\t_ = v9\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 1,
+      "depth": 2
+    },
+    "id": 45082,
+    "island": 0,
+    "gen": 22,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 133090,
+    "novelty": 0,
+    "len": 5,
+    "identity": "c48fa4c257386ff20766f83b0454adc02d288c16703cc7b3ac1d88c6d135aac0",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 12; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tfor i3 := 4; i3 \u003c len(xs); i3++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 2,
+      "depth": 1
+    },
+    "id": 109826,
+    "island": 5,
+    "gen": 53,
+    "origin": "crossover",
+    "correct": 9,
+    "vectors": 50,
+    "cost": 133677,
+    "novelty": 0,
+    "len": 9,
+    "identity": "f52246806ab8843474d0ec6fc0892368392cdcae36c4c12870c6762a6c70f0a4",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tv3 := 17 | v0\n\tfor i1 := 0; i1 \u003c v0; i1++ {\n\t\tv4 := i1 == i1\n\t\t_ = v4\n\t}\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 2130,
+    "island": 0,
+    "gen": 1,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 0,
+    "len": 9,
+    "identity": "1cf4207c8eb39301834a849bca3d372955db8777d8222d3a7f1da5e7a9663696",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv3 := ^i0\n\t\t\t_ = v3\n\t\t\tv4 := v1 \u0026^ v1\n\t\t\t_ = v4\n\t\t}\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 3,
+      "depth": 1
+    },
+    "id": 112005,
+    "island": 5,
+    "gen": 54,
+    "origin": "crossover",
+    "correct": 3,
+    "vectors": 50,
+    "cost": 133927,
+    "novelty": 0,
+    "len": 14,
+    "identity": "1cd30882a38ee0733eb28671ef29c62a45ab24f2bc2145d29e71dfe6df619f6d",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := 0; i1 \u003c v0; i1++ {\n\t\tv3 := bits.OnesCount64(28)\n\t\t_ = v3\n\t}\n\tfor i2 := 53; i2 \u003c len(xs); i2++ {\n\t\tv4 := xs[i2]\n\t\tv5 := bits.OnesCount64(v4)\n\t\t_ = v5\n\t\tv6 := max(64, v4)\n\t\t_ = v6\n\t}\n\tv7 := 14 | v0\n\treturn v7\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 13034,
+    "island": 2,
+    "gen": 6,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 0,
+    "len": 15,
+    "identity": "59af7bfa73347973e7c2a79af11fb5f141ee508488e8b9708c86926b0f58933a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv1 := uint64(i1)\n\t\t\t_ = v1\n\t\t\tv2 := uint64(v0)\n\t\t\t_ = v2\n\t\t}\n\t\tv3 := xs[i0]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v0 + v4\n\t}\n\treturn v0\n\tfor i2 := v0; i2 \u003c len(xs); i2 += 2 {\n\t\tv5 := xs[i2]\n\t\t_ = v5\n\t\tv6 := i2 \u003e= i2\n\t\t_ = v6\n\t\tv7 := xs[i2]\n\t\t_ = v7\n\t\tv0 = i2 * i2\n\t}\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 4,
+      "depth": 1
+    },
+    "id": 149476,
+    "island": 7,
+    "gen": 72,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133627,
+    "novelty": 0,
+    "len": 18,
+    "identity": "116e4fec141a18727221bd07993bd6e64833eb2aac1d72ad7bb034e70e66af36",
+    "source": "func f(xs []uint64) int {\n\tv0 := 19\n\t_ = v0\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 0; i1 \u003c v1; i1++ {\n\t\tv4 := v1 \u003c 7\n\t\t_ = v4\n\t}\n\treturn v1\n\treturn v1\n\tv5 := 28\n\tv6 := 2\n\tv7 := min(50, v6)\n\tv8 := -v5\n\txs[v8] = 19\n\treturn v8\n\treturn v7\n\treturn v1\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 14448,
+    "island": 0,
+    "gen": 7,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 0,
+    "len": 19,
+    "identity": "42918185ca15e89796a6ccee5d39aa39d3b2fb2cb77aad0bd670448bd2641fa0",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv2 = i1 | i1\n\t\t\tv2 = 29 - i1\n\t\t}\n\t}\n\treturn v0\n\tv3 := v0 | v0\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv3 = i2 + i2\n\t\tv3 = 20 + i2\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv3 = i3 | v3\n\t\t\tv3 = 29 - v3\n\t\t}\n\t}\n\treturn v3\n\tv4 := v3 \u003c= v0\n\t_ = v4\n\treturn v3\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 5,
+      "depth": 1
+    },
+    "id": 143345,
+    "island": 7,
+    "gen": 69,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 154492,
+    "novelty": 0,
+    "len": 20,
+    "identity": "319194f2f2c85b480f035fe6965408115bf1863b06fe2e2935d1c1ed13620d56",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 0; i1 \u003c v1; i1++ {\n\t\tv4 := min(i1, v1)\n\t\tv0 = max(v4, v4)\n\t}\n\treturn v1\n\treturn v1\n\tv5 := v1 \u003e v1\n\t_ = v5\n\tv6 := 3\n\tv7 := ^v6\n\txs[v7] = 19\n\tv8 := -v7\n\txs[v8] = 19\n\tv9 := v7 \u003e\u003e v1\n\t_ = v9\n\treturn v0\n\treturn 26\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 37478,
+    "island": 2,
+    "gen": 18,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 4,
+    "len": 21,
+    "identity": "8d9583aeed1ff37a4d1ab7b7703d2a0d24dae25762a04f7ff256ba28b5ddfd76",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv2 := ^i0\n\t\t\t_ = v2\n\t\t\tv0 = max(i0, i1)\n\t\t}\n\t\tv3 := xs[i0]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv1 = v1 + v4\n\t}\n\treturn v1\n\tfor i2 := v0; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = 40 + v0\n\t}\n\tv5 := uint64(v1)\n\treturn v0\n\tfor i3 := 31; i3 \u003c len(xs); i3 += 2 {\n\t\tv0 = int(v5)\n\t}\n\tv6 := uint64(v0)\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = bits.OnesCount64(v6)\n\t}\n\tv7 := min(v6, v6)\n\t_ = v7\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 121016,
+    "island": 0,
+    "gen": 59,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 0,
+    "len": 24,
+    "identity": "4d0b818036da99e858589f39517f35b2c8c1c23ca03e73b0971a7438299ca974",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv3 := i1 \u003c= i0\n\t\t\t_ = v3\n\t\t\tv4 := i0 \u0026 i0\n\t\t\t_ = v4\n\t\t}\n\t\tv0 = v0 + v2\n\t}\n\treturn v0\n\tv5 := v0 ^ 41\n\tfor i2 := 1; i2 \u003c len(xs); i2 += 4 {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3 += 2 {\n\t\t\tv0 = max(v5, i3)\n\t\t\tv5 = ^v5\n\t\t}\n\t}\n\tv6 := v0 \u0026^ v5\n\tv7 := bits.OnesCount64(47)\n\tv8 := v0 \u003c= v6\n\t_ = v8\n\tv9 := max(v7, v0)\n\tv10 := uint64(v0)\n\t_ = v10\n\tfor i4 := v0; i4 \u003c len(xs); i4++ {\n\t\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\t}\n\t\tv0 = i4 - v9\n\t\tv7 = v9 \u0026^ v9\n\t}\n\treturn v9\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 7,
+      "depth": 1
+    },
+    "id": 140716,
+    "island": 5,
+    "gen": 68,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 134065,
+    "novelty": 0,
+    "len": 28,
+    "identity": "5f9e57230d3bd31f239eba9c573dbd9a22bd74f61d49150b445c12ac57755b47",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t}\n\tfor i1 := v0; i1 \u003c len(xs); i1++ {\n\t\tv3 := xs[i1]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv0 = v4 + v4\n\t}\n\tv5 := v0\n\tfor i2 := 0; i2 \u003c v5; i2++ {\n\t\tv6 := i2 == i2\n\t\t_ = v6\n\t}\n\tv7 := max(v5, v5)\n\treturn v7\n\tfor i3 := -1; i3 \u003c len(xs); i3++ {\n\t\tv7 = i3 + i3\n\t}\n\tv8 := v7 | v7\n\treturn v7\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\tv7 = max(i4, 55)\n\t\tv7 = v7 \u003e\u003e i4\n\t}\n\treturn v8\n\tv9 := 34\n\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\tv9 = i5 + i5\n\t\tv9 = max(i5, 55)\n\t\tv10 := xs[i5]\n\t\t_ = v10\n\t}\n\treturn v9\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 7,
+      "depth": 2
+    },
+    "id": 125190,
+    "island": 1,
+    "gen": 61,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 133510,
+    "novelty": 0,
+    "len": 30,
+    "identity": "44548a167b222f6c405513a8cb6c4154b7f4ff893c40e55ecbc9da71bf3bc74a",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tv2 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v2\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t\tv3 := i1 | v0\n\t\t\t_ = v3\n\t\t\tv4 := 12 \u003e= v1\n\t\t\t_ = v4\n\t\t}\n\t}\n\treturn v0\n\tfor i2 := 8; i2 \u003c len(xs); i2 += 4 {\n\t\tv0 = 35 \u0026^ i2\n\t\tv0 = min(i2, v0)\n\t}\n\tv5 := xs[2]\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv5 = v5 | v5\n\t\tv5 = ^v5\n\t}\n\tv6 := uint64(v0)\n\tv7 := v6 \u003c\u003c v0\n\tv8 := min(v7, v6)\n\t_ = v8\n\tfor i4 := 8; i4 \u003c len(xs); i4++ {\n\t\tv0 = 35 \u0026^ v0\n\t}\n\tv9 := uint64(v0)\n\tv10 := v9 \u003c\u003c v0\n\t_ = v10\n\tv11 := 29 | v9\n\tv12 := uint64(15)\n\t_ = v12\n\tv13 := 12 * v0\n\tv14 := -v11\n\tv15 := 29 | v14\n\t_ = v15\n\tv16 := max(34, v13)\n\treturn v16\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 18,
+      "len_bucket": 8,
+      "depth": 2
+    },
+    "id": 108621,
+    "island": 0,
+    "gen": 53,
+    "origin": "crossover",
+    "correct": 3,
+    "vectors": 50,
+    "cost": 139057,
+    "novelty": 2,
+    "len": 32,
+    "identity": "b32fd6c725a7431afe482277318fb0a5b3227a98a7d036be86636c37f2a277ea",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 1; i0 \u003c len(xs); i0 += 3 {\n\t\tfor i1 := 4; i1 \u003c len(xs); i1++ {\n\t\t}\n\t\tfor i2 := 4; i2 \u003c len(xs); i2++ {\n\t\t}\n\t}\n\tv0 := bits.OnesCount64(47)\n\tv1 := max(v0, v0)\n\tv2 := uint64(v1)\n\t_ = v2\n\tfor i3 := v1; i3 \u003c len(xs); i3++ {\n\t\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\t}\n\t\tv1 = i3 - v1\n\t\tv0 = v1 \u0026^ v1\n\t}\n\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\tv3 := xs[i5]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv1 = v4 + v4\n\t}\n\treturn v1\n\tv5 := v1 ^ 41\n\tfor i6 := 1; i6 \u003c len(xs); i6 += 3 {\n\t\tfor i7 := 4; i7 \u003c len(xs); i7++ {\n\t\t\tv5 = max(i7, i7)\n\t\t\tv5 = i7 \u003c\u003c i7\n\t\t}\n\t\tfor i8 := 4; i8 \u003c len(xs); i8++ {\n\t\t\tv5 = max(v5, i8)\n\t\t\tv5 = ^v5\n\t\t}\n\t}\n\tv6 := 32 | v5\n\t_ = v6\n\tv7 := bits.OnesCount64(47)\n\tv8 := max(v7, v7)\n\tv9 := uint64(v8)\n\t_ = v9\n\tfor i9 := v8; i9 \u003c len(xs); i9++ {\n\t\tfor i10 := 0; i10 \u003c len(xs); i10++ {\n\t\t}\n\t\tv8 = i9 - v8\n\t\tv7 = v8 \u0026^ v8\n\t}\n\treturn v8\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 19,
+      "len_bucket": 2,
+      "depth": 2
+    },
+    "id": 22692,
+    "island": 0,
+    "gen": 11,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 279905,
+    "novelty": 0,
+    "len": 9,
+    "identity": "7b1116a67b65ec05f0ba7a2cee322987486a37515e31c3bbdc1d69377cdb1eb4",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv0 := xs[i0]\n\t\t_ = v0\n\t\tfor i1 := 5; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv1 := xs[i2]\n\t\t_ = v1\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t}\n\t}\n\tfor i4 := 0; i4 \u003c len(xs); i4++ {\n\t\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 19,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 33017,
+    "island": 0,
+    "gen": 16,
+    "origin": "crossover",
+    "correct": 2,
+    "vectors": 50,
+    "cost": 297565,
+    "novelty": 0,
+    "len": 13,
+    "identity": "222a380bcf44cc610ee72210c7aa6d000c4015a9fd40e88c7d9ebf8687bd741d",
+    "source": "func f(xs []uint64) int {\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c len(xs); i1++ {\n\t\t}\n\t}\n\tfor i2 := 0; i2 \u003c len(xs); i2++ {\n\t\tv0 := xs[i2]\n\t\tv1 := bits.OnesCount64(v0)\n\t\t_ = v1\n\t}\n\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\tv2 := xs[i3]\n\t\t_ = v2\n\t\tv3 := max(i3, 16)\n\t\t_ = v3\n\t\tfor i4 := 5; i4 \u003c len(xs); i4++ {\n\t\t\tv3 = max(i4, 38)\n\t\t}\n\t}\n\tfor i5 := 0; i5 \u003c len(xs); i5++ {\n\t\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\t}\n\t}\n\treturn 0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 19,
+      "len_bucket": 4,
+      "depth": 2
+    },
+    "id": 161675,
+    "island": 7,
+    "gen": 78,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 488277,
+    "novelty": 0,
+    "len": 17,
+    "identity": "1d1c72a31e27ff5cf87f695181f8373a931064a778715138f522859bbd8de4c7",
+    "source": "func f(xs []uint64) int {\n\tv0 := 3\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tfor i1 := 0; i1 \u003c v1; i1 += 3 {\n\t\t\tv2 = min(14, v2)\n\t\t\tv2 = v2\n\t\t}\n\t\tv1 = v1 + v3\n\t}\n\treturn v1\n\tv4 := 9\n\tv5 := max(v0, v4)\n\t_ = v5\n\tv6 := -v0\n\t_ = v6\n\tv7 := 2\n\t_ = v7\n\tv8 := 0\n\t_ = v8\n\tv9 := 2\n\t_ = v9\n\treturn v4\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 19,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 61149,
+    "island": 6,
+    "gen": 29,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 379693,
+    "novelty": 0,
+    "len": 20,
+    "identity": "011403d36f4a380421d992ede94eb909ad760ad7e6592fb1234195229c680a60",
+    "source": "func f(xs []uint64) int {\n\tv0 := -2\n\tv1 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tfor i1 := 0; i1 \u003c 64; i1++ {\n\t\t\tv0 = i1 + v0\n\t\t\tv2 := i1 == i1\n\t\t\t_ = v2\n\t\t}\n\t\tv3 := xs[i0]\n\t\tv4 := bits.OnesCount64(v3)\n\t\tv1 = v1 + v4\n\t}\n\treturn v1\n\tfor i2 := 5; i2 \u003c len(xs); i2 += 2 {\n\t\tv1 = i2 ^ i2\n\t\tv1 = i2 ^ i2\n\t\tv1 = v1 | v1\n\t\tv5 := bits.OnesCount64(35)\n\t\t_ = v5\n\t\tv6 := min(i2, i2)\n\t\tv1 = ^v6\n\t}\n\tv7 := v0 * 53\n\tv8 := uint64(v0)\n\t_ = v8\n\treturn v7\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 19,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 113239,
+    "island": 2,
+    "gen": 55,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 286433,
+    "novelty": 0,
+    "len": 26,
+    "identity": "33f5b637e411734e0ed4d5009ea9c7d86dbefa5ce2977885d0e63efc9c1792c9",
+    "source": "func f(xs []uint64) int {\n\tv0 := 2\n\tv1 := 0\n\tfor i0 := v1; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c 64; i1++ {\n\t\t\tv3 := int(v2)\n\t\t\t_ = v3\n\t\t}\n\t\tv4 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v4\n\t}\n\treturn v1\n\tv5 := uint64(v1)\n\tfor i2 := v0; i2 \u003c len(xs); i2 += 3 {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv5 = v5 - 4\n\t\t}\n\t}\n\treturn v1\n\tfor i4 := 27; i4 \u003c len(xs); i4++ {\n\t\tv1 = bits.OnesCount64(v5)\n\t}\n\tv6 := min(51, v5)\n\tv7 := v1 + v1\n\tv8 := ^v6\n\tv9 := v0 | v7\n\tfor i5 := v0; i5 \u003c len(xs); i5 += 2 {\n\t\tv0 = i5 - v1\n\t}\n\tv10 := min(v8, v8)\n\t_ = v10\n\tv11 := v1 * v9\n\t_ = v11\n\tv12 := v1 \u0026 v7\n\t_ = v12\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 20,
+      "len_bucket": 3,
+      "depth": 2
+    },
+    "id": 101065,
+    "island": 2,
+    "gen": 49,
+    "origin": "crossover",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 648469,
+    "novelty": 0,
+    "len": 15,
+    "identity": "1cf754a3fa48e2318c0094559f576500833132601d50935d17b7de82a36c0d6f",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tfor i1 := 1; i1 \u003c v1; i1 += 3 {\n\t\tfor i2 := 7; i2 \u003c len(xs); i2++ {\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := 27; i3 \u003c len(xs); i3 += 2 {\n\t}\n\tv4 := v1 + v1\n\tv5 := v4 | v4\n\tfor i4 := v5; i4 \u003c len(xs); i4 += 2 {\n\t}\n\tv6 := v1 * v0\n\t_ = v6\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 20,
+      "len_bucket": 5,
+      "depth": 2
+    },
+    "id": 100993,
+    "island": 2,
+    "gen": 49,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 947714,
+    "novelty": 0,
+    "len": 23,
+    "identity": "c5544aa288ad79b962f5ead8e5f3c5beb9dde342688805825ec64d097b3cdc54",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tv1 := 0\n\tfor i0 := v0; i0 \u003c len(xs); i0++ {\n\t\tv2 := xs[i0]\n\t\tv3 := bits.OnesCount64(v2)\n\t\tv1 = v1 + v3\n\t}\n\tv4 := uint64(v1)\n\tfor i1 := 1; i1 \u003c v1; i1 += 3 {\n\t\tfor i2 := 7; i2 \u003c len(xs); i2++ {\n\t\t\tv4 = min(v4, 54)\n\t\t\tv4 = min(v4, 8)\n\t\t}\n\t}\n\treturn v1\n\tfor i3 := 27; i3 \u003c len(xs); i3 += 2 {\n\t\tv1 = int(v4)\n\t}\n\tv5 := min(51, v4)\n\tv6 := v1 + v1\n\tv7 := ^v5\n\tv8 := v0 | v6\n\t_ = v8\n\tfor i4 := v0; i4 \u003c len(xs); i4 += 2 {\n\t\tv0 = bits.OnesCount64(v7)\n\t}\n\tv9 := min(v7, v7)\n\t_ = v9\n\tv10 := v1 * v0\n\t_ = v10\n\treturn v0\n}"
+  },
+  {
+    "cell": {
+      "cost_bucket": 20,
+      "len_bucket": 6,
+      "depth": 2
+    },
+    "id": 104549,
+    "island": 0,
+    "gen": 51,
+    "origin": "mutation",
+    "correct": 50,
+    "vectors": 50,
+    "cost": 622757,
+    "novelty": 0,
+    "len": 24,
+    "identity": "4ee87e14f4b8c1a391797b4b620c3c7e1e887826656f2f0787b3d626b810e514",
+    "source": "func f(xs []uint64) int {\n\tv0 := 0\n\tfor i0 := 0; i0 \u003c len(xs); i0++ {\n\t\tv1 := xs[i0]\n\t\tfor i1 := 0; i1 \u003c v0; i1 += 2 {\n\t\t\tv2 := -i1\n\t\t\t_ = v2\n\t\t}\n\t\tv3 := bits.OnesCount64(v1)\n\t\tv0 = v0 + v3\n\t}\n\treturn v0\n\tv4 := v0 ^ 41\n\tfor i2 := 3; i2 \u003c len(xs); i2 += 3 {\n\t\tfor i3 := 0; i3 \u003c len(xs); i3++ {\n\t\t\tv4 = v0 \u003c\u003c 28\n\t\t\tv0 = max(v4, i3)\n\t\t\tv4 = v0 \u003c\u003c 63\n\t\t}\n\t}\n\tfor i4 := 0; i4 \u003c v0; i4++ {\n\t\tv5 := i4 - 0\n\t\t_ = v5\n\t}\n\tv6 := 32 | v4\n\t_ = v6\n\tv7 := bits.OnesCount64(47)\n\tv8 := max(v7, v0)\n\tv9 := uint64(v0)\n\t_ = v9\n\tfor i5 := v0; i5 \u003c len(xs); i5++ {\n\t\tfor i6 := 0; i6 \u003c len(xs); i6++ {\n\t\t}\n\t\tv0 = i5 - v8\n\t}\n\treturn v8\n}"
+  }
+]
