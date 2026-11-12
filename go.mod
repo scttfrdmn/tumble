@@ -3,7 +3,7 @@ module github.com/scttfrdmn/tumble
 go 1.27
 
 require (
-	github.com/scttfrdmn/giri v0.99.1
+	github.com/scttfrdmn/giri v0.101.0
 	golang.org/x/perf v0.0.0-20261009192801-be2c69fb417e
 	golang.org/x/tools v0.52.0
 )
